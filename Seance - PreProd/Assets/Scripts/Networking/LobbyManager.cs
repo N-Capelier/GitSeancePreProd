@@ -19,7 +19,7 @@ namespace Seance.Networking
 		{
 			base.OnSpawnServer(connection);
 
-			if (!IsHost)
+			if (!IsServer)
 				return;
 
 			_connectedPlayerCount++;

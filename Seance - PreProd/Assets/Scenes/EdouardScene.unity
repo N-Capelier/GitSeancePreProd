@@ -340,6 +340,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b727c2dd50216bf47828af0c73478e12, type: 3}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.data[1].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: TestSoundLoop
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031838027315507229, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
+      propertyPath: sounds.Array.data[1].category
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7009817353342734821, guid: 6b4de2ceebf8e2d4f9b03b5963403161, type: 3}
       propertyPath: m_Name
       value: Audio Manager

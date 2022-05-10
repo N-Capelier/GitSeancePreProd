@@ -1,31 +1,23 @@
 // Edouard Murat
 
-// Similar to Brackys Audio Manager : https://www.youtube.com/watch?v=6OT43pvUyfY
+// Singleton & DontDestroyOnLoad
+// Need to be placed one first Scene
 
 
-using UnityEngine.Audio;
 using UnityEngine;
 using System;
-using System.Collections;
-using Random = UnityEngine.Random;
 
 namespace Seance.SoundManagement
 {
     public class AudioManager : Singleton<AudioManager>
     {
-        [Header("Initial Volumes")]
-        [Range(-80f, 20f), Tooltip("Volume in decibel")] public float masterVolume;
-        [Space(10)]
-        [Range(-80f, 20f), Tooltip("Volume in decibel")] public float musicVolume;
-        [Range(-80f, 20f), Tooltip("Volume in decibel")] public float sfxVolume;
-        [Range(-80f, 20f), Tooltip("Volume in decibel")] public float ambienceVolume;
-        [Range(-80f, 20f), Tooltip("Volume in decibel")] public float voiceVolume;
-        [Range(-80f, 20f), Tooltip("Volume in decibel")] public float interfaceVolume;
+        public Mixer[] mixers; // Mixers list, setup in Unity Inspector
+        public Sound[] sounds; // Sounds list, setup in Unity Inspector
 
-        [Space(25)]
-        public AudioMixer mainAudioMixer;
-        public Mixer[] mixers;
-        public Sound[] sounds;
+        public bool debug;
+
+
+        #region Unity Event
 
         void Awake()
         {
@@ -35,15 +27,83 @@ namespace Seance.SoundManagement
             CreateAudioBank();
         }
 
-        private void Start()
+        #endregion
+
+        #region Public Methods
+
+        public void PlayAudio(string _name)
         {
-            masterVolume = PlayerPrefs.GetFloat("masterVolume", 0.5f);
-            musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.5f);
-            sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);
-            ambienceVolume = PlayerPrefs.GetFloat("ambienceVolume", 0.5f);
-            voiceVolume = PlayerPrefs.GetFloat("voiceVolume", 0.5f); ;
-            interfaceVolume = PlayerPrefs.GetFloat("interfaceVolume", 0.5f); ;
+            Sound s = Array.Find(sounds, sound => sound.name == _name);
+            
+            if(s == null)
+            {
+                LogWarning("AudioManager : Sound '" + _name + "' is unknown. Check name spelling");
+            }
+            else
+            {
+                s.source.Play();
+                Log("Playing audio: " + _name);
+            }
         }
+
+        public void StopAudio(string _name)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == _name);
+
+            if (s == null)
+            {
+                LogWarning("AudioManager : Sound '" + _name + "' is unknown. Check name spelling");
+            }
+            else
+            {
+                s.source.Stop();
+                Log("Stopping audio: " + _name);
+            }
+        }
+
+        public void StopAllAudio()
+        {
+            Log("Stopping all audios");
+            foreach(Sound s in sounds)
+            {
+                s.source.Stop();
+                Log("Stopped audio: " + s.name);
+            }
+        }
+
+        public void PauseAudio(string _name)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == _name);
+
+            if (s == null)
+            {
+                LogWarning("AudioManager : Sound '" + _name + "' is unknown. Check name spelling");
+            }
+            else
+            {
+                s.source.Stop();
+                Log("Pausing audio: " + _name);
+            }
+        }
+
+        public void UnpauseAudio(string _name)
+        {
+            Sound s = Array.Find(sounds, sound => sound.name == _name);
+
+            if (s == null)
+            {
+                LogWarning("AudioManager : Sound '" + _name + "' is unknown. Check name spelling");
+            }
+            else
+            {
+                s.source.Stop();
+                Log("Unpausing audio: " + _name);
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
 
         private void CreateAudioBank()
         {
@@ -60,42 +120,18 @@ namespace Seance.SoundManagement
             }
         }
 
-        public void Play(string name)
+        private void Log(string _msg)
         {
-            Sound s = Array.Find(sounds, sound => sound.name == name);
-            
-            if(s == null)
-            {
-                Debug.LogWarning("AudioManager : Sound '" + name + "' is unknown. Check name spelling");
-            }
-            else
-            {
-                s.source.Play();
-            }
+            if(!debug) return;
+            Debug.Log("[AudioManager]: " + _msg);
+        }
+        
+        private void LogWarning(string _msg)
+        {
+            if (!debug) return;
+            Debug.LogWarning("[AudioManager]: " + _msg);
         }
 
-        // Method taken from Riverflow project
-        public void SetVolumes()
-        {
-            ChangeVolume(masterVolume, "masterVolume");
-            ChangeVolume(musicVolume, "musicVolume");
-            ChangeVolume(sfxVolume, "sfxVolume");
-            ChangeVolume(ambienceVolume, "ambienceVolume");
-            ChangeVolume(voiceVolume, "voiceVolume");
-            ChangeVolume(interfaceVolume, "interfaceVolume");
-        }
-
-        // Method taken from Riverflow project
-        public void ChangeVolume(float value, string targetGroup)
-        {
-            mainAudioMixer.SetFloat(targetGroup, value != 0 ? Mathf.Log10(value) * 20 : -80);
-            PlayerPrefs.SetFloat(targetGroup, value);
-        }
-
-        // Method taken from Riverflow project
-        public void ChangePitch(float value, AudioSource audioSource)
-        {
-            audioSource.pitch = value;
-        }
+        #endregion
     }
 }

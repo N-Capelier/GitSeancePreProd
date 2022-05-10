@@ -4,6 +4,8 @@ using UnityEngine;
 using FishNet.Object.Synchronizing;
 using FishNet.Connection;
 using FishNet.Object;
+using Seance.Player;
+using Seance.Management;
 
 namespace Seance.Networking
 {
@@ -13,7 +15,8 @@ namespace Seance.Networking
 	public class LobbyManager : NetworkBehaviour
 	{
 		[SyncVar] int _connectedPlayerCount = 0;
-		[SyncObject] readonly SyncList<NetworkConnection> _connectedPlayers = new SyncList<NetworkConnection>();
+		[SyncObject] public readonly SyncList<NetworkConnection> connectedPlayers = new SyncList<NetworkConnection>();
+		[SyncObject] public readonly SyncList<PlayerManager> playerManagers = new SyncList<PlayerManager>();
 
 		public override void OnSpawnServer(NetworkConnection connection)
 		{
@@ -21,23 +24,21 @@ namespace Seance.Networking
 
 			if (!IsServer)
 				return;
-
+			
 			_connectedPlayerCount++;
-			_connectedPlayers.Add(connection);
+			connectedPlayers.Add(connection);
 
 			if (_connectedPlayerCount != 3)
 				return;
 
-			foreach (NetworkConnection conn in _connectedPlayers)
-			{
-				Debug.LogWarning(conn.ClientId);
-			}
-			StartGame();
+			StartCoroutine(StartGame());
 		}
 
-		void StartGame()
+		IEnumerator StartGame()
 		{
-			Debug.Log("Starting game");
+			yield return new WaitUntil(() => playerManagers.Count == 3);
+			Debug.LogWarning("Starting game");
+			GameManager.Instance.turnManager.PlayNextTurn();
 		}
 	}
 }

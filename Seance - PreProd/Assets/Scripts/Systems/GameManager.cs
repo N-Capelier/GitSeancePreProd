@@ -4,6 +4,7 @@ using UnityEngine;
 using Seance.Networking;
 using Seance.Player;
 using TMPro;
+using Seance.Enemy;
 
 namespace Seance.Management
 {
@@ -15,25 +16,15 @@ namespace Seance.Management
 		[Header("References")]
 		public LobbyManager lobby;
 		public TurnManager turnManager;
+		public EnemyManager enemyManager;
 
 		[Header("Debug")]
-		public TextMeshProUGUI turnIndex; 
-		public TextMeshProUGUI playerTurn;
+		public TextMeshProUGUI debugTurnIndex; 
+		public TextMeshProUGUI debugPlayerTurn;
 
 		private void Awake()
 		{
 			CreateSingleton(true);
-		}
-
-		private void Update()
-		{
-			if(Input.GetKeyDown(KeyCode.Space))
-			{
-				foreach (PlayerManager playerManager in lobby.playerManagers)
-				{
-					playerManager.EndTurn();
-				}
-			}
 		}
 	}
 }

@@ -25,25 +25,45 @@ namespace Seance.Player
 			gManager = GameManager.Instance;
 		}
 
-		public void EndTurn()
+		private void Update()
 		{
 			if (!IsOwner)
 				return;
 
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				EndTurn();
+			}
+		}
+
+		public override void OnStartClient()
+		{
+			base.OnStartClient();
+			if (!IsOwner)
+				return;
+			GameManager.Instance.lobby.ownedPlayer = this;
+		}
+
+		public void EndTurn()
+		{
 			if (!_isPlaying)
 				return;
 
-			GameManager.Instance.playerTurn.text = "player turn: false";
+			GameManager.Instance.debugPlayerTurn.text = "player turn: false";
 			_isPlaying = false;
+
 			gManager.turnManager.PlayNextTurn();
 		}
 
-		[TargetRpc]
-		public void RpcStartTurn(NetworkConnection conn)
+		public void StartTurn()
 		{
-			GameManager.Instance.playerTurn.text = "player turn: true";
+			if(!IsOwner)
+				return;
+
+			gManager.debugTurnIndex.text = $"turn index: {gManager.turnManager.TotalTurns % 4}";
+
+			GameManager.Instance.debugPlayerTurn.text = "player turn: true";
 			_isPlaying = true;
-			Debug.LogWarning("Starting turn");
 		}
 	}
 }

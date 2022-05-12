@@ -7,7 +7,7 @@ namespace Seance.BoardManagment
     /// <summary>
     /// This script was created by Julien haigron
     /// </summary>
-    
+
     public class Pawn : MonoBehaviour
     {
         public TileManager.PawnType _thisPawnType = TileManager.PawnType.character;
@@ -18,9 +18,13 @@ namespace Seance.BoardManagment
 
         public void MovePawnTo(int x, int y)
         {
-            Vector3 ground = TileManager.Instance.GetTile(x, y).gameObject.transform.position;
+            if (TileManager.Instance.GetTile(x, y) != null)
+            {
+                Vector3 ground = TileManager.Instance.GetTile(x, y).gameObject.transform.position;
 
-            transform.position = ground + new Vector3(0, TileManager.Instance._tilePrefabs[0].transform.lossyScale.x, 0);
+                transform.position = ground + new Vector3(0, TileManager.Instance._tilePrefabs[0].transform.lossyScale.x, 0);
+            }
+
         }
     }
 }

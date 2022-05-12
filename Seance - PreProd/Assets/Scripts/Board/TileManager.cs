@@ -159,7 +159,7 @@ namespace Seance.BoardManagment
         public Tile GetTile(int x, int y)
         {
             if (_tilesInScene.Length > x * y)
-                return _tilesInScene[x * _roomShape._yLength + y];
+                return _tilesInScene[y * _roomShape._yLength + x];
             else
                 return null;
         }

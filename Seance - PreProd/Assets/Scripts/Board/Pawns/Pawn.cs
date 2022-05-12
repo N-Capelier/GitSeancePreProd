@@ -44,6 +44,12 @@ namespace Seance.BoardManagment
             if (_lifeActu <= 0) Die();
         }
 
+        public float GetDistanceFromPawn(Pawn theOtherpawn)
+        {
+            if (theOtherpawn != null) return Vector2.Distance(new Vector2(_x, _y), new Vector2(theOtherpawn._x, theOtherpawn._y));
+            else return float.PositiveInfinity; //TODO : throw error
+        }
+
         public void Die()
         {
             //when pawn dies

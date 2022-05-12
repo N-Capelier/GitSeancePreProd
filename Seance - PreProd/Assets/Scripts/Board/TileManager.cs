@@ -90,6 +90,7 @@ namespace Seance.BoardManagment
                         case Tiles.characterSpawn:
                         case Tiles.enemySpawn:
                         case Tiles.wall:
+                        case Tiles.door:
                         case Tiles.basicTile:
                             GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
                             go.GetComponent<Tile>()._x = x;
@@ -176,11 +177,35 @@ namespace Seance.BoardManagment
             return null; //when player doesnt exist
         }
 
+        public Pawn GetClosestPawn(int xOrigin, int yOrigin, PawnType pt)
+        {
+            float smallestDistanceRecorded = float.PositiveInfinity;
+            Pawn closestPawn = null;
+
+            //looking between every pawn in scene
+            for (int i = 0; i<_pawnsInScene.Length; i++)
+            {
+                //if this pawn is of type we're looking for
+                if(_pawnsInScene[i]._thisPawnType == pt)
+                {
+                    //
+                    if(Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)
+                    {
+                        smallestDistanceRecorded = Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin));
+                        closestPawn = _pawnsInScene[i];
+                    }
+                }
+            }
+
+            return closestPawn;
+        }
+
         public enum Tiles
         {
             empty,
             basicTile,
             wall,
+            door,
             characterSpawn,
             enemySpawn,
             total //always put this var on last position

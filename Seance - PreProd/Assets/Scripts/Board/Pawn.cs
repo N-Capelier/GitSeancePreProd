@@ -12,9 +12,15 @@ namespace Seance.BoardManagment
     {
         public TileManager.PawnType _thisPawnType = TileManager.PawnType.character;
 
+        //grid related var
         public int _pawnID;
         public int _x;
         public int _y;
+
+        //pawn related var
+        public int _life;
+        private int _lifeActu;
+        public int _damage;
 
         public void MovePawnTo(int x, int y)
         {
@@ -26,5 +32,24 @@ namespace Seance.BoardManagment
             }
 
         }
+
+        public void InflictDamageTo(Pawn p)
+        {
+            p.ReceiveDamage(_damage);
+        }
+
+        public void ReceiveDamage(int damage)
+        {
+            _lifeActu -= damage;
+            if (_lifeActu <= 0) Die();
+        }
+
+        public void Die()
+        {
+            //when pawn dies
+            Destroy(gameObject);
+        }
+
+
     }
 }

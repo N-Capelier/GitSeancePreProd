@@ -65,9 +65,9 @@ namespace Seance.BoardManagment
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
             Vector3 originPos = new Vector3(0,0,0);
 
-            for (int x = 0; x < _roomShape._xLength; x++)
+            for (int x = 0; x < _roomShape._yLength; x++)
             {
-                for (int y = 0; y < _roomShape._yLength; y++)
+                for (int y = 0; y < _roomShape._xLength; y++)
                 {
                     Vector3 thisBlockPos = originPos + new Vector3(tileSize* x, 0, tileSize * y) ;
 

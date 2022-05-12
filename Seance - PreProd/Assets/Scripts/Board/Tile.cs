@@ -12,11 +12,7 @@ namespace Seance.BoardManagment
     {
         public int _x;
         public int _y;
-        public Tile _northTile;
-        public Tile _southTile;
-        public Tile _westTile;
-        public Tile _eastTile;
-
+        public TileManager.Tiles _thisTileType;
         // Start is called before the first frame update
         void Start()
         {

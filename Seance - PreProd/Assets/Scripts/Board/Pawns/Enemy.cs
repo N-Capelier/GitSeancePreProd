@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Seance.BoardManagment
 {
+    /// <summary>
+    /// This script was created by Julien haigron
+    /// </summary>
+    
     public class Enemy : Pawn
     {
         

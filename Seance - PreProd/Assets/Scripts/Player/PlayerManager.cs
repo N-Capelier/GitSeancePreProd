@@ -15,14 +15,14 @@ namespace Seance.Player
 		bool _isPlaying = false;
 		public bool IsPlaying { get => _isPlaying; }
 
-		GameManager gManager;
+		GameManager _gManager;
 
-		public PlayerHand hand;
+		public PlayerHand _hand;
 
 
 		private void Start()
 		{
-			gManager = GameManager.Instance;
+			_gManager = GameManager.Instance;
 		}
 
 		private void Update()
@@ -41,7 +41,7 @@ namespace Seance.Player
 			base.OnStartClient();
 			if (!IsOwner)
 				return;
-			GameManager.Instance.lobby.ownedPlayer = this;
+			GameManager.Instance._lobby._ownedPlayer = this;
 		}
 
 		public void EndTurn()
@@ -49,10 +49,10 @@ namespace Seance.Player
 			if (!_isPlaying)
 				return;
 
-			GameManager.Instance.debugPlayerTurn.text = "player turn: false";
+			GameManager.Instance._debugPlayerTurn.text = "player turn: false";
 			_isPlaying = false;
 
-			gManager.turnManager.PlayNextTurn();
+			_gManager._turnManager.PlayNextTurn();
 		}
 
 		public void StartTurn()
@@ -60,9 +60,9 @@ namespace Seance.Player
 			if(!IsOwner)
 				return;
 
-			gManager.debugTurnIndex.text = $"turn index: {gManager.turnManager.TotalTurns % 4}";
+			_gManager._debugTurnIndex.text = $"turn index: {_gManager._turnManager.TotalTurns % 4}";
 
-			GameManager.Instance.debugPlayerTurn.text = "player turn: true";
+			GameManager.Instance._debugPlayerTurn.text = "player turn: true";
 			_isPlaying = true;
 		}
 	}

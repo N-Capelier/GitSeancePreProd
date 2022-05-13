@@ -14,13 +14,13 @@ namespace Seance.Management
     public class GameManager : Singleton<GameManager>
     {
 		[Header("References")]
-		public LobbyManager lobby;
-		public TurnManager turnManager;
-		public EnemyManager enemyManager;
+		public LobbyManager _lobby;
+		public TurnManager _turnManager;
+		public EnemyManager _enemyManager;
 
 		[Header("Debug")]
-		public TextMeshProUGUI debugTurnIndex; 
-		public TextMeshProUGUI debugPlayerTurn;
+		public TextMeshProUGUI _debugTurnIndex; 
+		public TextMeshProUGUI _debugPlayerTurn;
 
 		private void Awake()
 		{

@@ -11,17 +11,17 @@ namespace Seance.Enemy
 	/// </summary>
     public class EnemyManager : NetworkBehaviour
     {
-        GameManager gManager;
+        GameManager _gManager;
 
 		private void Start()
 		{
-			gManager = GameManager.Instance;
+			_gManager = GameManager.Instance;
 		}
 
 		[ServerRpc(RequireOwnership = false)]
         public void ServerRpcPlayTurn()
 		{
-			gManager.turnManager.PlayNextTurn();
+			_gManager._turnManager.PlayNextTurn();
 		}
     }
 }

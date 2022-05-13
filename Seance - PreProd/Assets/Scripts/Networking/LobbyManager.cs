@@ -15,9 +15,9 @@ namespace Seance.Networking
 	public class LobbyManager : NetworkBehaviour
 	{
 		[SyncVar] int _connectedPlayerCount = 0;
-		[SyncObject] public readonly SyncList<NetworkConnection> networkConnections = new SyncList<NetworkConnection>();
-		public PlayerManager ownedPlayer;
-		public NetworkConnection ownedConnection;
+		[SyncObject] public readonly SyncList<NetworkConnection> _networkConnections = new SyncList<NetworkConnection>();
+		public PlayerManager _ownedPlayer;
+		public NetworkConnection _ownedConnection;
 
 		public override void OnSpawnServer(NetworkConnection connection)
 		{
@@ -27,8 +27,8 @@ namespace Seance.Networking
 				return;
 			
 			_connectedPlayerCount++;
-			networkConnections.Add(connection);
-			ownedConnection = connection;
+			_networkConnections.Add(connection);
+			_ownedConnection = connection;
 
 			if (_connectedPlayerCount != 3)
 				return;
@@ -39,7 +39,7 @@ namespace Seance.Networking
 		void StartGame()
 		{
 			Debug.LogWarning("Starting game");
-			GameManager.Instance.turnManager.PlayNextTurn();
+			GameManager.Instance._turnManager.PlayNextTurn();
 		}
 	}
 }

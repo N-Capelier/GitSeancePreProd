@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7f208602d63c641ad4d1c5a287bdea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _originPos: {x: -4, y: 0, z: -4}
   _roomShape: {fileID: 11400000, guid: 37e4cc234936917459604c77e4fe5a65, type: 2}
   _tilePrefabs:
   - {fileID: 6154887793308164271, guid: 8caf4cefdd0d99c4c9415a66c42ded4e, type: 3}

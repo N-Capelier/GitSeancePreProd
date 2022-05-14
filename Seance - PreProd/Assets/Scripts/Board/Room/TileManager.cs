@@ -14,6 +14,9 @@ namespace Seance.BoardManagment
         //Singleton
         public static TileManager Instance;
 
+        //origin spawn position
+        public Vector3 _originPos = Vector3.zero;
+
         public RoomProfile _roomShape;
         public GameObject[] _tilePrefabs;
         public GameObject[] _enemyPrefabs;
@@ -72,14 +75,13 @@ namespace Seance.BoardManagment
 
             //determine grid and tiles margin ratio
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
-            Vector3 originPos = new Vector3(0, 0, 0);
 
             //generate tile prefabs
             for (int x = 0; x < _roomShape._yLength; x++)
             {
                 for (int y = 0; y < _roomShape._xLength; y++)
                 {
-                    Vector3 thisBlockPos = originPos + new Vector3(tileSize * x, 0, tileSize * y);
+                    Vector3 thisBlockPos = _originPos + new Vector3(tileSize * x, 0, tileSize * y);
 
                     switch (_roomShape._tiles[y * _roomShape._yLength + x])
                     {
@@ -123,7 +125,8 @@ namespace Seance.BoardManagment
 
             //determine grid and tiles margin ratio
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
-            Vector3 originPos = new Vector3(0, tileSize, 0); //one level upper than ground tiles in scene
+
+            Vector3 originPos = _originPos + new Vector3(0, tileSize, 0); //one level upper than ground tiles in scene
 
             //generate pawns prefabs
             for (int x = 0; x < _roomShape._yLength; x++)

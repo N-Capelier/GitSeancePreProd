@@ -16,6 +16,7 @@ namespace Seance.BoardManagment
 
         //origin spawn position
         public Vector3 _originPos = Vector3.zero;
+        public GameObject _instanceParent;
 
         public RoomProfile _roomShape;
         public GameObject[] _tilePrefabs;
@@ -25,6 +26,7 @@ namespace Seance.BoardManagment
         //instances in scene
         public Tile[] _tilesInScene;
         public Pawn[] _pawnsInScene;
+        public List<GameObject> _otherInstancesInScene;
         //compteur
         public int _currentNbOfPawnInScene;
 
@@ -44,19 +46,135 @@ namespace Seance.BoardManagment
             #endregion
         }
 
-
-        void Start()
+        public void GenerateRoom(RoomProfile rp)
         {
-
+            _roomShape = rp;
+            GenerateRoom();
         }
 
-
-        void Update()
-        {
-
-        }
-
+        //For Room Decoration Editing purposes
         [ContextMenu("Generate Room")]
+        public void GenerateRoomEditor()
+        {
+            //empty grid and delete game objects
+            if (_tilesInScene.Length > 0)
+            {
+                for (int i = 0; i < _tilesInScene.Length; i++)
+                {
+                    if (_tilesInScene[i] != null)
+                        DestroyImmediate(_tilesInScene[i].gameObject);
+                }
+                _tilesInScene = new Tile[0];
+            }
+
+            if (_otherInstancesInScene.Count > 0)
+            {
+                for (int i = 0; i < _otherInstancesInScene.Count; i++)
+                {
+                    DestroyImmediate(_otherInstancesInScene[i]);
+                }
+                _otherInstancesInScene.Clear();
+            }
+
+            /*Transform[] oldRoomTiles = _instanceParent.GetComponentsInChildren<Transform>();
+            for (int i = 0; i<oldRoomTiles.Length; i++)
+            {
+                DestroyImmediate(oldRoomTiles[i].gameObject);
+            }*/
+
+            //get nb of door in room
+            /*int nbOfDoorTotal = 0;
+            int nbOfDoorActu = 0;
+            if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
+            else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
+            */
+            //init array size
+            _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
+
+            //determine grid and tiles margin ratio
+            float tileSize = _tilePrefabs[0].transform.lossyScale.x;
+
+            //generate tile prefabs
+            for (int x = 0; x < _roomShape._yLength; x++)
+            {
+                for (int y = 0; y < _roomShape._xLength; y++)
+                {
+                    Vector3 thisBlockPos = _originPos + new Vector3(tileSize * x, 0, tileSize * y);
+
+                    switch (_roomShape._tiles[y * _roomShape._yLength + x])
+                    {
+                        case Tiles.empty:
+                            _tilesInScene[x * _roomShape._yLength + y] = null;
+                            break;
+                        case Tiles.wall:
+                            //block under wall
+                            GameObject wallBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            wallBlock.GetComponent<Tile>()._x = x;
+                            wallBlock.GetComponent<Tile>()._y = y;
+                            wallBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            _tilesInScene[x * _roomShape._yLength + y] = wallBlock.GetComponent<Tile>();
+
+                            GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            _otherInstancesInScene.Add(wall);
+                            break;
+                        case Tiles.door:
+                            //block under door
+                            GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            doorBlock.GetComponent<Tile>()._x = x;
+                            doorBlock.GetComponent<Tile>()._y = y;
+                            doorBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            _tilesInScene[x * _roomShape._yLength + y] = doorBlock.GetComponent<Tile>();
+
+                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0,tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            _otherInstancesInScene.Add(door);
+
+                            //apply reference of next room to appropriate door
+                            /*if(nbOfDoorTotal == 2)
+                            {
+                                if (nbOfDoorActu == 0)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode;
+                                }
+                                if (nbOfDoorActu == 1)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                }
+                            }
+                            else if (nbOfDoorTotal == 1)
+                            {
+                                if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                }
+                                else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                }
+                            }
+                            else
+                            {
+                                //no door in the room => last room (boos)
+                            }
+                            */
+                            break;
+                        case Tiles.characterSpawn:
+                        case Tiles.enemySpawn:
+                        case Tiles.basicTile:
+                            GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            go.GetComponent<Tile>()._x = x;
+                            go.GetComponent<Tile>()._y = y;
+                            go.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            _tilesInScene[x * _roomShape._yLength + y] = go.GetComponent<Tile>();
+                            break;
+                    }
+                }
+            }
+        }
+
         public void GenerateRoom()
         {
             //empty grid and delete game objects
@@ -69,6 +187,20 @@ namespace Seance.BoardManagment
                 }
                 _tilesInScene = new Tile[0];
             }
+            if (_otherInstancesInScene.Count > 0)
+            {
+                for (int i = 0; i < _otherInstancesInScene.Count; i++)
+                {
+                    DestroyImmediate(_otherInstancesInScene[i]);
+                }
+                _otherInstancesInScene.Clear();
+            }
+
+            //get nb of door in room
+            int nbOfDoorTotal = 0;
+            int nbOfDoorActu = 0;
+            if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
+            else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
 
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
@@ -88,13 +220,64 @@ namespace Seance.BoardManagment
                         case Tiles.empty:
                             _tilesInScene[x * _roomShape._yLength + y] = null;
                             break;
-                        //TODO : implement other tile prefabs
+                        case Tiles.wall:
+                            //block under wall
+                            GameObject wallBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            wallBlock.GetComponent<Tile>()._x = x;
+                            wallBlock.GetComponent<Tile>()._y = y;
+                            wallBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            _tilesInScene[x * _roomShape._yLength + y] = wallBlock.GetComponent<Tile>();
+
+                            GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            _otherInstancesInScene.Add(wall);
+                            break;
+                        case Tiles.door:
+                            //block under door
+                            GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            doorBlock.GetComponent<Tile>()._x = x;
+                            doorBlock.GetComponent<Tile>()._y = y;
+                            doorBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            _tilesInScene[x * _roomShape._yLength + y] = doorBlock.GetComponent<Tile>();
+
+                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            _otherInstancesInScene.Add(door);
+
+                            //apply reference of next room to appropriate door
+                            if (nbOfDoorTotal == 2)
+                            {
+                                if (nbOfDoorActu == 0)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode;
+                                }
+                                if (nbOfDoorActu == 1)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                }
+                            }
+                            else if (nbOfDoorTotal == 1)
+                            {
+                                if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode;
+                                }
+                                else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null)
+                                {
+                                    nbOfDoorActu++;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                }
+                            }
+                            else
+                            {
+                                //no door in the room => last room (boos)
+                            }
+                            break;
                         case Tiles.characterSpawn:
                         case Tiles.enemySpawn:
-                        case Tiles.wall:
-                        case Tiles.door:
                         case Tiles.basicTile:
-                            GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
                             go.GetComponent<Tile>()._x = x;
                             go.GetComponent<Tile>()._y = y;
                             go.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
@@ -140,20 +323,20 @@ namespace Seance.BoardManagment
                         case Tiles.characterSpawn:
                             //spawn pawn
                             GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            characterPawn.GetComponent<Pawn>()._x = x;
-                            characterPawn.GetComponent<Pawn>()._y = y;
-                            characterPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
-                            characterPawn.GetComponent<Pawn>()._thisPawnType = PawnType.character;
-                            _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
+                            characterPawn.GetComponent<Character>()._x = x;
+                            characterPawn.GetComponent<Character>()._y = y;
+                            characterPawn.GetComponent<Character>()._pawnID = _currentNbOfPawnInScene;
+                            characterPawn.GetComponent<Character>()._thisPawnType = PawnType.character;
+                            _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Character>();
                             break;
                         case Tiles.enemySpawn:
                             //spawn pawn
                             GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            enemyPawn.GetComponent<Pawn>()._x = x;
-                            enemyPawn.GetComponent<Pawn>()._y = y;
-                            enemyPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
-                            enemyPawn.GetComponent<Pawn>()._thisPawnType = PawnType.enemy;
-                            _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Pawn>();
+                            enemyPawn.GetComponent<Enemy>()._x = x;
+                            enemyPawn.GetComponent<Enemy>()._y = y;
+                            enemyPawn.GetComponent<Enemy>()._pawnID = _currentNbOfPawnInScene;
+                            enemyPawn.GetComponent<Enemy>()._thisPawnType = PawnType.enemy;
+                            _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Enemy>();
                             break;
                     }
                 }

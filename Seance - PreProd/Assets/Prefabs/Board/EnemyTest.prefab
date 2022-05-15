@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7840296203232995330}
-  - component: {fileID: 4200971864251303780}
+  - component: {fileID: 1408623562005081477}
   - component: {fileID: 7840296203232995329}
   - component: {fileID: 7840296203232995328}
   - component: {fileID: 7840296203232995455}
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4200971864251303780
+--- !u!114 &1408623562005081477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7840296203232995454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce134e76eb37b2a478a3cb7330490b59, type: 3}
+  m_Script: {fileID: 11500000, guid: 0523a8e8a5dfb2c469f2c805a3275747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _thisPawnType: 1
+  _pawnID: 0
+  _x: 0
+  _y: 0
+  _life: 0
+  _damage: 0
 --- !u!33 &7840296203232995329
 MeshFilter:
   m_ObjectHideFlags: 0

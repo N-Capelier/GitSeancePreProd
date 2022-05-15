@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6154887793308164269}
   - component: {fileID: 6154887793308164268}
   m_Layer: 0
-  m_Name: TileTest2
+  m_Name: GroundTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

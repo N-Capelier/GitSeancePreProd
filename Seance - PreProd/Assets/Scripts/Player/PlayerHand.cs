@@ -10,16 +10,33 @@ namespace Seance.Player
 	/// </summary>
 	public class PlayerHand : MonoBehaviour
 	{
-		[SerializeField] List<Card> _cards;
+		[SerializeField] List<Card> _deck;
+		[SerializeField] List<Card> _hand;
+		[SerializeField] List<Card> _discard;
 
-		public Card PickCard(int cardIndex)
+		public void DrawCard()
 		{
-			return _cards[cardIndex];
+			if(_deck.Count == 0)
+			{
+				_deck = _discard;
+				_discard = new List<Card>();
+			}
+
+			int cardIndex = Random.Range(0, _deck.Count);
+
+			_hand.Add(_deck[cardIndex]);
+			_deck.RemoveAt(cardIndex);
 		}
 
-		public Card PickRandomCard()
+		public void UseCard(int cardIndex/*, targetCell*/)
 		{
-			return _cards[Random.Range(0, _cards.Count)];
+			if (cardIndex < 0 || cardIndex >= _hand.Count)
+				throw new System.ArgumentOutOfRangeException("Card index out of range");
+
+			_hand[cardIndex].Use();
+
+			_discard.Add(_hand[cardIndex]);
+			_hand.RemoveAt(cardIndex);
 		}
 	}
 }

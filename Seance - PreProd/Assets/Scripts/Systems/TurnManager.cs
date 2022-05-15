@@ -13,25 +13,22 @@ namespace Seance.Management
 	/// </summary>
 	public class TurnManager : NetworkBehaviour
 	{
-		[SyncVar(OnChange = nameof(OnTotalTurnsChanged))]
 		int _totalTurns;
 		public int TotalTurns { get => _totalTurns; }
 
 		GameManager _gManager;
-
-		private void OnTotalTurnsChanged(int prev, int next, bool asServer)
-		{
-			Debug.LogError("total turns changed");
-		}
 
 		private void Start()
 		{
 			_gManager = GameManager.Instance;
 		}
 
-		public void PlayNextTurn()
+		[ServerRpc(RequireOwnership = false)]
+		public void ServerRpcPlayNextTurn()
 		{
 			_totalTurns++;
+
+			ObserverRpcUpdateTurn(_totalTurns);
 
 			int currentTurnDelta = TotalTurns % 4;
 
@@ -44,6 +41,12 @@ namespace Seance.Management
 			{
 				ServerRpcStartTurn(_gManager._lobby._networkConnections[currentTurnDelta - 1]);
 			}
+		}
+
+		[ObserversRpc]
+		void ObserverRpcUpdateTurn(int totalTurns)
+		{
+			_totalTurns = totalTurns;
 		}
 
 		[ServerRpc(RequireOwnership = false)]

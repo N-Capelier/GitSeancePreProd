@@ -7,10 +7,28 @@ namespace Seance.CardSystem
     /// <summary>
     /// Nico
     /// </summary>
-    [CreateAssetMenu(menuName = "ScriptableObjects/CardSystem/Card", fileName = "New Card", order = 50)]
-    public class Card : ScriptableObject
+    //[CreateAssetMenu(menuName = "ScriptableObjects/CardSystem/Card", fileName = "New Card", order = 50)]
+    public abstract class Card : ScriptableObject
     {
-        public string _cardName;
-        public int _cost;
+        public CardType _type;
+        public string _title;
+        public int _corruption;
+        public bool _hasMovement;
+
+        public abstract void Use(/*targetCell*/);
     }
+
+    public enum CardType
+	{
+        Common,
+        Wizard,
+        Knight,
+        Ranger
+	}
+
+    public enum EffectArea
+	{
+        Target,
+        Self
+	}
 }

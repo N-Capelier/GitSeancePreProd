@@ -286,11 +286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b205f9cd45490b242bb16ebd546d175e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lobby: {fileID: 0}
-  _turnManager: {fileID: 0}
-  _enemyManager: {fileID: 0}
-  _debugTurnIndex: {fileID: 0}
-  _debugPlayerTurn: {fileID: 0}
+  _lobby: {fileID: 736076779}
+  _turnManager: {fileID: 2026151323}
+  _enemyManager: {fileID: 1829115389}
+  _debugTurnIndex: {fileID: 293568577}
+  _debugPlayerTurn: {fileID: 83473546}
 --- !u!4 &149036143
 Transform:
   m_ObjectHideFlags: 0

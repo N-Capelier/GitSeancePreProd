@@ -52,7 +52,7 @@ namespace Seance.Player
 			GameManager.Instance._debugPlayerTurn.text = "player turn: false";
 			_isPlaying = false;
 
-			_gManager._turnManager.PlayNextTurn();
+			_gManager._turnManager.ServerRpcPlayNextTurn();
 		}
 
 		public void StartTurn()

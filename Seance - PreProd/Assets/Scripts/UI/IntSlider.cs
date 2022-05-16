@@ -24,6 +24,7 @@ namespace Seance.UI
         public int MinValue { get => _minValue; set => _minValue = value; }
         public int MaxValue { get => _maxValue; set => _maxValue = value; }
         public int DefaultValue { get => _defaultValue; set => _defaultValue = value; }
+        public int Value { get => _value;  }
 
         #region Unity events
 

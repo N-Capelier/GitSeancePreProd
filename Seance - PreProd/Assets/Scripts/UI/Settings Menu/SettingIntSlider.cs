@@ -32,6 +32,17 @@ namespace Seance.UI.SettingsMenu
         #endregion
 
         #region Public methods
+        
+        public override void UpdateSetting()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override int GetSettingValue()
+        {
+            return _intSlider.Value;
+        }
+
         #endregion
 
         #region Private methods

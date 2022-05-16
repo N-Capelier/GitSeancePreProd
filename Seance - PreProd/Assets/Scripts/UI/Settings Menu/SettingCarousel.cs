@@ -30,6 +30,17 @@ namespace Seance.UI.SettingsMenu
         #endregion
 
         #region Public methods
+
+        public override int GetSettingValue()
+        {
+            return _carousel.Index;
+        }
+
+        public override void SetSettingValue(int value)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         #region Private methods

@@ -23,6 +23,7 @@ namespace Seance.UI
 
         public List<string> Options { get => _options; set => _options = value; }
         public int DefaultIndex { get => _defaultIndex; set => _defaultIndex = value; }
+        public int Index { get => _index; }
 
         #region Unity events
 

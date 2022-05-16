@@ -162,7 +162,8 @@ namespace Seance.BoardManagment
                             */
                             break;
                         case Tiles.characterSpawn:
-                        case Tiles.enemySpawn:
+                        case Tiles.enemySpawn1:
+                        case Tiles.enemySpawn2:
                         case Tiles.basicTile:
                             GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
                             go.GetComponent<Tile>()._x = x;
@@ -275,7 +276,8 @@ namespace Seance.BoardManagment
                             }
                             break;
                         case Tiles.characterSpawn:
-                        case Tiles.enemySpawn:
+                        case Tiles.enemySpawn1:
+                        case Tiles.enemySpawn2:
                         case Tiles.basicTile:
                             GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
                             go.GetComponent<Tile>()._x = x;
@@ -329,14 +331,25 @@ namespace Seance.BoardManagment
                             characterPawn.GetComponent<Character>()._thisPawnType = PawnType.character;
                             _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Character>();
                             break;
-                        case Tiles.enemySpawn:
+                        case Tiles.enemySpawn1:
                             //spawn pawn
                             GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, transform);
                             enemyPawn.GetComponent<Enemy>()._x = x;
                             enemyPawn.GetComponent<Enemy>()._y = y;
                             enemyPawn.GetComponent<Enemy>()._pawnID = _currentNbOfPawnInScene;
                             enemyPawn.GetComponent<Enemy>()._thisPawnType = PawnType.enemy;
+                            enemyPawn.GetComponent<Enemy>()._thisEnemyType = Enemy.EnemyType.enemy1;
                             _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Enemy>();
+                            break;
+                        case Tiles.enemySpawn2:
+                            //spawn pawn
+                            GameObject enemyPawn2 = Instantiate(_enemyPrefabs[1], thisBlockPos, Quaternion.identity, transform);
+                            enemyPawn2.GetComponent<Enemy>()._x = x;
+                            enemyPawn2.GetComponent<Enemy>()._y = y;
+                            enemyPawn2.GetComponent<Enemy>()._pawnID = _currentNbOfPawnInScene;
+                            enemyPawn2.GetComponent<Enemy>()._thisPawnType = PawnType.enemy;
+                            enemyPawn2.GetComponent<Enemy>()._thisEnemyType = Enemy.EnemyType.enemy2;
+                            _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn2.GetComponent<Enemy>();
                             break;
                     }
                 }
@@ -393,7 +406,8 @@ namespace Seance.BoardManagment
             wall,
             door,
             characterSpawn,
-            enemySpawn,
+            enemySpawn1,
+            enemySpawn2,
             total //always put this var on last position
         }
 

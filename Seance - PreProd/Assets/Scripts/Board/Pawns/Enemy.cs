@@ -10,7 +10,18 @@ namespace Seance.BoardManagment
     
     public class Enemy : Pawn
     {
-        
+        public enum EnemyType
+        {
+            enemy1,
+            enemy2,
+            total
+        }
+        public EnemyType _thisEnemyType = EnemyType.enemy1;
+
+        //TODO : function that itinitalise every var for TileManager.SpawnPawns
+        //do the same for Character & Tile
+        //public void Initialise()
+
         public void TakeAction()
         {
             //TODO : implement different actions

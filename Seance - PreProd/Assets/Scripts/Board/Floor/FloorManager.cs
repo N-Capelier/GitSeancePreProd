@@ -50,9 +50,11 @@ namespace Seance.BoardManagment
             BinaryTreeOfRoom testFloor = new BinaryTreeOfRoom(_roomProfiles[0], 9);
 
             RoomProfile a = _roomProfiles[1]; 
-            RoomProfile b = _roomProfiles[2]; 
-            RoomProfile c = _roomProfiles[3]; 
-            RoomProfile boss = _roomProfiles[4];
+            RoomProfile aBoss = _roomProfiles[2]; 
+            RoomProfile b = _roomProfiles[3]; 
+            RoomProfile bBoss = _roomProfiles[4]; 
+            RoomProfile c = _roomProfiles[5]; 
+            RoomProfile boss = _roomProfiles[6];
 
             //1st column
             testFloor.Add(a, testFloor._floor[0]);
@@ -66,8 +68,8 @@ namespace Seance.BoardManagment
             Node[] secoundFloor = { testFloor._floor[3], testFloor._floor[4], testFloor._floor[5] };
 
             //3rd floor
-            testFloor.Add(a, secoundFloor);
-            testFloor.Add(b, secoundFloor);
+            testFloor.Add(aBoss, secoundFloor);
+            testFloor.Add(bBoss, secoundFloor);
             Node[] thirdFloor = { testFloor._floor[6], testFloor._floor[7] };
 
             //boss

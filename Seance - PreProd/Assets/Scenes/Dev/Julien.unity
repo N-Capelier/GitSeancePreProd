@@ -393,10 +393,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
-      propertyPath: _originPos.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _currentNbOfPawnInScene
       value: 5
       objectReference: {fileID: 0}

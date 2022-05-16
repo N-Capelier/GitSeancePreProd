@@ -83,9 +83,9 @@ MonoBehaviour:
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
   - {fileID: 6154887793308164271, guid: c4008619dc107244bae2d62659ece606, type: 3}
   - {fileID: 7840296203232995454, guid: 800a88f5ee31e3b4b9fb4750f7dc0adb, type: 3}
-  - {fileID: 7840296203232995454, guid: 8b70568e0eda9e94fbe0d8d8fd5c9a7d, type: 3}
   _enemyPrefabs:
   - {fileID: 7840296203232995454, guid: 8b70568e0eda9e94fbe0d8d8fd5c9a7d, type: 3}
+  - {fileID: 7840296203232995454, guid: 56b8eb1bc6cfcd449b32d2dba336ad06, type: 3}
   _characterPrefabs:
   - {fileID: 7840296203232995454, guid: 800a88f5ee31e3b4b9fb4750f7dc0adb, type: 3}
   _tilesInScene:
@@ -162,6 +162,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _pawnsInScene: []
+  _otherInstancesInScene: []
   _currentNbOfPawnInScene: 0
 --- !u!114 &8182744253737441598
 MonoBehaviour:
@@ -178,7 +179,9 @@ MonoBehaviour:
   _roomProfiles:
   - {fileID: 11400000, guid: 37e4cc234936917459604c77e4fe5a65, type: 2}
   - {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
+  - {fileID: 11400000, guid: cc1a276ec6a178a4ca6113073abdac34, type: 2}
   - {fileID: 11400000, guid: 639a58d7053d5e447b1dba23b8fc4268, type: 2}
+  - {fileID: 11400000, guid: c174895cdee549a4399e746271a552fa, type: 2}
   - {fileID: 11400000, guid: 390c49a5ee279de4a8fcd50382f9c3ef, type: 2}
   - {fileID: 11400000, guid: a4e4c89a5426cd645ac203a681a27de6, type: 2}
   _playersPositionInFloor: 0

@@ -17,10 +17,13 @@ namespace Seance.BoardManagment
         /// </TODO>
 
         [Header("Params")]
-        HeroType _heroType;
+        [SerializeField] HeroType _heroType;
         public HeroType HeroType { get => _heroType; }
 
-        [HideInInspector] public int _corruption = 0;
+
+		[SerializeField] int _corruption = 0;
+		public int Corruption { get => _corruption;}
+
 
         public int Corrupt(int amount)
 		{

@@ -8,7 +8,7 @@ namespace Seance.Player
 	/// <summary>
 	/// Nico
 	/// </summary>
-	public class PlayerHand : MonoBehaviour
+	public class PlayerCardZones : MonoBehaviour
 	{
 		[SerializeField] List<Card> _deck;
 		[SerializeField] List<Card> _hand;
@@ -22,10 +22,8 @@ namespace Seance.Player
 				_discard = new List<Card>();
 			}
 
-			int cardIndex = Random.Range(0, _deck.Count);
-
-			_hand.Add(_deck[cardIndex]);
-			_deck.RemoveAt(cardIndex);
+			_hand.Add(_deck[0]);
+			_deck.RemoveAt(0);
 		}
 
 		public void UseCard(int cardIndex/*, targetCell*/)
@@ -35,8 +33,14 @@ namespace Seance.Player
 
 			_hand[cardIndex].Use();
 
+			DiscardCard(cardIndex);
+		}
+
+		public void DiscardCard(int cardIndex)
+		{
 			_discard.Add(_hand[cardIndex]);
 			_hand.RemoveAt(cardIndex);
 		}
+
 	}
 }

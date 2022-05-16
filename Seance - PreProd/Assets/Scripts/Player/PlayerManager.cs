@@ -19,8 +19,8 @@ namespace Seance.Player
 		[Header("References")]
 		GameManager _gManager;
 
-		public PlayerHand _hand;
-		public CharacterPawn pawn;
+		public PlayerCardZones _cardZones;
+		public CharacterPawn _pawn;
 
 		#region Unity messages & Setup
 
@@ -59,9 +59,9 @@ namespace Seance.Player
 
 			_gManager._debugTurnIndex.text = $"turn index: {_gManager._turnManager.TotalTurns % 4}";
 
-			GameManager.Instance._debugPlayerTurn.text = "player turn: true";
+			_gManager._debugPlayerTurn.text = "player turn: true";
 
-
+			_cardZones.DrawCard();
 
 			_isPlaying = true;
 		}

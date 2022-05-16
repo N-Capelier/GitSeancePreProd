@@ -140,7 +140,7 @@ namespace Seance.BoardManagment
                             characterPawn.GetComponent<Pawn>()._x = x;
                             characterPawn.GetComponent<Pawn>()._y = y;
                             characterPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
-                            characterPawn.GetComponent<Pawn>()._thisPawnType = PawnType.character;
+                            characterPawn.GetComponent<Pawn>()._pawnType = PawnType.character;
                             _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
                             break;
                         case Tiles.enemySpawn:
@@ -149,7 +149,7 @@ namespace Seance.BoardManagment
                             enemyPawn.GetComponent<Pawn>()._x = x;
                             enemyPawn.GetComponent<Pawn>()._y = y;
                             enemyPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
-                            enemyPawn.GetComponent<Pawn>()._thisPawnType = PawnType.enemy;
+                            enemyPawn.GetComponent<Pawn>()._pawnType = PawnType.enemy;
                             _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Pawn>();
                             break;
                     }
@@ -186,7 +186,7 @@ namespace Seance.BoardManagment
             for (int i = 0; i<_pawnsInScene.Length; i++)
             {
                 //if this pawn is of type we're looking for
-                if(_pawnsInScene[i]._thisPawnType == pt)
+                if(_pawnsInScene[i]._pawnType == pt)
                 {
                     //
                     if(Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)

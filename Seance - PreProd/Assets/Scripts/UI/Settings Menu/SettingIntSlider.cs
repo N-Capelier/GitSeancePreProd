@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,20 +28,22 @@ namespace Seance.UI.SettingsMenu
             _intSlider.MinValue = _minValue;
             _intSlider.MaxValue = _maxValue;
             _intSlider.DefaultValue = _defaultValue;
+
+            _intSlider.onSettingChange += UpdateSettingValue;
         }
 
         #endregion
 
         #region Public methods
-        
-        public override void UpdateSetting()
-        {
-            throw new System.NotImplementedException();
-        }
 
         public override int GetSettingValue()
         {
             return _intSlider.Value;
+        }
+        
+        public override void SetSettingValue(int value)
+        {
+            _intSlider.Value = value;
         }
 
         #endregion

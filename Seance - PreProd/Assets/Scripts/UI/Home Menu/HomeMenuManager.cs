@@ -30,6 +30,10 @@ namespace Seance.UI.HomeMenu
         private void Awake()
         {
             CreateSingleton();
+        }
+
+        private void Start()
+        {
             UpdateSections();
         }
 

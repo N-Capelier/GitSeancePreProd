@@ -23,7 +23,10 @@ namespace Seance.UI
 
         public List<string> Options { get => _options; set => _options = value; }
         public int DefaultIndex { get => _defaultIndex; set => _defaultIndex = value; }
-        public int Index { get => _index; }
+        public int Index { get => _index; set => _index = value; }
+
+        public delegate void OnSettingChange();
+        public event OnSettingChange onSettingChange;
 
         #region Unity events
 
@@ -59,6 +62,7 @@ namespace Seance.UI
             {
                 _index--;
                 UpdateText();
+                onSettingChange?.Invoke();
 
                 if (_index <= 0)
                 {
@@ -75,6 +79,7 @@ namespace Seance.UI
             {
                 _index++;
                 UpdateText();
+                onSettingChange?.Invoke();
 
                 if (_index >= _options.Count - 1)
                 {

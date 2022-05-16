@@ -15,6 +15,12 @@ namespace Seance.UI.SettingsMenu
         public SettingType SettingType { get => _settingType; }
 
         public abstract void SetSettingValue(int value);
+
         public abstract int GetSettingValue();
+
+        public void UpdateSettingValue()
+        {
+            SettingsManager.Instance.UpdateSettingValue(_settingType, GetSettingValue());
+        }
     }
 }

@@ -24,7 +24,11 @@ namespace Seance.UI
         public int MinValue { get => _minValue; set => _minValue = value; }
         public int MaxValue { get => _maxValue; set => _maxValue = value; }
         public int DefaultValue { get => _defaultValue; set => _defaultValue = value; }
-        public int Value { get => _value;  }
+        public int Value { get => _value; set => _value = value; }
+
+        public delegate void OnSettingChange();
+        public event OnSettingChange onSettingChange;
+
 
         #region Unity events
 
@@ -44,11 +48,13 @@ namespace Seance.UI
         public void ActionSliderChanged()
         {
             _inputField.text = $"{_slider.value}";
+            onSettingChange?.Invoke();
         }
 
         public void ActionInputChanged()
         {
             _slider.value = int.Parse(_inputField.text);
+            onSettingChange?.Invoke();
         }
 
         #endregion

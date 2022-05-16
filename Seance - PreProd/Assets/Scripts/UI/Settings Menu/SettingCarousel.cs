@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,6 +26,8 @@ namespace Seance.UI.SettingsMenu
             _label.text = _settingName;
             _carousel.Options = _options;
             _carousel.DefaultIndex = _defaultIndex;
+
+            _carousel.onSettingChange += UpdateSettingValue;
         }
 
         #endregion
@@ -38,7 +41,7 @@ namespace Seance.UI.SettingsMenu
 
         public override void SetSettingValue(int value)
         {
-            throw new System.NotImplementedException();
+            _carousel.Index = value;
         }
 
         #endregion

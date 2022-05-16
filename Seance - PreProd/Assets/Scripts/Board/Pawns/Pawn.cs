@@ -19,10 +19,13 @@ namespace Seance.BoardManagment
 
         //pawn related var
         public int _life;
-        private int _lifeActu;
+        public int _lifeActu;
         public int _damage;
+        public int _armor = 0;
+        public int _intiativeBase;
 
-        public void MovePawnTo(int x, int y)
+        //hard set pawn position to x,y pos on board
+        public void ChangePositionTo(int x, int y)
         {
             if (TileManager.Instance.GetTile(x, y) != null)
             {
@@ -31,6 +34,13 @@ namespace Seance.BoardManagment
                 transform.position = ground + new Vector3(0, TileManager.Instance._tilePrefabs[0].transform.lossyScale.x, 0);
             }
 
+        }
+
+        //moves pawn "movement" cases toward the tile on position x,y
+        public void MoveToward(int x, int y, int movement)
+        {
+            //TODO : implement A*
+            
         }
 
         public void InflictDamageTo(Pawn p)

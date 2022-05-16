@@ -13,16 +13,12 @@ namespace Seance.BoardManagment
         public int _x;
         public int _y;
         public TileManager.Tiles _thisTileType;
-        // Start is called before the first frame update
-        void Start()
-        {
         
-        }
-
-        // Update is called once per frame
-        void Update()
+        public void Initialize(int x, int y, TileManager.Tiles tileType)
         {
-        
+            _x = x;
+            _y = y;
+            _thisTileType = tileType;
         }
     }
 }

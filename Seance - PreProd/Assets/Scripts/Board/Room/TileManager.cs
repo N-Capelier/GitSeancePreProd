@@ -109,9 +109,7 @@ namespace Seance.BoardManagment
                         case Tiles.wall:
                             //block under wall
                             GameObject wallBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            wallBlock.GetComponent<Tile>()._x = x;
-                            wallBlock.GetComponent<Tile>()._y = y;
-                            wallBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            wallBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = wallBlock.GetComponent<Tile>();
 
                             GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
@@ -120,12 +118,10 @@ namespace Seance.BoardManagment
                         case Tiles.door:
                             //block under door
                             GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            doorBlock.GetComponent<Tile>()._x = x;
-                            doorBlock.GetComponent<Tile>()._y = y;
-                            doorBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            doorBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = doorBlock.GetComponent<Tile>();
 
-                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0,tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
                             _otherInstancesInScene.Add(door);
 
                             //apply reference of next room to appropriate door
@@ -166,9 +162,7 @@ namespace Seance.BoardManagment
                         case Tiles.enemySpawn2:
                         case Tiles.basicTile:
                             GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            go.GetComponent<Tile>()._x = x;
-                            go.GetComponent<Tile>()._y = y;
-                            go.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            go.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = go.GetComponent<Tile>();
                             break;
                     }
@@ -224,9 +218,7 @@ namespace Seance.BoardManagment
                         case Tiles.wall:
                             //block under wall
                             GameObject wallBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
-                            wallBlock.GetComponent<Tile>()._x = x;
-                            wallBlock.GetComponent<Tile>()._y = y;
-                            wallBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            wallBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = wallBlock.GetComponent<Tile>();
 
                             GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
@@ -235,9 +227,7 @@ namespace Seance.BoardManagment
                         case Tiles.door:
                             //block under door
                             GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
-                            doorBlock.GetComponent<Tile>()._x = x;
-                            doorBlock.GetComponent<Tile>()._y = y;
-                            doorBlock.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
+                            doorBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = doorBlock.GetComponent<Tile>();
 
                             GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
@@ -279,11 +269,9 @@ namespace Seance.BoardManagment
                         case Tiles.enemySpawn1:
                         case Tiles.enemySpawn2:
                         case Tiles.basicTile:
-                            GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
-                            go.GetComponent<Tile>()._x = x;
-                            go.GetComponent<Tile>()._y = y;
-                            go.GetComponent<Tile>()._thisTileType = _roomShape._tiles[y * _roomShape._yLength + x];
-                            _tilesInScene[x * _roomShape._yLength + y] = go.GetComponent<Tile>();
+                            GameObject basicTile = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            basicTile.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
+                            _tilesInScene[x * _roomShape._yLength + y] = basicTile.GetComponent<Tile>();
                             break;
                     }
                 }
@@ -303,7 +291,7 @@ namespace Seance.BoardManagment
                 }
                 _pawnsInScene = new Pawn[0];
             }
-
+            
             //init array size
             _pawnsInScene = new Pawn[20]; //TODO : Get actual nb of pawn in scene
             _currentNbOfPawnInScene = 0;
@@ -325,30 +313,20 @@ namespace Seance.BoardManagment
                         case Tiles.characterSpawn:
                             //spawn pawn
                             GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            characterPawn.GetComponent<Character>()._x = x;
-                            characterPawn.GetComponent<Character>()._y = y;
-                            characterPawn.GetComponent<Character>()._pawnID = _currentNbOfPawnInScene;
-                            characterPawn.GetComponent<Character>()._thisPawnType = PawnType.character;
+                            //TODO : change init values to accurate one
+                            characterPawn.GetComponent<Character>().Initialize(10, 0, 20, _currentNbOfPawnInScene);
                             _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Character>();
                             break;
                         case Tiles.enemySpawn1:
                             //spawn pawn
                             GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            enemyPawn.GetComponent<Enemy>()._x = x;
-                            enemyPawn.GetComponent<Enemy>()._y = y;
-                            enemyPawn.GetComponent<Enemy>()._pawnID = _currentNbOfPawnInScene;
-                            enemyPawn.GetComponent<Enemy>()._thisPawnType = PawnType.enemy;
-                            enemyPawn.GetComponent<Enemy>()._thisEnemyType = Enemy.EnemyType.enemy1;
+                            enemyPawn.GetComponent<Enemy>().Initialize(6, 1, 12, Enemy.EnemyType.enemy1, _currentNbOfPawnInScene);
                             _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Enemy>();
                             break;
                         case Tiles.enemySpawn2:
                             //spawn pawn
                             GameObject enemyPawn2 = Instantiate(_enemyPrefabs[1], thisBlockPos, Quaternion.identity, transform);
-                            enemyPawn2.GetComponent<Enemy>()._x = x;
-                            enemyPawn2.GetComponent<Enemy>()._y = y;
-                            enemyPawn2.GetComponent<Enemy>()._pawnID = _currentNbOfPawnInScene;
-                            enemyPawn2.GetComponent<Enemy>()._thisPawnType = PawnType.enemy;
-                            enemyPawn2.GetComponent<Enemy>()._thisEnemyType = Enemy.EnemyType.enemy2;
+                            enemyPawn2.GetComponent<Enemy>().Initialize(4, 0, 4, Enemy.EnemyType.enemy2, _currentNbOfPawnInScene);
                             _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn2.GetComponent<Enemy>();
                             break;
                     }
@@ -366,7 +344,7 @@ namespace Seance.BoardManagment
 
         public Pawn GetPawn(int pawnID)
         {
-            for (int i = 0; i< _pawnsInScene.Length; i++)
+            for (int i = 0; i < _pawnsInScene.Length; i++)
             {
                 if (_pawnsInScene[i]._pawnID == pawnID)
                 {
@@ -382,13 +360,13 @@ namespace Seance.BoardManagment
             Pawn closestPawn = null;
 
             //looking between every pawn in scene
-            for (int i = 0; i<_pawnsInScene.Length; i++)
+            for (int i = 0; i < _pawnsInScene.Length; i++)
             {
                 //if this pawn is of type we're looking for
-                if(_pawnsInScene[i]._thisPawnType == pt)
+                if (_pawnsInScene[i]._thisPawnType == pt)
                 {
                     //
-                    if(Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)
+                    if (Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)
                     {
                         smallestDistanceRecorded = Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin));
                         closestPawn = _pawnsInScene[i];
@@ -397,6 +375,20 @@ namespace Seance.BoardManagment
             }
 
             return closestPawn;
+        }
+
+        public Pawn GetPawnOn(int x, int y)
+        {
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
+                if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
+                {
+                    return _pawnsInScene[i];
+                }
+            }
+            
+            //no pawn on position x,y on board
+            return null;
         }
 
         public enum Tiles

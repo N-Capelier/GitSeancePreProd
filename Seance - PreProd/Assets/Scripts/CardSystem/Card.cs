@@ -12,6 +12,7 @@ namespace Seance.CardSystem
     {
         public CardType _type;
         public string _title;
+        public string _description;
         public int _corruption;
         public bool _hasMovement;
 

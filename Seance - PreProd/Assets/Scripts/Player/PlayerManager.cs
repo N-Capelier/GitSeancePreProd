@@ -10,17 +10,20 @@ namespace Seance.Player
 	/// </summary>
 	public class PlayerManager : NetworkBehaviour
 	{
+		[Header("References")]
+		GameManager _gManager;
+		[SerializeField] GameObject _playerUI;
+		[SerializeField] Transform _cardsParent;
+
 		[Header("Control")]
 		bool _isPlaying = false;
 		public bool IsPlaying { get => _isPlaying; }
 
 		int _interactions = 0;
 
-		[Header("References")]
-		GameManager _gManager;
 
 		public PlayerCardZones _cardZones;
-		public CharacterPawn _pawn;
+		[HideInInspector] public CharacterPawn _pawn;
 
 		#region Unity messages & Setup
 
@@ -46,6 +49,7 @@ namespace Seance.Player
 			if (!IsOwner)
 				return;
 			GameManager.Instance._lobby._ownedPlayer = this;
+			_playerUI?.SetActive(true);
 		}
 
 		#endregion

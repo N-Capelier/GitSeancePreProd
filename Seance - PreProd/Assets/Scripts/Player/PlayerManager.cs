@@ -13,7 +13,6 @@ namespace Seance.Player
 		[Header("References")]
 		GameManager _gManager;
 		[SerializeField] GameObject _playerUI;
-		[SerializeField] Transform _cardsParent;
 
 		[Header("Control")]
 		bool _isPlaying = false;

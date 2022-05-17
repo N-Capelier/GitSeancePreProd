@@ -10,9 +10,22 @@ namespace Seance.Player
 	/// </summary>
 	public class PlayerCardZones : MonoBehaviour
 	{
+		[Header("References")]
+		[SerializeField] Transform _cardsParent;
+		[SerializeField] GameObject _visualCardPrefab;
+
+		[Header("Params")]
 		[SerializeField] List<Card> _deck;
 		[SerializeField] List<Card> _hand;
 		[SerializeField] List<Card> _discard;
+
+		private void Start()
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				DrawCard();
+			}
+		}
 
 		public void DrawCard()
 		{
@@ -24,6 +37,9 @@ namespace Seance.Player
 
 			_hand.Add(_deck[0]);
 			_deck.RemoveAt(0);
+
+			VisualCard newVisualCard = Instantiate(_visualCardPrefab, _cardsParent).GetComponent<VisualCard>();
+			newVisualCard.Init(_hand[_hand.Count - 1], _hand.Count - 1);
 		}
 
 		public void UseCard(int cardIndex/*, targetCell*/)
@@ -42,5 +58,14 @@ namespace Seance.Player
 			_hand.RemoveAt(cardIndex);
 		}
 
+		public void RefreshCardIndexes()
+		{
+			VisualCard[] cards = _cardsParent.GetComponentsInChildren<VisualCard>();
+
+			for (int i = 0; i < cards.Length; i++)
+			{
+				cards[i]._boardIndex = i;
+			}
+		}
 	}
 }

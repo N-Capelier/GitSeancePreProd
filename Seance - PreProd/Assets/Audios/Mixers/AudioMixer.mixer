@@ -6,7 +6,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Voice
+  m_Name: Dialogue
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 2901e3605ab19e643b628067b6dad694
   m_Children: []
@@ -58,7 +58,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SFX
+  m_Name: Effects
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: d7ce01113701f21479e5957e6cea7f27
   m_Children: []
@@ -154,17 +154,17 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 3287a9e4ede9e554595ba6df8d46e54d
-    name: MyExposedParam 2
+    name: AmbienceVolume
   - guid: 90967aa4e65b74b43aef0ca4155961f0
-    name: MyExposedParam 1
+    name: InterfaceVolume
   - guid: 88babe02e53d57945917694422f1dcf4
-    name: MyExposedParam
+    name: MasterVolume
   - guid: 1f6dd237a6973474b9f23d780549f0af
-    name: MyExposedParam 3
+    name: MusicVolume
   - guid: 23d1fd5d196d89442896ba0a10d3de76
-    name: MyExposedParam 4
+    name: EffectsVolume
   - guid: a46f5670f6aed704e8b332185ad2890c
-    name: MyExposedParam 5
+    name: DialogueVolume
   m_AudioMixerGroupViews:
   - guids:
     - 407a7d1827bd72145a51c0c6692250ba

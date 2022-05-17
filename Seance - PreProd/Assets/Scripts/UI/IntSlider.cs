@@ -36,8 +36,8 @@ namespace Seance.UI
         {
             _slider.minValue = _minValue;
             _slider.maxValue = _maxValue;
-            _slider.value = _value;
-            _inputField.text = $"{_slider.value}";
+            _slider.SetValueWithoutNotify(_value);
+            _inputField.SetTextWithoutNotify($"{_value}");
         }
 
         #endregion
@@ -46,13 +46,18 @@ namespace Seance.UI
 
         public void ActionSliderChanged()
         {
-            _inputField.text = $"{_slider.value}";
+            _value = (int)_slider.value;
+            _inputField.SetTextWithoutNotify($"{_value}");
+
             onSettingChange?.Invoke();
+
         }
 
         public void ActionInputChanged()
         {
-            _slider.value = int.Parse(_inputField.text);
+            _value = int.Parse(_inputField.text);
+            _slider.SetValueWithoutNotify(_value);
+
             onSettingChange?.Invoke();
         }
 

@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 33839473}
   - component: {fileID: 33839472}
+  - component: {fileID: 33839474}
   m_Layer: 5
   m_Name: Section - System settings
   m_TagString: Untagged
@@ -168,6 +169,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &33839474
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33839471}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &44316543
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 134556463}
   - component: {fileID: 134556464}
+  - component: {fileID: 134556465}
   m_Layer: 5
   m_Name: Section - Join game
   m_TagString: Untagged
@@ -676,6 +690,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134556462}
   m_CullTransparentMesh: 1
+--- !u!225 &134556465
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134556462}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &202594769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,6 +2028,7 @@ GameObject:
   - component: {fileID: 381541031}
   - component: {fileID: 381541033}
   - component: {fileID: 381541032}
+  - component: {fileID: 381541034}
   m_Layer: 5
   m_Name: Section - Main menu
   m_TagString: Untagged
@@ -2059,6 +2086,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381541030}
   m_CullTransparentMesh: 1
+--- !u!225 &381541034
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381541030}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &385457739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2839565155397206299, guid: ef3d656c9b271f947a88a7ce374e7ee8, type: 3}
@@ -2235,6 +2274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 411927484}
   - component: {fileID: 411927483}
+  - component: {fileID: 411927485}
   m_Layer: 5
   m_Name: Section - Audio settings
   m_TagString: Untagged
@@ -2270,6 +2310,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &411927485
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411927482}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &420478837
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,7 +2758,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -175.00003}
-  m_SizeDelta: {x: 0, y: 350}
+  m_SizeDelta: {x: -40, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &445833182
 MonoBehaviour:
@@ -2728,9 +2780,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 21e6deb1b26b24a41a890261f80ac028, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3704,7 +3756,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c2e50c2f19914514cba649914bfaffa3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4625,18 +4677,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 979baaaf32e0b404b80a9e6792a8a551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenu: {fileID: 381541030}
-  _hostMenu: {fileID: 1791187803}
-  _joinMenu: {fileID: 134556462}
-  _settingsMenu: {fileID: 1488163259}
-  _graphicsSettings: {fileID: 1570436803}
-  _audioSettings: {fileID: 411927482}
-  _controlsSettings: {fileID: 1200490289}
-  _accessibilitySettings: {fileID: 1638001483}
-  _interfaceSettings: {fileID: 1065444733}
-  _systemSettings: {fileID: 33839471}
-  _credits: {fileID: 1447963030}
-  _quitAlert: {fileID: 1541699567}
+  _mainMenu: {fileID: 381541034}
+  _hostMenu: {fileID: 1791187806}
+  _joinMenu: {fileID: 134556465}
+  _settingsMenu: {fileID: 1488163262}
+  _graphicsSettings: {fileID: 1570436806}
+  _audioSettings: {fileID: 411927485}
+  _controlsSettings: {fileID: 1200490292}
+  _accessibilitySettings: {fileID: 1638001486}
+  _interfaceSettings: {fileID: 1065444736}
+  _systemSettings: {fileID: 33839474}
+  _credits: {fileID: 1447963033}
+  _quitAlert: {fileID: 1541699570}
 --- !u!4 &1008227095
 Transform:
   m_ObjectHideFlags: 0
@@ -4851,6 +4903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1065444735}
   - component: {fileID: 1065444734}
+  - component: {fileID: 1065444736}
   m_Layer: 5
   m_Name: Section - Interface settings
   m_TagString: Untagged
@@ -4886,6 +4939,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1065444736
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065444733}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1068083655
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,6 +6043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1200490291}
   - component: {fileID: 1200490290}
+  - component: {fileID: 1200490292}
   m_Layer: 5
   m_Name: Section - Controls settings
   m_TagString: Untagged
@@ -6013,6 +6079,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1200490292
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200490289}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1240378010
 GameObject:
   m_ObjectHideFlags: 0
@@ -6049,9 +6127,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 20}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1240378012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6681,6 +6759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1447963031}
   - component: {fileID: 1447963032}
+  - component: {fileID: 1447963033}
   m_Layer: 5
   m_Name: Section - Credits
   m_TagString: Untagged
@@ -6715,6 +6794,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447963030}
   m_CullTransparentMesh: 1
+--- !u!225 &1447963033
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447963030}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1488163259
 GameObject:
   m_ObjectHideFlags: 0
@@ -6725,6 +6816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1488163260}
   - component: {fileID: 1488163261}
+  - component: {fileID: 1488163262}
   m_Layer: 5
   m_Name: Section - Settings
   m_TagString: Untagged
@@ -6770,6 +6862,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488163259}
   m_CullTransparentMesh: 1
+--- !u!225 &1488163262
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488163259}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1517192163
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,7 +6994,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1008227094}
         m_TargetAssemblyTypeName: Seance.UI.HomeMenu.HomeMenuManager, Assembly-CSharp
-        m_MethodName: ActionStateGraphSettings
+        m_MethodName: ActionApplySettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7007,6 +7111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1541699568}
   - component: {fileID: 1541699569}
+  - component: {fileID: 1541699570}
   m_Layer: 5
   m_Name: Section - Quit alert
   m_TagString: Untagged
@@ -7044,6 +7149,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541699567}
   m_CullTransparentMesh: 1
+--- !u!225 &1541699570
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541699567}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1570436803
 GameObject:
   m_ObjectHideFlags: 0
@@ -7054,6 +7171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570436805}
   - component: {fileID: 1570436804}
+  - component: {fileID: 1570436806}
   m_Layer: 5
   m_Name: Section - Graphics settings
   m_TagString: Untagged
@@ -7089,6 +7207,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 0, y: -120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1570436806
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570436803}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1584788719
 GameObject:
   m_ObjectHideFlags: 0
@@ -7570,6 +7700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638001485}
   - component: {fileID: 1638001484}
+  - component: {fileID: 1638001486}
   m_Layer: 5
   m_Name: Section - Accessibility settings
   m_TagString: Untagged
@@ -7605,6 +7736,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1638001486
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638001483}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &1699265899 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8203204638963248423, guid: 868fada696582cb43ac0020b434c99af, type: 3}
@@ -7980,6 +8123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1791187804}
   - component: {fileID: 1791187805}
+  - component: {fileID: 1791187806}
   m_Layer: 5
   m_Name: Section - Host game
   m_TagString: Untagged
@@ -8014,6 +8158,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791187803}
   m_CullTransparentMesh: 1
+--- !u!225 &1791187806
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791187803}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &1801885210 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2839565155397206299, guid: ef3d656c9b271f947a88a7ce374e7ee8, type: 3}
@@ -9295,7 +9451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

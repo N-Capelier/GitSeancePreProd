@@ -12,18 +12,18 @@ namespace Seance.UI.HomeMenu
         private HomeMenuState _state = HomeMenuState.MAIN;
 
         [Header("UI Sections")]
-        [SerializeField] private GameObject _mainMenu;
-        [SerializeField] private GameObject _hostMenu;
-        [SerializeField] private GameObject _joinMenu;
-        [SerializeField] private GameObject _settingsMenu;
-        [SerializeField] private GameObject _graphicsSettings;
-        [SerializeField] private GameObject _audioSettings;
-        [SerializeField] private GameObject _controlsSettings;
-        [SerializeField] private GameObject _accessibilitySettings;
-        [SerializeField] private GameObject _interfaceSettings;
-        [SerializeField] private GameObject _systemSettings;
-        [SerializeField] private GameObject _credits;
-        [SerializeField] private GameObject _quitAlert;
+        [SerializeField] private CanvasGroup _mainMenu;
+        [SerializeField] private CanvasGroup _hostMenu;
+        [SerializeField] private CanvasGroup _joinMenu;
+        [SerializeField] private CanvasGroup _settingsMenu;
+        [SerializeField] private CanvasGroup _graphicsSettings;
+        [SerializeField] private CanvasGroup _audioSettings;
+        [SerializeField] private CanvasGroup _controlsSettings;
+        [SerializeField] private CanvasGroup _accessibilitySettings;
+        [SerializeField] private CanvasGroup _interfaceSettings;
+        [SerializeField] private CanvasGroup _systemSettings;
+        [SerializeField] private CanvasGroup _credits;
+        [SerializeField] private CanvasGroup _quitAlert;
 
         #region Unity events
 
@@ -95,6 +95,11 @@ namespace Seance.UI.HomeMenu
             UpdateSections();
         }
 
+        public void ActionApplySettings()
+        {
+            PlayerPrefs.Save();
+        }
+
         public void ActionStateCredits()
         {
             _state = HomeMenuState.CREDITS;
@@ -118,80 +123,94 @@ namespace Seance.UI.HomeMenu
 
         private void UpdateSections()
         {
-            DisableAllSections();
+            HideAllSections();
 
             switch (_state)
             {
                 case HomeMenuState.MAIN:
-                    _mainMenu.SetActive(true);
+                    ShowSection(_mainMenu);
                     break;
 
                 case HomeMenuState.HOST_GAME:
-                    _hostMenu.SetActive(true);
+                    ShowSection(_hostMenu);
                     break;
 
                 case HomeMenuState.JOIN_GAME:
-                    _joinMenu.SetActive(true);
+                    ShowSection(_joinMenu);
                     break;
 
                 case HomeMenuState.GRAPH_SETTINGS:
-                    _settingsMenu.SetActive(true);
-                    _graphicsSettings.SetActive(true);
+                    ShowSection(_settingsMenu);
+                    ShowSection(_graphicsSettings);
                     break;
 
                 case HomeMenuState.AUDIO_SETTINGS:
-                    _settingsMenu.SetActive(true);
-                    _audioSettings.SetActive(true);
+                    ShowSection(_settingsMenu);
+                    ShowSection(_audioSettings);
                     break;
 
                 case HomeMenuState.CONTROLS_SETTINGS:
-                    _settingsMenu.SetActive(true);
-                    _controlsSettings.SetActive(true);
+                    ShowSection(_settingsMenu);
+                    ShowSection(_controlsSettings);
                     break;
 
                 case HomeMenuState.ACCESSIBILITY_SETTINGS:
-                    _settingsMenu.SetActive(true);
-                    _accessibilitySettings.SetActive(true);
+                    ShowSection(_settingsMenu);
+                    ShowSection(_accessibilitySettings);
                     break;
 
                 case HomeMenuState.INTERFACE_SETTINGS:
-                    _settingsMenu.SetActive(true);
-                    _interfaceSettings.SetActive(true);
+                    ShowSection(_settingsMenu);
+                    ShowSection(_interfaceSettings);
                     break;
 
                 case HomeMenuState.SYSTEM_SETTINGS:
-                    _settingsMenu.SetActive(true);
-                    _systemSettings.SetActive(true);
+                    ShowSection(_settingsMenu);
+                    ShowSection(_systemSettings);
                     break;
 
                 case HomeMenuState.CREDITS:
-                    _credits.SetActive(true);
+                    ShowSection(_credits);
                     break;
 
                 case HomeMenuState.QUIT_ALERT:
-                    _quitAlert.SetActive(true);
+                    ShowSection(_quitAlert);
                     break;
 
                 default:
-                    _mainMenu.SetActive(true);
+                    ShowSection(_mainMenu);
                     break;
             }
         }
 
-        private void DisableAllSections()
+        private void HideAllSections()
         {
-            _mainMenu.SetActive(false);
-            _hostMenu.SetActive(false);
-            _joinMenu.SetActive(false);
-            _settingsMenu.SetActive(false);
-            _graphicsSettings.SetActive(false);
-            _audioSettings.SetActive(false);
-            _controlsSettings.SetActive(false);
-            _accessibilitySettings.SetActive(false);
-            _interfaceSettings.SetActive(false);
-            _systemSettings.SetActive(false);
-            _credits.SetActive(false);
-            _quitAlert.SetActive(false);
+            HideSection(_mainMenu);
+            HideSection(_hostMenu);
+            HideSection(_joinMenu);
+            HideSection(_settingsMenu);
+            HideSection(_graphicsSettings);
+            HideSection(_audioSettings);
+            HideSection(_controlsSettings);
+            HideSection(_accessibilitySettings);
+            HideSection(_interfaceSettings);
+            HideSection(_systemSettings);
+            HideSection(_credits);
+            HideSection(_quitAlert);
+        }
+
+        private void ShowSection(CanvasGroup section)
+        {
+            section.alpha = 1;
+            section.interactable = true;
+            section.blocksRaycasts = true;
+        }
+
+        private void HideSection(CanvasGroup section)
+        {
+            section.alpha = 0;
+            section.interactable = false;
+            section.blocksRaycasts = false;
         }
 
         #endregion

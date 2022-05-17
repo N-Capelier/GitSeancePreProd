@@ -1,3 +1,4 @@
+using Seance.SoundManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,13 +22,12 @@ namespace Seance.UI.SettingsMenu
 
             GetAllSettingsComponents();
             GetAllSettingsValues();
-            UpdateAllComponants();
-            ApplyAllSettings();
         }
 
         private void Start()
         {
-            
+            SetAllComponentsValues();
+            ApplyAllSettings();
         }
 
         #endregion
@@ -36,9 +36,16 @@ namespace Seance.UI.SettingsMenu
 
         public void UpdateSettingValue(SettingType setting, int value)
         {
-            _settingsValues[setting] = value;
-            PlayerPrefs.SetInt($"{setting}", value);
+            if(_settingsValues.ContainsKey(setting))
+            {
+                _settingsValues[setting] = value;
+            }
+            else
+            {
+                _settingsValues.Add(setting, value);
+            }
 
+            PlayerPrefs.SetInt($"{setting}", value);
             ApplySetting(setting);
         }
 
@@ -51,7 +58,7 @@ namespace Seance.UI.SettingsMenu
             _settingsComponents = new Dictionary<SettingType, SettingBase>();
             SettingBase[] settingsArray = FindObjectsOfType<SettingBase>();
 
-            foreach(SettingBase sb in settingsArray)
+            foreach (SettingBase sb in settingsArray)
             {
                 _settingsComponents.Add(sb.SettingType, sb);
             }
@@ -61,7 +68,7 @@ namespace Seance.UI.SettingsMenu
         {
             _settingsValues = new Dictionary<SettingType, int>();
 
-            foreach(SettingType st in _settingsComponents.Keys)
+            foreach (SettingType st in _settingsComponents.Keys)
             {
                 if (PlayerPrefs.HasKey($"{st}"))
                 {
@@ -70,24 +77,24 @@ namespace Seance.UI.SettingsMenu
                 }
                 else
                 {
-                    if(_settingsComponents.TryGetValue(st, out SettingBase component))
+                    if (_settingsComponents.TryGetValue(st, out SettingBase component))
                     {
-                        int defaultValue = component.GetSettingValue();
+                        int defaultValue = component.GetSettingDefaultValue();
                         PlayerPrefs.SetInt($"{st}", defaultValue);
                     }
                 }
             }
         }
 
-        private void UpdateAllComponants()
+        public void SetAllComponentsValues()
         {
-            foreach(SettingType st in _settingsValues.Keys)
+            foreach (SettingType st in _settingsValues.Keys)
             {
-                if(_settingsComponents.TryGetValue(st, out SettingBase componant))
+                if (_settingsComponents.TryGetValue(st, out SettingBase component))
                 {
-                    if(_settingsValues.TryGetValue(st,out int value))
+                    if (_settingsValues.TryGetValue(st, out int value))
                     {
-                        componant.SetSettingValue(value);
+                        component.SetSettingValue(value);
                     }
                 }
             }
@@ -95,7 +102,7 @@ namespace Seance.UI.SettingsMenu
 
         private void ApplyAllSettings()
         {
-            foreach(SettingType st in _settingsValues.Keys)
+            foreach (SettingType st in _settingsValues.Keys)
             {
                 ApplySetting(st);
             }
@@ -108,18 +115,42 @@ namespace Seance.UI.SettingsMenu
                 case SettingType.WINDOW_MODE:
                     UpdateWindowMode();
                     break;
+
                 case SettingType.GENERAL_VOLUME:
+                    UpdateVolumes();
                     break;
+
                 case SettingType.MUSIC_VOLUME:
+                    UpdateVolumes();
                     break;
+
                 case SettingType.EFFECT_VOLUME:
+                    UpdateVolumes();
                     break;
+
                 case SettingType.AMBIANCE_VOLUME:
+                    UpdateVolumes();
                     break;
+
                 case SettingType.DIALOGUE_VOLUME:
+                    UpdateVolumes();
                     break;
+
                 case SettingType.INTERFACE_VOLUME:
+                    UpdateVolumes();
                     break;
+
+                case SettingType.VOICE_METHOD:
+                    break;
+
+                case SettingType.LEFT_PLAYER_VOLUME:
+                    UpdateVolumes();
+                    break;
+
+                case SettingType.RIGHT_PLAYER_VOLUME:
+                    UpdateVolumes();
+                    break;
+
                 default:
                     break;
             }
@@ -136,10 +167,6 @@ namespace Seance.UI.SettingsMenu
                         break;
 
                     case 1:
-                        Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                        break;
-
-                    case 2:
                         Screen.fullScreenMode = FullScreenMode.Windowed;
                         break;
 
@@ -148,6 +175,11 @@ namespace Seance.UI.SettingsMenu
                         break;
                 }
             }
+        }
+
+        private void UpdateVolumes()
+        {
+            
         }
 
         #endregion

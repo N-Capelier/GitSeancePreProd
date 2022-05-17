@@ -26,6 +26,7 @@ namespace Seance.UI.SettingsMenu
             _label.text = _settingName;
             _carousel.Options = _options;
             _carousel.DefaultIndex = _defaultIndex;
+            _carousel.Index = _defaultIndex;
 
             _carousel.onSettingChange += UpdateSettingValue;
         }
@@ -37,6 +38,11 @@ namespace Seance.UI.SettingsMenu
         public override int GetSettingValue()
         {
             return _carousel.Index;
+        }
+
+        public override int GetSettingDefaultValue()
+        {
+            return _carousel.DefaultIndex;
         }
 
         public override void SetSettingValue(int value)

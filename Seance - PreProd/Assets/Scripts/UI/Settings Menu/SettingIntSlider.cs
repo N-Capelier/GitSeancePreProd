@@ -28,6 +28,7 @@ namespace Seance.UI.SettingsMenu
             _intSlider.MinValue = _minValue;
             _intSlider.MaxValue = _maxValue;
             _intSlider.DefaultValue = _defaultValue;
+            _intSlider.Value = _defaultValue;
 
             _intSlider.onSettingChange += UpdateSettingValue;
         }
@@ -40,7 +41,12 @@ namespace Seance.UI.SettingsMenu
         {
             return _intSlider.Value;
         }
-        
+
+        public override int GetSettingDefaultValue()
+        {
+            return _intSlider.DefaultValue;
+        }
+
         public override void SetSettingValue(int value)
         {
             _intSlider.Value = value;

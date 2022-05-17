@@ -34,7 +34,6 @@ namespace Seance.UI
 
         private void Start()
         {
-            _value = _defaultValue;
             _slider.minValue = _minValue;
             _slider.maxValue = _maxValue;
             _slider.value = _value;

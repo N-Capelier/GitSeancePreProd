@@ -32,7 +32,6 @@ namespace Seance.UI
 
         private void Start()
         {
-            _index = _defaultIndex;
             UpdateText();
 
             if (_index == 0)

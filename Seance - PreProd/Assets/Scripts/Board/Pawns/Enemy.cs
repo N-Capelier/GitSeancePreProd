@@ -24,12 +24,12 @@ namespace Seance.BoardManagment
         //do the same for Character & Tile
         public void Initialize(int hp, int armor, int initDice, EnemyType enemyType, int pawnID)
         {
-            _life = hp;
-            _lifeActu = _life;
+            _baseHealth = hp;
+            _currentHealth = _baseHealth;
             _armor = armor;
             _intiativeBase = initDice;
             _thisEnemyType = enemyType;
-            _thisPawnType = TileManager.PawnType.enemy;
+            _pawnType = TileManager.PawnType.enemy;
         }
 
         public void TakeAction()
@@ -61,22 +61,22 @@ namespace Seance.BoardManagment
 
                         if (p1 != null)
                         {
-                            InflictDamageTo(p1);
+                            DealDamage(p1, 2);
                         }
                         if (p2 != null)
                         {
-                            InflictDamageTo(p2);
+                            DealDamage(p2, 2);
                         }
                         if (p3 != null)
                         {
-                            InflictDamageTo(p3);
+                            DealDamage(p3, 2);
                         }
                         if (p4 != null)
                         {
-                            InflictDamageTo(p4);
+                            DealDamage(p4, 2);
                         }
 
-                        InflictDamageTo(closestCharacter);
+                        DealDamage(closestCharacter, 2);
                     }
                     //else, walk to player
                     else
@@ -88,7 +88,7 @@ namespace Seance.BoardManagment
                     //if in attack range then attack
                     if (distanceWithClosestCharacter < 4)
                     {
-                        InflictDamageTo(closestCharacter);
+                        DealDamage(closestCharacter, 2);
                     }
                     //else, walk to player
                     else

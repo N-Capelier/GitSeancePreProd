@@ -13,8 +13,8 @@ namespace Seance.BoardManagment
         public TileManager.PawnType _pawnType = TileManager.PawnType.character;
 
         [Header("Setup")]
-        [SerializeField] int _baseHealth;
-        private int _currentHealth;
+        [SerializeField] protected int _baseHealth;
+        protected int _currentHealth;
 		public int CurrentHealth { get => _currentHealth;}
 
         //grid related var

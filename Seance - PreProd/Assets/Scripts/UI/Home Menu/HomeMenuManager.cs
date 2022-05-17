@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Seance.UI.HomeMenu
@@ -22,14 +23,22 @@ namespace Seance.UI.HomeMenu
         [SerializeField] private CanvasGroup _accessibilitySettings;
         [SerializeField] private CanvasGroup _interfaceSettings;
         [SerializeField] private CanvasGroup _systemSettings;
+        [SerializeField] private CanvasGroup _reportMenu;
+        [SerializeField] private CanvasGroup _reportThanks;
         [SerializeField] private CanvasGroup _credits;
         [SerializeField] private CanvasGroup _quitAlert;
+
+        [Space(20)]
+
+        [SerializeField] private TextMeshProUGUI _versionText;
 
         #region Unity events
 
         private void Awake()
         {
             CreateSingleton();
+
+            _versionText.text = $"Build {Application.version}";
         }
 
         private void Start()
@@ -98,6 +107,18 @@ namespace Seance.UI.HomeMenu
         public void ActionApplySettings()
         {
             PlayerPrefs.Save();
+        }
+
+        public void ActionStateReport()
+        {
+            _state = HomeMenuState.REPORT_BUG;
+            UpdateSections();
+        }
+
+        public void ActionStateReportThanks()
+        {
+            _state = HomeMenuState.REPORT_THANKS;
+            UpdateSections();
         }
 
         public void ActionStateCredits()
@@ -169,6 +190,14 @@ namespace Seance.UI.HomeMenu
                     ShowSection(_systemSettings);
                     break;
 
+                case HomeMenuState.REPORT_BUG:
+                    ShowSection(_reportMenu);
+                    break;
+
+                case HomeMenuState.REPORT_THANKS:
+                    ShowSection(_reportThanks);
+                    break;
+
                 case HomeMenuState.CREDITS:
                     ShowSection(_credits);
                     break;
@@ -195,6 +224,8 @@ namespace Seance.UI.HomeMenu
             HideSection(_accessibilitySettings);
             HideSection(_interfaceSettings);
             HideSection(_systemSettings);
+            HideSection(_reportMenu);
+            HideSection(_reportThanks);
             HideSection(_credits);
             HideSection(_quitAlert);
         }

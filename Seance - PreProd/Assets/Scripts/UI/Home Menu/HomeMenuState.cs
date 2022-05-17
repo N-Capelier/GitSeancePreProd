@@ -17,6 +17,8 @@ namespace Seance.UI.HomeMenu
         ACCESSIBILITY_SETTINGS,
         INTERFACE_SETTINGS,
         SYSTEM_SETTINGS,
+        REPORT_BUG,
+        REPORT_THANKS,
         CREDITS,
         QUIT_ALERT
     }

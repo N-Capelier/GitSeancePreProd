@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Seance.UI.HomeMenu
+namespace Seance.UI.Home
 {
     [Serializable]
     public enum HomeMenuState

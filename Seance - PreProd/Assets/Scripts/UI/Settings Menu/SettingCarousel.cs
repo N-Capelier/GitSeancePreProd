@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Seance.UI.SettingsMenu
+namespace Seance.UI.Settings
 {
     /// <summary>
     /// Edouard

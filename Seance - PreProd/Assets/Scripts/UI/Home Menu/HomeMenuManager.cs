@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Seance.UI.HomeMenu
+namespace Seance.UI.Home
 {
     /// <summary>
     /// Edouard

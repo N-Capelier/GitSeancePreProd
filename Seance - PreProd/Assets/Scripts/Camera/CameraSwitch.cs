@@ -42,8 +42,8 @@ namespace Seance.CameraManagement
 
         private void Update()
         {
-            if (!playerManager.IsOwner)
-                return;
+            //if (!playerManager.IsOwner)
+            //    return;
             GetInput();
         }
 

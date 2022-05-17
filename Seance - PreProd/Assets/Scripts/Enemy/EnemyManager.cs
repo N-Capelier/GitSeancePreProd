@@ -21,7 +21,7 @@ namespace Seance.Enemy
 		[ServerRpc(RequireOwnership = false)]
         public void ServerRpcPlayTurn()
 		{
-			_gManager._turnManager.PlayNextTurn();
+			_gManager._turnManager.ServerRpcPlayNextTurn();
 		}
     }
 }

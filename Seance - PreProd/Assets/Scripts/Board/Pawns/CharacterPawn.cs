@@ -8,7 +8,7 @@ namespace Seance.BoardManagment
     /// This script was created by Julien haigron
     /// </summary>
     
-    public class Character : Pawn
+    public class CharacterPawn : Pawn
     {
         /// <TODO>
         /// - character class (wizard,...)*
@@ -16,6 +16,9 @@ namespace Seance.BoardManagment
         /// - 
         /// </TODO>
 
+        [Header("Params")]
+        [SerializeField] HeroType _heroType;
+        public HeroType HeroType { get => _heroType; }
 
         public void Initialize(int hp, int armor, int initDice, /*CharacterType characterType,*/ int pawnID)
         {
@@ -29,5 +32,25 @@ namespace Seance.BoardManagment
         }
 
 
+		[SerializeField] int _corruption = 0;
+		public int Corruption { get => _corruption;}
+
+
+        public int Corrupt(int amount)
+		{
+            if (_corruption + amount > 200)
+                _corruption = 200;
+            else
+                _corruption += amount;
+
+            return _corruption;
+		}
+    }
+
+    public enum HeroType
+	{
+        Wizard,
+        Knight,
+        Ranger
     }
 }

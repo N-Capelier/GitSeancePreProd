@@ -18,6 +18,8 @@ namespace Seance.BoardManagment
         }
         public EnemyType _thisEnemyType = EnemyType.enemy1;
 
+        [SerializeField] int _damages;
+
         //TODO : function that itinitalise every var for TileManager.SpawnPawns
         //do the same for Character & Tile
         public void Initialize(int hp, int armor, int initDice, EnemyType enemyType, int pawnID)
@@ -34,14 +36,14 @@ namespace Seance.BoardManagment
         {
             //get closes pawn of type 'Character'
             Pawn closestCharacter = TileManager.Instance.GetClosestPawn(_x, _y, TileManager.PawnType.character);
-            float distanceWithClosestCharacter = GetDistanceFromPawn(closestCharacter);
+            float distanceWithClosestCharacter = GetDistanceToPawn(closestCharacter);
             if (distanceWithClosestCharacter == float.PositiveInfinity)
             {
                 //ERROR : no other pawn of choosen type on board
                 return;
             }
             //TODO : verify if distance is on the great ratio => (one cell = 1f)
-            Debug.Log(distanceWithClosestCharacter);
+            Debug.Log($"Enemy distance to closest character: {distanceWithClosestCharacter}");
 
             //wich enemy type ?
             switch (_thisEnemyType)

@@ -313,15 +313,20 @@ namespace Seance.BoardManagment
                         case Tiles.characterSpawn:
                             //spawn pawn
                             GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            //TODO : change init values to accurate one
-                            characterPawn.GetComponent<Character>().Initialize(10, 0, 20, _currentNbOfPawnInScene);
-                            _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Character>();
+                            characterPawn.GetComponent<Pawn>()._x = x;
+                            characterPawn.GetComponent<Pawn>()._y = y;
+                            characterPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
+                            characterPawn.GetComponent<Pawn>()._pawnType = PawnType.character;
+                            _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
                             break;
                         case Tiles.enemySpawn1:
                             //spawn pawn
                             GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, transform);
-                            enemyPawn.GetComponent<Enemy>().Initialize(6, 1, 12, Enemy.EnemyType.enemy1, _currentNbOfPawnInScene);
-                            _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Enemy>();
+                            enemyPawn.GetComponent<Pawn>()._x = x;
+                            enemyPawn.GetComponent<Pawn>()._y = y;
+                            enemyPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
+                            enemyPawn.GetComponent<Pawn>()._pawnType = PawnType.enemy;
+                            _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Pawn>();
                             break;
                         case Tiles.enemySpawn2:
                             //spawn pawn
@@ -363,7 +368,7 @@ namespace Seance.BoardManagment
             for (int i = 0; i < _pawnsInScene.Length; i++)
             {
                 //if this pawn is of type we're looking for
-                if (_pawnsInScene[i]._thisPawnType == pt)
+                if(_pawnsInScene[i]._pawnType == pt)
                 {
                     //
                     if (Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)

@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7840296203232995330}
-  - component: {fileID: 1512649183072897679}
+  - component: {fileID: 1408623562005081477}
   - component: {fileID: 7840296203232995329}
   - component: {fileID: 7840296203232995328}
   - component: {fileID: 7840296203232995455}
   m_Layer: 0
-  m_Name: CharacterTest
+  m_Name: Enemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1512649183072897679
+--- !u!114 &1408623562005081477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7840296203232995454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9f7a3de8cd5d974eb1660b6915c9875, type: 3}
+  m_Script: {fileID: 11500000, guid: 0523a8e8a5dfb2c469f2c805a3275747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisPawnType: 0
+  _thisPawnType: 1
   _pawnID: 0
   _x: 0
   _y: 0
@@ -79,7 +79,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3690666b7e3fa14fa7801e4d44f628a, type: 2}
+  - {fileID: 2100000, guid: 874b53a34503dda41ae9517c0197e1f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

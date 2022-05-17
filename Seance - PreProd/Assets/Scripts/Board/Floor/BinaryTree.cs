@@ -28,11 +28,11 @@ namespace Seance.BoardManagment
             _parents.Add(parent);
         }
 
-        public Node(RoomProfile rp, List<Node> parents)
+        public Node(RoomProfile rp, Node[] parents)
         {
             _data = rp;
 
-            for(int i = 0; i<parents.Count; i++)
+            for (int i = 0; i < parents.Length; i++)
             {
                 _parents.Add(parents[i]);
             }
@@ -42,52 +42,54 @@ namespace Seance.BoardManagment
     public class BinaryTreeOfRoom
     {
         public Node _root { get; set; }
-        public Node[] _floor;
+        public List<Node> _floor;   
 
         public BinaryTreeOfRoom(RoomProfile init, int nbOfNode)
         {
             _root = new Node(init);
-            _floor = new Node[nbOfNode];
+            _floor.Add(_root);
         }
 
         public bool Add(RoomProfile newRoom, Node nodeParent)
         {
             Node newNode = new Node(newRoom, nodeParent);
 
-            for (int i = 0; i< _floor.Length; i++)
+            for (int i = 0; i < _floor.Count; i++)
             {
                 if (_floor[i].Equals(nodeParent))
                 {
-                    if(_floor[i]._leftNode == null)
+                    if (_floor[i]._leftNode == null)
                     {
                         _floor[i]._leftNode = newNode;
+                        _floor.Add(newNode);
                         return true;
                     }
-                    else if(_floor[i]._rightNode == null)
+                    else if (_floor[i]._rightNode == null)
                     {
                         _floor[i]._rightNode = newNode;
+                        _floor.Add(newNode);
                         return true;
                     }
                     else
                     {
                         return false;
                     }
-                    
+
                 }
             }
 
             //the parent node doesnt exist in the tree
             return false;
         }
-        
-        public bool Add(RoomProfile newRoom, List<Node> nodesParent)
+
+        public bool Add(RoomProfile newRoom, Node[] nodesParent)
         {
             Node newNode = new Node(newRoom, nodesParent);
             int parentsFound = 0;
 
-            for (int parentIterator = 0; parentIterator < nodesParent.Count; parentIterator++)
+            for (int parentIterator = 0; parentIterator < nodesParent.Length; parentIterator++)
             {
-                for (int i = 0; i < _floor.Length; i++)
+                for (int i = 0; i < _floor.Count; i++)
                 {
                     if (_floor[i].Equals(nodesParent[parentIterator]))
                     {
@@ -106,16 +108,29 @@ namespace Seance.BoardManagment
                 }
             }
 
-            if (parentsFound == nodesParent.Count)
+            if (parentsFound == nodesParent.Length)
+            {
+                _floor.Add(newNode);
                 return true;
+            }
+
             else
                 //One ore more node in arguments dont exist in the tree
                 return false;
         }
 
+        public int GetNodePositionInTree(Node n)
+        {
+            for (int i = 0; i < _floor.Count; i++)
+            {
+                if (_floor[i].Equals(n)) return i;
+            }
+            return -1;
+        }
+
         public Node GetNextRoom(Node actualRoom, bool direction)
         {
-            for (int i = 0; i < _floor.Length; i++)
+            for (int i = 0; i < _floor.Count; i++)
             {
                 if (_floor[i].Equals(actualRoom))
                 {

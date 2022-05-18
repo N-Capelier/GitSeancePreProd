@@ -12,11 +12,12 @@ namespace Seance.CardSystem
 
         [Space]
         [HideInInspector] public int _boardIndex;
-        public Card _card;
+        [HideInInspector] public Card _card;
 
-        public void Init(Card card)
+        public void Init(Card card, int boardIndex)
 		{
             _card = card;
+            _boardIndex = boardIndex;
             DisplayCardInformation();
 		}
 
@@ -27,6 +28,12 @@ namespace Seance.CardSystem
             _cardTitle.text = _card._title;
             _cardDescription.text = _card._description;
             _cardCorruptionCost.text = _card._corruption.ToString();
+		}
+
+        //UnityEvent OnClick
+        public void OnClick()
+		{
+            Debug.Log(_boardIndex);
 		}
     }
 }

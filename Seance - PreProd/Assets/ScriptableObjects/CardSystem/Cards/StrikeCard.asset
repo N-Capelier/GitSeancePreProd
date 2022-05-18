@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 0
   _title: Strike
+  _description: Strike Card description
   _corruption: 4
   _hasMovement: 1

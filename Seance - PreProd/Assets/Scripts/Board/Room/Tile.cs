@@ -13,6 +13,9 @@ namespace Seance.BoardManagment
         public int _x;
         public int _y;
         public TileManager.Tiles _thisTileType;
+        public List<Pawn> _pawnsOnTile;
+        public int _nbOfPawnOnStart = 0;
+        public int _maxPawnOnTile = 4;
         
         public void Initialize(int x, int y, TileManager.Tiles tileType)
         {

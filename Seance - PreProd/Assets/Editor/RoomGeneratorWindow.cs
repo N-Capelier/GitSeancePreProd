@@ -15,10 +15,13 @@ namespace Seance.BoardManagment
         RoomProfile _currentRoom;
 
 
-        SerializedProperty _roomID, _xLength, _yLength, _tiles, _currentTileSelected, _tilesColor;
+        SerializedProperty _roomID, _xLength, _yLength, _tiles, _tilesWeight, _currentTileSelected, _tilesColor;
 
         //editor window var
-        private bool isMouseDown;
+        private bool isMouseLeftDown;
+        private bool isMouseLeftDownProcessed;
+        private bool isMouseRightDown;
+        private bool isMouseRightDownProcessed;
         private int marginSize;
         private Vector2 curMousePosition;
         private int tileActu = 0;
@@ -33,11 +36,15 @@ namespace Seance.BoardManagment
             _xLength = _serializedObject.FindProperty("_xLength");
             _yLength = _serializedObject.FindProperty("_yLength");
             _tiles = _serializedObject.FindProperty("_tiles");
+            _tilesWeight = _serializedObject.FindProperty("_tilesWeight");
             _currentTileSelected = _serializedObject.FindProperty("_currentTileSelected");
             _tilesColor = _serializedObject.FindProperty("_tilesColor");
 
             marginSize = 32;
-            isMouseDown = false;
+            isMouseLeftDown = false;
+            isMouseRightDown = false;
+            isMouseLeftDownProcessed = false;
+            isMouseRightDownProcessed = false;
             curMousePosition = Vector2.zero;
         }
 
@@ -104,6 +111,12 @@ namespace Seance.BoardManagment
                 {
                     _tiles.ClearArray();
                     _tiles.arraySize = _currentRoom._xLength * _currentRoom._yLength;
+                    _tilesWeight.ClearArray();
+                    _tilesWeight.arraySize = _currentRoom._xLength * _currentRoom._yLength;
+                    for (int i = 0; i < _tiles.arraySize; i++)
+                    {
+                        _tilesWeight.GetArrayElementAtIndex(i).intValue = 0;
+                    }
                 }
             }
 
@@ -150,14 +163,40 @@ namespace Seance.BoardManagment
                     int index = j * _currentRoom._yLength + i;
 
                     //detec if left mouse pressed
-                    bool isPaintingOverThis = isMouseDown && cell.Contains(Event.current.mousePosition);
+                    bool isPaintingOverThis = isMouseLeftDown && cell.Contains(Event.current.mousePosition);
                     if (isPaintingOverThis)
                     {
                         _tiles.GetArrayElementAtIndex(index).enumValueIndex = _currentTileSelected.enumValueIndex;
+                        _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;
+                        isMouseLeftDownProcessed = true;
                     }
+                    bool isChangingEntityCount = isMouseRightDown && cell.Contains(Event.current.mousePosition);
+                    if (isChangingEntityCount)
+                    {
+                        _tilesWeight.GetArrayElementAtIndex(index).intValue++;
+                        if (_tilesWeight.GetArrayElementAtIndex(index).intValue > 1)
+                            _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;
+
+                        isMouseRightDownProcessed = true;
+                    }
+
+
                     int enumIndexInPalette = _tiles.GetArrayElementAtIndex(index).enumValueIndex;
                     Color col = _tilesColor.GetArrayElementAtIndex(enumIndexInPalette).colorValue;
                     EditorGUI.DrawRect(cell, col);
+
+                    //draw nb of entity
+                    switch (_tilesWeight.GetArrayElementAtIndex(index).intValue)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            Rect r1 = new Rect(curX + (cellWidth / 3), curY + (cellWidth / 3), cellWidth / 2, cellHeight / 2);
+                            EditorGUI.DrawRect(r1, Color.black);
+                            break;
+
+                    }
+
                     curX += cellWidth + widthSpace;
                 }
                 curY += cellHeight + heightSpace;
@@ -175,10 +214,21 @@ namespace Seance.BoardManagment
 
         private void ProcessEvents()
         {
-            if (Event.current.type == EventType.MouseDown)
-                isMouseDown = true;
-            if (Event.current.type == EventType.MouseUp)
-                isMouseDown = false;
+            if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && !isMouseLeftDownProcessed)
+                isMouseLeftDown = true;
+            if (Event.current.type == EventType.MouseUp && Event.current.button == 0)
+            {
+                isMouseLeftDown = false;
+                isMouseLeftDownProcessed = false;
+            }
+
+            if (Event.current.type == EventType.MouseDown && Event.current.button == 1 && !isMouseRightDownProcessed)
+                isMouseRightDown = true;
+            if (Event.current.type == EventType.MouseUp && Event.current.button == 1)
+            {
+                isMouseRightDown = false;
+                isMouseRightDownProcessed = false;
+            }
         }
 
     }

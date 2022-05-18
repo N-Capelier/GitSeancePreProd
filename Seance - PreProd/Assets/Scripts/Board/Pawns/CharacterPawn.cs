@@ -18,16 +18,17 @@ namespace Seance.BoardManagment
 
         [Header("Params")]
         [SerializeField] HeroType _heroType;
-        public HeroType HeroType { get => _heroType; }
+        //public HeroType HeroType { get => _heroType; }
 
-        public void Initialize(int hp, int armor, int initDice, /*CharacterType characterType,*/ int pawnID)
+        public void Initialize(int x, int y, int hp, int armor, int initDice, HeroType heroType, int pawnID)
         {
+            _x = x;
+            _y = y;
             _baseHealth = hp;
             _currentHealth = _baseHealth;
             _armor = armor;
             _intiativeBase = initDice;
-            //TODO : to implement from Nico's version
-            //_characterType = characterType;
+            _heroType = heroType;
             _pawnType = TileManager.PawnType.character;
         }
 

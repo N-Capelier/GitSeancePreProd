@@ -7,23 +7,19 @@ namespace Seance.BoardManagment
     /// <summary>
     /// This script was created by Julien haigron
     /// </summary>
-    
+
     public class Enemy : Pawn
     {
-        public enum EnemyType
-        {
-            enemy1,
-            enemy2,
-            total
-        }
         public EnemyType _thisEnemyType = EnemyType.enemy1;
 
         [SerializeField] int _damages;
 
         //TODO : function that itinitalise every var for TileManager.SpawnPawns
         //do the same for Character & Tile
-        public void Initialize(int hp, int armor, int initDice, EnemyType enemyType, int pawnID)
+        public void Initialize(int x, int y, int hp, int armor, int initDice, EnemyType enemyType, int pawnID)
         {
+            _x = x;
+            _y = y;
             _baseHealth = hp;
             _currentHealth = _baseHealth;
             _armor = armor;
@@ -54,10 +50,10 @@ namespace Seance.BoardManagment
                     if (distanceWithClosestCharacter < 4)
                     {
                         //inflict damage on 4 cases around pawn
-                        Pawn p1 = TileManager.Instance.GetPawnOn(_x-1,_y); //left
-                        Pawn p2 = TileManager.Instance.GetPawnOn(_x+1,_y); //right
-                        Pawn p3 = TileManager.Instance.GetPawnOn(_x,_y-1); //up
-                        Pawn p4 = TileManager.Instance.GetPawnOn(_x,_y+1); //down
+                        Pawn p1 = TileManager.Instance.GetPawnOn(_x - 1, _y); //left
+                        Pawn p2 = TileManager.Instance.GetPawnOn(_x + 1, _y); //right
+                        Pawn p3 = TileManager.Instance.GetPawnOn(_x, _y - 1); //up
+                        Pawn p4 = TileManager.Instance.GetPawnOn(_x, _y + 1); //down
 
                         if (p1 != null)
                         {
@@ -99,5 +95,11 @@ namespace Seance.BoardManagment
                     break;
             }
         }
+    }
+    public enum EnemyType
+    {
+        enemy1,
+        enemy2,
+        total
     }
 }

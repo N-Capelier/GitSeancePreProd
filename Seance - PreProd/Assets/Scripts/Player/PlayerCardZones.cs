@@ -24,8 +24,11 @@ namespace Seance.Player
 		private void Start()
 		{
 			_gManager = GameManager.Instance;
+		}
 
-			StartCoroutine(DrawStartingCards());
+		public void InitZones()
+		{
+			StartCoroutine(InitZonesCoroutine());
 		}
 
 		public void DrawCard()
@@ -69,9 +72,11 @@ namespace Seance.Player
 			}
 		}
 
-		IEnumerator DrawStartingCards()
+		IEnumerator InitZonesCoroutine()
 		{
 			WaitForSeconds wait = new WaitForSeconds(.4f);
+
+			yield return new WaitUntil(() => _gManager != null);
 
 			_gManager._lobby._ownedPlayer.AddInteraction();
 

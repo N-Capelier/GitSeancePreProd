@@ -19,7 +19,6 @@ namespace Seance.Management
 		public EnemyManager _enemyManager;
 
 		[Header("Debug")]
-		public TextMeshProUGUI _debugTurnIndex; 
 		public TextMeshProUGUI _debugPlayerTurn;
 
 		private void Awake()

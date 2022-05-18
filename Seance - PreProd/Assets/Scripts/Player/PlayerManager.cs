@@ -12,7 +12,7 @@ namespace Seance.Player
 	{
 		[Header("References")]
 		GameManager _gManager;
-		[SerializeField] GameObject _playerUI;
+		[SerializeField] PlayerUIMode _playerUI;
 
 		[Header("Control")]
 		bool _isPlaying = false;
@@ -35,20 +35,19 @@ namespace Seance.Player
 		{
 			if (!IsOwner)
 				return;
-
-			//debug
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				EndTurn();
-			}
 		}
+
 		public override void OnStartClient()
 		{
 			base.OnStartClient();
+
 			if (!IsOwner)
 				return;
+
 			GameManager.Instance._lobby._ownedPlayer = this;
-			_playerUI?.SetActive(true);
+
+			_playerUI?.gameObject.SetActive(true);
+			_cardZones.InitZones();
 		}
 
 		#endregion
@@ -60,9 +59,9 @@ namespace Seance.Player
 			if (!IsOwner)
 				return;
 
-			_gManager._debugTurnIndex.text = $"turn index: {_gManager._turnManager.TotalTurns % 4}";
+			_gManager._debugPlayerTurn.text = "Your turn";
 
-			_gManager._debugPlayerTurn.text = "player turn: true";
+			_playerUI.EnableTurnUI();
 
 			_cardZones.DrawCard();
 
@@ -74,9 +73,11 @@ namespace Seance.Player
 			if (!_isPlaying)
 				return;
 
-			GameManager.Instance._debugPlayerTurn.text = "player turn: false";
-			_isPlaying = false;
+			GameManager.Instance._debugPlayerTurn.text = string.Empty;
 
+			_playerUI.DisableTurnUI();
+
+			_isPlaying = false;
 			_gManager._turnManager.ServerRpcPlayNextTurn();
 		}
 

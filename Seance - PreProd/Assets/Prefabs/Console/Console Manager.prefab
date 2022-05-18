@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8135745876907162939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8135745876907162938}
+  - component: {fileID: 8135745876907162937}
+  m_Layer: 0
+  m_Name: Console Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8135745876907162938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135745876907162939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8135745876907162937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135745876907162939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2396050a12309e94db6af9a0e0866dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _showConsole: 0
+  _bindOpen: 13
+  _bindClose: 27
+  _bindSend: 13
+  _bindPreviousCommand: 273
+  _bindNextCommand: 274
+  _traceColor: {r: 0, g: 0, b: 0.78431374, a: 1}
+  _logColor: {r: 0.49803925, g: 0.49803925, b: 0.49803925, a: 1}
+  _infoColor: {r: 1, g: 1, b: 1, a: 1}
+  _successColor: {r: 0, g: 0.78431374, b: 0, a: 1}
+  _warnColor: {r: 1, g: 0.49803922, b: 0, a: 1}
+  _errorColor: {r: 0.78431374, g: 0, b: 0, a: 1}
+  _consoleGroup: {fileID: 0}
+  _scrollviewContent: {fileID: 0}
+  _inputField: {fileID: 0}
+  _commandMessageTemplate: {fileID: 2936937456999010635, guid: 32d881ab7bdc5d549ae022723f8c9692, type: 3}

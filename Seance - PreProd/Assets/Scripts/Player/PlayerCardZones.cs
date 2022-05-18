@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Seance.CardSystem;
+using Seance.Management;
 
 namespace Seance.Player
 {
@@ -13,6 +14,7 @@ namespace Seance.Player
 		[Header("References")]
 		[SerializeField] Transform _cardsParent;
 		[SerializeField] GameObject _visualCardPrefab;
+		GameManager _gManager;
 
 		[Header("Params")]
 		[SerializeField] List<Card> _deck;
@@ -21,10 +23,9 @@ namespace Seance.Player
 
 		private void Start()
 		{
-			for (int i = 0; i < 5; i++)
-			{
-				DrawCard();
-			}
+			_gManager = GameManager.Instance;
+
+			StartCoroutine(DrawStartingCards());
 		}
 
 		public void DrawCard()
@@ -66,6 +67,23 @@ namespace Seance.Player
 			{
 				cards[i]._boardIndex = i;
 			}
+		}
+
+		IEnumerator DrawStartingCards()
+		{
+			WaitForSeconds wait = new WaitForSeconds(.4f);
+
+			_gManager._lobby._ownedPlayer.AddInteraction();
+
+			yield return new WaitForSeconds(.2f);
+			
+			for (int i = 0; i < 5; i++)
+			{
+				DrawCard();
+				yield return wait;
+			}
+
+			_gManager._lobby._ownedPlayer.RemoveInteraction();
 		}
 	}
 }

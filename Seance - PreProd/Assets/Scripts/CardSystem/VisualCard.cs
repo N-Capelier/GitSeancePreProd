@@ -33,7 +33,7 @@ namespace Seance.CardSystem
         //UnityEvent OnClick
         public void OnClick()
 		{
-            Debug.Log("Card selected");
+            Debug.Log(_boardIndex);
 		}
     }
 }

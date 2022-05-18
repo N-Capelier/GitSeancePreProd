@@ -170,11 +170,11 @@ namespace Seance.BoardManagment
                         _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;
                         isMouseLeftDownProcessed = true;
                     }
-                    bool isChangingEntityCount = isMouseRightDown && cell.Contains(Event.current.mousePosition);
+                    bool isChangingEntityCount = isMouseRightDown && !isMouseRightDownProcessed && cell.Contains(Event.current.mousePosition);
                     if (isChangingEntityCount)
                     {
                         _tilesWeight.GetArrayElementAtIndex(index).intValue++;
-                        if (_tilesWeight.GetArrayElementAtIndex(index).intValue > 1)
+                        if (_tilesWeight.GetArrayElementAtIndex(index).intValue > 4)
                             _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;
 
                         isMouseRightDownProcessed = true;
@@ -191,8 +191,33 @@ namespace Seance.BoardManagment
                         case 0:
                             break;
                         case 1:
-                            Rect r1 = new Rect(curX + (cellWidth / 3), curY + (cellWidth / 3), cellWidth / 2, cellHeight / 2);
+                            //Rect r1 = new Rect(curX + (cellWidth / 3), curY + (cellWidth / 3), cellWidth / 2, cellHeight / 2);
+                            Rect r1 = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
                             EditorGUI.DrawRect(r1, Color.black);
+                            break;
+                        case 2:
+                            Rect r2a = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r2a, Color.black);
+                            Rect r2b = new Rect(curX + (cellWidth / 8) + (cellWidth/2), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r2b, Color.black);
+                            break;
+                        case 3:
+                            Rect r3a = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r3a, Color.black);
+                            Rect r3b = new Rect(curX + (cellWidth / 8) + (cellWidth / 2), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r3b, Color.black);
+                            Rect r3c = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8) + (cellHeight / 2), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r3c, Color.black);
+                            break;
+                        case 4:
+                            Rect r4a = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r4a, Color.black);
+                            Rect r4b = new Rect(curX + (cellWidth / 8) + (cellWidth / 2), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r4b, Color.black);
+                            Rect r4c = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8) + (cellHeight / 2), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r4c, Color.black);
+                            Rect r4d = new Rect(curX + (cellWidth / 8) + (cellWidth / 2), curY + (cellWidth / 8) + (cellHeight / 2), cellWidth / 4, cellHeight / 4);
+                            EditorGUI.DrawRect(r4d, Color.black);
                             break;
 
                     }

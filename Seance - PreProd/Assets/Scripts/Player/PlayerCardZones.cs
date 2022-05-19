@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Seance.CardSystem;
 using Seance.Management;
+using Seance.BoardManagment;
 
 namespace Seance.Player
 {
@@ -51,7 +52,7 @@ namespace Seance.Player
 			if (cardIndex < 0 || cardIndex >= _hand.Count)
 				throw new System.ArgumentOutOfRangeException("Card index out of range");
 
-			_hand[cardIndex].Use();
+			_hand[cardIndex].Use(new CharacterPawn(), new Tile(), null); //need complete implementation
 
 			DiscardCard(cardIndex);
 		}

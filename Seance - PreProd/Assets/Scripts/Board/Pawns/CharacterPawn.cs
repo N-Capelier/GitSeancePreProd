@@ -28,7 +28,7 @@ namespace Seance.BoardManagment
             _intiativeBase = initDice;
             //TODO : to implement from Nico's version
             //_characterType = characterType;
-            _pawnType = TileManager.PawnType.character;
+            _pawnType = PawnType.Character;
         }
 
 
@@ -42,6 +42,16 @@ namespace Seance.BoardManagment
                 _corruption = 200;
             else
                 _corruption += amount;
+
+            return _corruption;
+		}
+
+        public int Purify(int amount)
+		{
+            if (_corruption - amount < 0)
+                _corruption = 0;
+            else
+                _corruption -= amount;
 
             return _corruption;
 		}

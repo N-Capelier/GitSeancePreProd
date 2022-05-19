@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Seance.BoardManagment;
 
 namespace Seance.CardSystem
 {
@@ -14,9 +15,10 @@ namespace Seance.CardSystem
         public string _title;
         public string _description;
         public int _corruption;
+        public bool _castOnSelf;
         public bool _hasMovement;
 
-        public abstract void Use(/*targetCell*/);
+        public abstract void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns);
     }
 
     public enum CardType

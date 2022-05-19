@@ -29,13 +29,13 @@ namespace Seance.BoardManagment
             _armor = armor;
             _intiativeBase = initDice;
             _thisEnemyType = enemyType;
-            _pawnType = TileManager.PawnType.enemy;
+            _pawnType = PawnType.Enemy;
         }
 
         public void TakeAction()
         {
             //get closes pawn of type 'Character'
-            Pawn closestCharacter = TileManager.Instance.GetClosestPawn(_x, _y, TileManager.PawnType.character);
+            Pawn closestCharacter = TileManager.Instance.GetClosestPawn(_x, _y, PawnType.Character);
             float distanceWithClosestCharacter = GetDistanceToPawn(closestCharacter);
             if (distanceWithClosestCharacter == float.PositiveInfinity)
             {

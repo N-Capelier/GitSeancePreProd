@@ -316,7 +316,7 @@ namespace Seance.BoardManagment
                             characterPawn.GetComponent<Pawn>()._x = x;
                             characterPawn.GetComponent<Pawn>()._y = y;
                             characterPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
-                            characterPawn.GetComponent<Pawn>()._pawnType = PawnType.character;
+                            characterPawn.GetComponent<Pawn>()._pawnType = PawnType.Character;
                             _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
                             break;
                         case Tiles.enemySpawn1:
@@ -325,7 +325,7 @@ namespace Seance.BoardManagment
                             enemyPawn.GetComponent<Pawn>()._x = x;
                             enemyPawn.GetComponent<Pawn>()._y = y;
                             enemyPawn.GetComponent<Pawn>()._pawnID = _currentNbOfPawnInScene;
-                            enemyPawn.GetComponent<Pawn>()._pawnType = PawnType.enemy;
+                            enemyPawn.GetComponent<Pawn>()._pawnType = PawnType.Enemy;
                             _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Pawn>();
                             break;
                         case Tiles.enemySpawn2:
@@ -408,11 +408,5 @@ namespace Seance.BoardManagment
             total //always put this var on last position
         }
 
-        public enum PawnType
-        {
-            character,
-            enemy,
-            total
-        }
     }
 }

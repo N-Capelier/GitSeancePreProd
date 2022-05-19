@@ -4,13 +4,20 @@ using UnityEngine;
 
 namespace Seance.BoardManagment
 {
+    public enum PawnType
+    {
+        Character,
+        Enemy,
+        Total
+    }
+
     /// <summary>
     /// This script was created by Julien haigron
     /// </summary>
     public class Pawn : MonoBehaviour
     {
         //Pascal Case PawnType enum + move it to pawn class
-        public TileManager.PawnType _pawnType = TileManager.PawnType.character;
+        public PawnType _pawnType = PawnType.Character;
 
         [Header("Setup")]
         [SerializeField] protected int _baseHealth;
@@ -23,7 +30,9 @@ namespace Seance.BoardManagment
         public int _y;
 
         //pawn related var
-        public int _armor = 0;
+        protected int _armor = 0;
+        public int CurrentArmor { get => _armor; }
+
         public int _intiativeBase;
 
         //hard set pawn position to x,y pos on board
@@ -54,6 +63,11 @@ namespace Seance.BoardManagment
             _currentHealth -= damages;
             if (_currentHealth <= 0) Die();
         }
+
+        public void GainArmor(int amount)
+		{
+            _armor += amount;
+		}
 
         public float GetDistanceToPawn(Pawn pawn)
         {

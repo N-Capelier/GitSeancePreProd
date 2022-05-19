@@ -54,7 +54,7 @@ namespace Seance.BoardManagment.Dice
 
         private void UpdateAnimator()
         {
-            _animator.SetInteger("diceValue", _diceValue);
+            _animator.SetInteger("DiceValue", _diceValue);
         }
 
         #endregion

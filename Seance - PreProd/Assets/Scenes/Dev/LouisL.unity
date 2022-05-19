@@ -158,6 +158,9 @@ MonoBehaviour:
   _x: 5
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &18857959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -269,6 +272,9 @@ MonoBehaviour:
   _x: 7
   _y: 3
   _thisTileType: 4
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &36721676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -380,6 +386,9 @@ MonoBehaviour:
   _x: 7
   _y: 6
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &40408888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -491,6 +500,9 @@ MonoBehaviour:
   _x: 1
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &42944550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -602,6 +614,9 @@ MonoBehaviour:
   _x: 7
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &55229847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -713,6 +728,9 @@ MonoBehaviour:
   _x: 4
   _y: 2
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &66543427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -824,6 +842,9 @@ MonoBehaviour:
   _x: 4
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &94945551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -935,6 +956,9 @@ MonoBehaviour:
   _x: 4
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &103827661
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1046,6 +1070,9 @@ MonoBehaviour:
   _x: 2
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &106189034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1157,6 +1184,9 @@ MonoBehaviour:
   _x: 5
   _y: 0
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &119637503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1669,6 +1699,9 @@ MonoBehaviour:
   _x: 7
   _y: 5
   _thisTileType: 4
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &222791040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1876,6 +1909,9 @@ MonoBehaviour:
   _x: 4
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &290400886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1987,6 +2023,9 @@ MonoBehaviour:
   _x: 6
   _y: 0
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &305422953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2098,6 +2137,9 @@ MonoBehaviour:
   _x: 7
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &316866261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2304,6 +2346,9 @@ MonoBehaviour:
   _x: 2
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &396822893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2415,6 +2460,9 @@ MonoBehaviour:
   _x: 5
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &407133997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2526,6 +2574,9 @@ MonoBehaviour:
   _x: 6
   _y: 2
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &407759752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2637,6 +2688,9 @@ MonoBehaviour:
   _x: 0
   _y: 1
   _thisTileType: 3
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &425109976
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2748,6 +2802,9 @@ MonoBehaviour:
   _x: 6
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &456278070
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2859,6 +2916,9 @@ MonoBehaviour:
   _x: 6
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &505165738
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2970,6 +3030,9 @@ MonoBehaviour:
   _x: 2
   _y: 2
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &545149886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3081,6 +3144,9 @@ MonoBehaviour:
   _x: 5
   _y: 2
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &558098662
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3192,6 +3258,9 @@ MonoBehaviour:
   _x: 1
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &579321955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3303,6 +3372,9 @@ MonoBehaviour:
   _x: 7
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &580881241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3414,6 +3486,9 @@ MonoBehaviour:
   _x: 7
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &584322953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3525,6 +3600,9 @@ MonoBehaviour:
   _x: 5
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &654110545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3636,6 +3714,9 @@ MonoBehaviour:
   _x: 4
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &654922006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3747,6 +3828,9 @@ MonoBehaviour:
   _x: 8
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &704110373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3823,6 +3907,75 @@ Transform:
   m_Father: {fileID: 1341540428}
   m_RootOrder: 77
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &723022593
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.013
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.46022096
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5974382
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.1453081
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.6404295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 32.188
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.134
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295676, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -124.992
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513478409893295678, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_Name
+      value: Dice 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056805263214574369, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056805263214574369, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056805263214574369, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 30
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3158e5d4c3ea4b444a40f31aaa9671c4, type: 3}
 --- !u!1 &727956857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,6 +4011,9 @@ MonoBehaviour:
   _x: 1
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &727956859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3969,6 +4125,9 @@ MonoBehaviour:
   _x: 3
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &749853561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4080,6 +4239,9 @@ MonoBehaviour:
   _x: 3
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &800929273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4191,6 +4353,9 @@ MonoBehaviour:
   _x: 1
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &850217815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4494,6 +4659,9 @@ MonoBehaviour:
   _x: 0
   _y: 7
   _thisTileType: 3
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &859455083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4793,6 +4961,9 @@ MonoBehaviour:
   _x: 2
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &886336309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4904,6 +5075,9 @@ MonoBehaviour:
   _x: 2
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &925320784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5015,6 +5189,9 @@ MonoBehaviour:
   _x: 8
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &963404586
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5126,6 +5303,9 @@ MonoBehaviour:
   _x: 8
   _y: 6
   _thisTileType: 4
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &996057861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5237,6 +5417,9 @@ MonoBehaviour:
   _x: 3
   _y: 0
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1026609804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5348,6 +5531,9 @@ MonoBehaviour:
   _x: 0
   _y: 2
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1028732657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5459,6 +5645,9 @@ MonoBehaviour:
   _x: 6
   _y: 6
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1048948736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5570,6 +5759,9 @@ MonoBehaviour:
   _x: 6
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1180363502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5681,6 +5873,9 @@ MonoBehaviour:
   _x: 0
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1208902568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5792,6 +5987,9 @@ MonoBehaviour:
   _x: 4
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1251189580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5903,6 +6101,9 @@ MonoBehaviour:
   _x: 2
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1252695081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6014,6 +6215,9 @@ MonoBehaviour:
   _x: 3
   _y: 2
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1300786075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6122,12 +6326,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce134e76eb37b2a478a3cb7330490b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisPawnType: 0
+  _pawnType: 0
+  _baseHealth: 0
   _pawnID: 1
   _x: 7
   _y: 5
-  _life: 0
-  _damage: 0
+  _armor: 0
+  _intiativeBase: 0
 --- !u!65 &1340159126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6339,6 +6544,9 @@ MonoBehaviour:
   _x: 0
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1429499664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6546,6 +6754,9 @@ MonoBehaviour:
   _x: 8
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1564652354
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6657,6 +6868,9 @@ MonoBehaviour:
   _x: 8
   _y: 2
   _thisTileType: 4
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1612539431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6768,6 +6982,9 @@ MonoBehaviour:
   _x: 0
   _y: 0
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1619429838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6879,6 +7096,9 @@ MonoBehaviour:
   _x: 3
   _y: 4
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1652097681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6990,6 +7210,9 @@ MonoBehaviour:
   _x: 8
   _y: 4
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1652577957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7101,6 +7324,9 @@ MonoBehaviour:
   _x: 8
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1670816628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7209,12 +7435,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce134e76eb37b2a478a3cb7330490b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisPawnType: 0
+  _pawnType: 0
+  _baseHealth: 0
   _pawnID: 0
   _x: 7
   _y: 3
-  _life: 0
-  _damage: 0
+  _armor: 0
+  _intiativeBase: 0
 --- !u!65 &1711160672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7326,6 +7553,9 @@ MonoBehaviour:
   _x: 1
   _y: 2
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1714767737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7437,6 +7667,9 @@ MonoBehaviour:
   _x: 1
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1729168912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7548,6 +7781,9 @@ MonoBehaviour:
   _x: 3
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1739602705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7659,6 +7895,9 @@ MonoBehaviour:
   _x: 5
   _y: 8
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1743576664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7770,6 +8009,9 @@ MonoBehaviour:
   _x: 0
   _y: 8
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1746278607
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7881,6 +8123,9 @@ MonoBehaviour:
   _x: 6
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1760817712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7992,6 +8237,9 @@ MonoBehaviour:
   _x: 3
   _y: 6
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1766094873
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8103,6 +8351,9 @@ MonoBehaviour:
   _x: 8
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1767740064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8214,6 +8465,9 @@ MonoBehaviour:
   _x: 1
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1784689091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8325,6 +8579,9 @@ MonoBehaviour:
   _x: 4
   _y: 6
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1791760639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8436,6 +8693,9 @@ MonoBehaviour:
   _x: 4
   _y: 0
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1810734173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8547,6 +8807,9 @@ MonoBehaviour:
   _x: 2
   _y: 1
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1812516542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8658,6 +8921,9 @@ MonoBehaviour:
   _x: 4
   _y: 7
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1830947906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8769,6 +9035,9 @@ MonoBehaviour:
   _x: 7
   _y: 0
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1908850270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8880,6 +9149,9 @@ MonoBehaviour:
   _x: 8
   _y: 0
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1915599373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8991,6 +9263,9 @@ MonoBehaviour:
   _x: 0
   _y: 6
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1928530872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9102,6 +9377,9 @@ MonoBehaviour:
   _x: 2
   _y: 6
   _thisTileType: 2
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1969652652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9213,6 +9491,9 @@ MonoBehaviour:
   _x: 1
   _y: 0
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1975131111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9324,6 +9605,9 @@ MonoBehaviour:
   _x: 6
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1976601727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9435,6 +9719,9 @@ MonoBehaviour:
   _x: 3
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1978691784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9546,6 +9833,9 @@ MonoBehaviour:
   _x: 2
   _y: 0
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &1996366024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9657,6 +9947,9 @@ MonoBehaviour:
   _x: 0
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2010466241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9768,6 +10061,9 @@ MonoBehaviour:
   _x: 5
   _y: 3
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2014665139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9879,6 +10175,9 @@ MonoBehaviour:
   _x: 5
   _y: 6
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2036928704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9990,6 +10289,9 @@ MonoBehaviour:
   _x: 6
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2043599370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10101,6 +10403,9 @@ MonoBehaviour:
   _x: 1
   _y: 6
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2057520123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10212,6 +10517,9 @@ MonoBehaviour:
   _x: 7
   _y: 2
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2066419189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10323,6 +10631,9 @@ MonoBehaviour:
   _x: 5
   _y: 5
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2072186742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10434,6 +10745,9 @@ MonoBehaviour:
   _x: 3
   _y: 8
   _thisTileType: 1
+  _pawnsOnTile: []
+  _nbOfPawnOnStart: 0
+  _maxPawnOnTile: 4
 --- !u!65 &2082285168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10542,12 +10856,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce134e76eb37b2a478a3cb7330490b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisPawnType: 0
+  _pawnType: 0
+  _baseHealth: 0
   _pawnID: 2
   _x: 8
   _y: 2
-  _life: 0
-  _damage: 0
+  _armor: 0
+  _intiativeBase: 0
 --- !u!65 &2113544340
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10656,12 +10971,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce134e76eb37b2a478a3cb7330490b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thisPawnType: 0
+  _pawnType: 0
+  _baseHealth: 0
   _pawnID: 3
   _x: 8
   _y: 6
-  _life: 0
-  _damage: 0
+  _armor: 0
+  _intiativeBase: 0
 --- !u!65 &2130872439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10751,23 +11067,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280400, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: field of view
-      value: 50
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.8699999
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.46
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8749554
+      value: 0.9848078
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.48420358
+      value: 0.17364816
       objectReference: {fileID: 0}
     - target: {fileID: 8017787785112268700, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_Name

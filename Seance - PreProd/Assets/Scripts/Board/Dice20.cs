@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Seance
+namespace Seance.BoardManagment.Dice
 {
+    /// <summary>
+    /// Edouard
+    /// </summary>
     public class Dice20 : MonoBehaviour
     {
         private int _diceValue = 20;
@@ -13,6 +16,8 @@ namespace Seance
         
         public int DiceValue { get => _diceValue; set => _diceValue = Mathf.Clamp(value, 1, 20); }
 
+        #region Unity events
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -21,6 +26,19 @@ namespace Seance
             _diceClick.onLeftClick += IncreaseDiceValue;
             _diceClick.onRightClick += DecreaseDiceValue;
         }
+
+        private void Start()
+        {
+            UpdateAnimator();
+        }
+
+        #endregion
+
+        #region Public methods
+
+        #endregion
+
+        #region Private methods
 
         private void IncreaseDiceValue()
         {
@@ -38,5 +56,7 @@ namespace Seance
         {
             _animator.SetInteger("diceValue", _diceValue);
         }
+
+        #endregion
     }
 }

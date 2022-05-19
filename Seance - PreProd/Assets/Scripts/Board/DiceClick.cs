@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Seance
+namespace Seance.BoardManagment.Dice
 {
+    /// <summary>
+    /// Edouard
+    /// </summary>
     public class DiceClick : MonoBehaviour
     {
         public delegate void OnLeftClick();
@@ -11,6 +14,8 @@ namespace Seance
         
         public delegate void OnRightClick();
         public event OnRightClick onRightClick;
+
+        #region Unity events
 
         private void OnMouseOver()
         {
@@ -24,5 +29,15 @@ namespace Seance
                 onRightClick?.Invoke();
             }
         }
+
+        #endregion
+
+        #region Public methods
+
+        #endregion
+
+        #region Private methods
+
+        #endregion
     }
 }

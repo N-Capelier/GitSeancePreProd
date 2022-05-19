@@ -52,7 +52,7 @@ namespace Seance.Player
 			if (cardIndex < 0 || cardIndex >= _hand.Count)
 				throw new System.ArgumentOutOfRangeException("Card index out of range");
 
-			_hand[cardIndex].Use(new CharacterPawn(), new Tile(), null); //need complete implementation
+			//_hand[cardIndex].Use(new CharacterPawn(), new Tile(), null); //need complete implementation
 
 			DiscardCard(cardIndex);
 		}

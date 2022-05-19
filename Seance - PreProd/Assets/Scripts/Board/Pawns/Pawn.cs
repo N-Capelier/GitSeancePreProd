@@ -64,10 +64,34 @@ namespace Seance.BoardManagment
             if (_currentHealth <= 0) Die();
         }
 
+        public void Heal(int amount)
+        {
+            if(_currentHealth + amount >= _baseHealth)
+            {
+                _currentHealth = _baseHealth;
+            }
+            else
+            {
+                _currentHealth += amount;
+            }
+        }
+
         public void GainArmor(int amount)
 		{
             _armor += amount;
 		}
+
+        public void DecreaseArmor(int amount)
+        {
+            if(_armor - amount < 0)
+            {
+                _armor = 0;
+            }
+            else
+            {
+                _armor -= amount;
+            }
+        }
 
         public float GetDistanceToPawn(Pawn pawn)
         {

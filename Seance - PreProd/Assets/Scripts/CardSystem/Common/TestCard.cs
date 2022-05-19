@@ -11,7 +11,7 @@ namespace Seance.CardSystem
 	[CreateAssetMenu(menuName = "ScriptableObjects/CardSystem/TestCard", fileName = "New TestCard", order = 50)]
 	public class TestCard : Card
 	{
-		public override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
+		protected override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
 		{
 
 

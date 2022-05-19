@@ -9,9 +9,14 @@ namespace Seance.CardSystem
 	[CreateAssetMenu(menuName = "ScriptableObjects/CardSystem/Strike", fileName = "New Strike Card", order = 50)]
 	public class StrikeCard : Card
 	{
-		public override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
+		[SerializeField]
+		int damage;
+		protected override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
 		{
-
+			foreach(Pawn pawn in targetPawns)
+            {
+				pawn.TakeDamage(damage);
+            }
 		}
 	}
 }

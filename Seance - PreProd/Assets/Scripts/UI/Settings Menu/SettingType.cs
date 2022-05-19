@@ -24,7 +24,7 @@ namespace Seance.UI.Settings
         // --- Voice chat
         VOICE_METHOD = 7,
         LEFT_PLAYER_VOLUME = 8,
-        RIGHT_PLAYER_VOLUME = 9
+        RIGHT_PLAYER_VOLUME = 9,
 
         // Controls
 
@@ -33,6 +33,7 @@ namespace Seance.UI.Settings
         // Interface
 
         // System
-
+        // --- Debug
+        ENABLE_CONSOLE = 10
     }
 }

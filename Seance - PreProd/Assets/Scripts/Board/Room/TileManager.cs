@@ -396,6 +396,21 @@ namespace Seance.BoardManagment
             return null;
         }
 
+        public Pawn[] GetPawnsOn(int x, int y)
+		{
+            List<Pawn> _pawnList = new List<Pawn>();
+
+			for (int i = 0; i < _pawnsInScene.Length; i++)
+			{
+                if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
+                {
+                    _pawnList.Add(_pawnsInScene[i]);
+                }
+            }
+
+            return _pawnList.ToArray();
+		}
+
         public enum Tiles
         {
             empty,

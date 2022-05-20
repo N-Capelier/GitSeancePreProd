@@ -18,7 +18,13 @@ namespace Seance.CardSystem
         public bool _castOnSelf;
         public bool _hasMovement;
 
-        public abstract void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns);
+        public void UseCard(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns, int corruptionAmount)
+		{
+            caster.Corrupt(corruptionAmount);
+            Use(caster, targetTile, targetPawns);
+		}
+
+        protected abstract void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns);
     }
 
     public enum CardType

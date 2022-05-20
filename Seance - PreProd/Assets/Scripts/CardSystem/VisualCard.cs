@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Seance.Management;
 
 namespace Seance.CardSystem
 {
@@ -9,16 +10,18 @@ namespace Seance.CardSystem
         [SerializeField] TextMeshProUGUI _cardTitle;
         [SerializeField] TextMeshProUGUI _cardDescription;
         [SerializeField] TextMeshProUGUI _cardCorruptionCost;
+        GameManager _gManager;
 
         [Space]
-        [HideInInspector] public int _boardIndex;
+        [HideInInspector] public int _cardIndex;
         [HideInInspector] public Card _card;
 
         public void Init(Card card, int boardIndex)
 		{
             _card = card;
-            _boardIndex = boardIndex;
+            _cardIndex = boardIndex;
             DisplayCardInformation();
+            _gManager = GameManager.Instance;
 		}
 
         public void DisplayCardInformation()
@@ -33,7 +36,7 @@ namespace Seance.CardSystem
         //UnityEvent OnClick
         public void OnClick()
 		{
-            Debug.Log(_boardIndex);
+            _gManager._lobby._ownedPlayer._cardZones._selectedCardIndex = _cardIndex;
 		}
     }
 }

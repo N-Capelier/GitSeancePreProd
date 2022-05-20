@@ -19,10 +19,10 @@ namespace Seance.BoardManagment
 
         //editor window var
         private bool isMouseDown;
-        private int marginSize;
-        private Vector2 curMousePosition;
-        private int tileActu = 0;
-        private Vector2 scrollPos;
+        //private int marginSize;
+        //private Vector2 curMousePosition;
+        //private int tileActu = 0;
+        //private Vector2 scrollPos;
 
 
         public void InitializeWindow(RoomProfile correspondingLevel)
@@ -36,9 +36,9 @@ namespace Seance.BoardManagment
             _currentTileSelected = _serializedObject.FindProperty("_currentTileSelected");
             _tilesColor = _serializedObject.FindProperty("_tilesColor");
 
-            marginSize = 32;
+            //marginSize = 32;
             isMouseDown = false;
-            curMousePosition = Vector2.zero;
+            //curMousePosition = Vector2.zero;
         }
 
 

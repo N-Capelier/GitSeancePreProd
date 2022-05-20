@@ -22,6 +22,8 @@ namespace Seance.Player
 		[SerializeField] List<Card> _hand;
 		[SerializeField] List<Card> _discard;
 
+		[HideInInspector] public int _selectedCardIndex = -1;
+
 		private void Start()
 		{
 			_gManager = GameManager.Instance;
@@ -47,14 +49,16 @@ namespace Seance.Player
 			newVisualCard.Init(_hand[_hand.Count - 1], _hand.Count - 1);
 		}
 
-		public void UseCard(int cardIndex/*, targetCell*/)
+		public void UseCard(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
 		{
-			if (cardIndex < 0 || cardIndex >= _hand.Count)
-				throw new System.ArgumentOutOfRangeException("Card index out of range");
+			if (_selectedCardIndex == -1)
+				return;
 
-			_hand[cardIndex].Use(new CharacterPawn(), new Tile(), null); //need complete implementation
+			_hand[_selectedCardIndex].UseCard(caster, targetTile, targetPawns, _hand[_selectedCardIndex]._corruption);
 
-			DiscardCard(cardIndex);
+			DiscardCard(_selectedCardIndex);
+			RefreshCardIndexes();
+			_selectedCardIndex = -1;
 		}
 
 		public void DiscardCard(int cardIndex)
@@ -69,7 +73,7 @@ namespace Seance.Player
 
 			for (int i = 0; i < cards.Length; i++)
 			{
-				cards[i]._boardIndex = i;
+				cards[i]._cardIndex = i;
 			}
 		}
 

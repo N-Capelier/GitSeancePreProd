@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Seance.CardSystem;
+using Seance.BoardManagment;
+using Seance.Management;
+
+namespace Seance.Player
+{
+    public class PlayerTileInteraction : MonoBehaviour
+    {
+		private void Update()
+		{
+			if (Input.GetMouseButtonDown(0))
+				RayCastTileInteraction();
+		}
+
+		void RayCastTileInteraction()
+		{
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+			{
+				if(hit.transform.GetComponent<Tile>() != null)
+				{
+					Tile targetTile = hit.transform.GetComponent<Tile>();
+					GameManager.Instance._lobby._ownedPlayer._cardZones.UseCard(GameManager.Instance._lobby._ownedPlayer._pawn, targetTile, TileManager.Instance.GetPawnsOn(targetTile._x, targetTile._y));
+				}
+			}
+		}
+	}
+}

@@ -58,7 +58,7 @@ namespace Seance.BoardManagment
             p.TakeDamage(damages);
         }
 
-        public void TakeDamage(int damages)
+        public virtual void TakeDamage(int damages)
         {
             _currentHealth -= damages;
             if (_currentHealth <= 0) Die();
@@ -76,12 +76,12 @@ namespace Seance.BoardManagment
             }
         }
 
-        public void GainArmor(int amount)
+        public virtual void GainArmor(int amount)
 		{
             _armor += amount;
 		}
 
-        public void DecreaseArmor(int amount)
+        public virtual void DecreaseArmor(int amount)
         {
             if(_armor - amount < 0)
             {

@@ -511,7 +511,7 @@ namespace Seance.BoardManagment
                 {
                     //apply save manualy
                     _otherInstancesInScene[i].GetComponent<Tile>()._savedRot = _roomShape._otherTileRotationSave[i];
-                    _tilesInScene[i].ApplySavedRotation();
+                    _otherInstancesInScene[i].GetComponent<Tile>().ApplySavedRotation();
                 }
             }
         }

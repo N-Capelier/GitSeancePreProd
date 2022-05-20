@@ -10,7 +10,7 @@ namespace Seance.BoardManagment.Dice
     /// <summary>
     /// Edouard
     /// </summary>
-    public class Dice20 : MonoBehaviour
+    public class Dice20 : Singleton<Dice20>
     {
         [Header("Dice")]
         [SerializeField] private int _diceValue = 20;
@@ -26,7 +26,6 @@ namespace Seance.BoardManagment.Dice
         private Animator _animator;
         private DiceClick _diceClick;
         //private CameraShake _mainCameraShake;
-        [SerializeField] private Volume _volumePostprocess;
         private Vignette _vignetteEffect;
 
         public int ExpectedValue { get => _expectedValue; set => _expectedValue = value; }
@@ -40,11 +39,15 @@ namespace Seance.BoardManagment.Dice
             _animator = GetComponent<Animator>();
             _diceClick = GetComponentInChildren<DiceClick>();
             //_mainCameraShake = Camera.main.GetComponent<CameraShake>();
-            _vignetteEffect = (Vignette)_volumePostprocess.profile.components[0];
 
             _diceClick.onLeftClick += IncreaseDiceValue;
             _diceClick.onRightClick += DecreaseDiceValue;
         }
+
+        public void Init(Volume volumePostprocess)
+		{
+            _vignetteEffect = (Vignette)volumePostprocess.profile.components[0];
+		}
 
         private void Start()
         {

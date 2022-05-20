@@ -3,6 +3,7 @@ using Seance.BoardManagment;
 using Seance.CameraManagement;
 using Seance.Management;
 using UnityEngine;
+using Seance.BoardManagment.Dice;
 
 namespace Seance.Player
 {
@@ -46,6 +47,7 @@ namespace Seance.Player
 			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
 			_playerUI?.gameObject.SetActive(true);
 			_cardZones.InitZones();
+			Dice20.Instance.Init(null);
 		}
 
 		#endregion

@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _roomShape
       value: 
-      objectReference: {fileID: 11400000, guid: 37e4cc234936917459604c77e4fe5a65, type: 2}
+      objectReference: {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _currentNbOfPawnInScene
       value: 4

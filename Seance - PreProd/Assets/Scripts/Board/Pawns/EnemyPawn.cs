@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Seance.UI;
 
 namespace Seance.BoardManagment
 {
@@ -8,12 +9,12 @@ namespace Seance.BoardManagment
     /// This script was created by Julien haigron
     /// </summary>
 
-    public class Enemy : Pawn
+    public class EnemyPawn : Pawn
     {
         public EnemyType _thisEnemyType = EnemyType.enemy1;
 
         [SerializeField] int _damages;
-
+        [SerializeField] EnemyStatDisplay statDisplay;
         //TODO : function that itinitalise every var for TileManager.SpawnPawns
         //do the same for Character & Tile
         public void Initialize(int x, int y, int hp, int armor, int initDice, EnemyType enemyType, int pawnID)
@@ -26,7 +27,9 @@ namespace Seance.BoardManagment
             _intiativeBase = initDice;
             _thisEnemyType = enemyType;
             _pawnType = PawnType.Enemy;
+            statDisplay.ActualizeAll(_currentHealth, _armor);
         }
+
 
         public void TakeAction()
         {
@@ -94,6 +97,16 @@ namespace Seance.BoardManagment
                     }
                     break;
             }
+        }
+        public override void TakeDamage(int damages)
+        {
+            base.TakeDamage(damages);
+            statDisplay.ActualizeDisplayHealth(_currentHealth);
+        }
+        public override void DecreaseArmor(int amount)
+        {
+            base.DecreaseArmor(amount);
+            statDisplay.ActualizeDisplayArmor(_armor);
         }
     }
     public enum EnemyType

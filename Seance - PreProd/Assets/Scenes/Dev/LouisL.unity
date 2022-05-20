@@ -161,6 +161,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &18857959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -275,6 +276,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &36721676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -389,6 +391,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &40408888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -503,6 +506,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &42944550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -617,6 +621,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &55229847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -731,6 +736,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &66543427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -845,6 +851,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &94945551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -959,6 +966,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &103827661
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1073,6 +1081,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &106189034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1187,6 +1196,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &119637503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1270,6 +1280,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2361356239006588476, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
+      propertyPath: m_RootOrder
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 3947040132606521290, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1284,7 +1298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3947040132606521290, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3947040132606521290, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1321,7 +1335,15 @@ PrefabInstance:
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _roomShape
       value: 
-      objectReference: {fileID: 11400000, guid: 639a58d7053d5e447b1dba23b8fc4268, type: 2}
+      objectReference: {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
+    - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
+      propertyPath: _originPos.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
+      propertyPath: _originPos.z
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _pawnsInScene.Array.data[0]
       value: 
@@ -1702,6 +1724,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &222791040
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1912,6 +1935,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &290400886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2026,6 +2050,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &305422953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2140,6 +2165,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &316866261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2380,6 +2406,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &396822893
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2494,6 +2521,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &407133997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2608,6 +2636,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &407759752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2722,6 +2751,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &425109976
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2836,6 +2866,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &456278070
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2950,6 +2981,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &505165738
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3064,6 +3096,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &545149886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3178,6 +3211,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &558098662
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3292,6 +3326,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &579321955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3406,6 +3441,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &580881241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3520,6 +3556,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &584322953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3634,6 +3671,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &654110545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3748,6 +3786,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &654922006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3862,6 +3901,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &704110373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4045,6 +4085,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &727956859
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4159,6 +4200,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &749853561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4273,6 +4315,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &800929273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4387,6 +4430,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &850217815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4693,6 +4737,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &859455083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4995,6 +5040,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &886336309
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5109,6 +5155,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &925320784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5223,6 +5270,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &963404586
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5337,6 +5385,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &996057861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5451,6 +5500,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1026609804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5565,6 +5615,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1028732657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5679,6 +5730,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1048948736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5793,6 +5845,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1180363502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5907,6 +5960,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1208902568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6021,6 +6075,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1251189580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6135,6 +6190,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1252695081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6266,6 +6322,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1300786075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6379,7 +6436,6 @@ MonoBehaviour:
   _pawnID: 1
   _x: 7
   _y: 5
-  _armor: 0
   _intiativeBase: 0
 --- !u!65 &1340159126
 BoxCollider:
@@ -6557,6 +6613,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1429461198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429461202}
+  - component: {fileID: 1429461201}
+  - component: {fileID: 1429461200}
+  - component: {fileID: 1429461199}
+  m_Layer: 0
+  m_Name: PlateauDeJeu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1429461199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1429461200
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 533259d9330b0d94c87d4765b69f67b7, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1429461201
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_Mesh: {fileID: -8372763966957768565, guid: e8a30386d6f99a44ca4147dccb383b69, type: 3}
+--- !u!4 &1429461202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1429499662
 GameObject:
   m_ObjectHideFlags: 0
@@ -6595,6 +6746,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1429499664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6805,6 +6957,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1564652354
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6919,6 +7072,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1612539431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7033,6 +7187,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1619429838
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7147,6 +7302,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1652097681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7261,6 +7417,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1652577957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7375,6 +7532,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1670816628
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7488,7 +7646,6 @@ MonoBehaviour:
   _pawnID: 0
   _x: 7
   _y: 3
-  _armor: 0
   _intiativeBase: 0
 --- !u!65 &1711160672
 BoxCollider:
@@ -7604,6 +7761,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1714767737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7718,6 +7876,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1729168912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7832,6 +7991,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1739602705
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7946,6 +8106,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1743576664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8060,6 +8221,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1746278607
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8174,6 +8336,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1760817712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8288,6 +8451,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1766094873
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8402,6 +8566,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1767740064
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8516,6 +8681,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1784689091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8630,6 +8796,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1791760639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8744,6 +8911,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1810734173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8858,6 +9026,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1812516542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8972,6 +9141,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1830947906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9086,6 +9256,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1908850270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9200,6 +9371,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1915599373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9314,6 +9486,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1928530872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9428,6 +9601,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1969652652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9542,6 +9716,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1975131111
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9656,6 +9831,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1976601727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9770,6 +9946,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1978691784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9884,6 +10061,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1996366024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9998,6 +10176,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2010466241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10112,6 +10291,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2014665139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10226,6 +10406,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2036928704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10340,6 +10521,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2043599370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10454,6 +10636,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2057520123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10568,6 +10751,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2066419189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10682,6 +10866,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2072186742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10796,6 +10981,7 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &2082285168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10909,7 +11095,6 @@ MonoBehaviour:
   _pawnID: 2
   _x: 8
   _y: 2
-  _armor: 0
   _intiativeBase: 0
 --- !u!65 &2113544340
 BoxCollider:
@@ -11024,7 +11209,6 @@ MonoBehaviour:
   _pawnID: 3
   _x: 8
   _y: 6
-  _armor: 0
   _intiativeBase: 0
 --- !u!65 &2130872439
 BoxCollider:
@@ -11115,23 +11299,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280400, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: field of view
-      value: 65
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8699999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9848078
+      value: 0.8749554
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.17364816
+      value: 0.48420358
       objectReference: {fileID: 0}
     - target: {fileID: 8017787785112268700, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_Name

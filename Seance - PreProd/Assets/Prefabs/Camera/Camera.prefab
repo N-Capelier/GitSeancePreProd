@@ -242,7 +242,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3710186089290607254, guid: 649166a111081cf419783846074c8ad0, type: 3}
       propertyPath: m_ChildCameras.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3710186089290607255, guid: 649166a111081cf419783846074c8ad0, type: 3}
       propertyPath: m_RootOrder
@@ -299,26 +299,6 @@ PrefabInstance:
     - target: {fileID: 3710186089290607259, guid: 649166a111081cf419783846074c8ad0, type: 3}
       propertyPath: m_Name
       value: StateDrivenCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 3710186089939966687, guid: 649166a111081cf419783846074c8ad0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7933534
-      objectReference: {fileID: 0}
-    - target: {fileID: 3710186089939966687, guid: 649166a111081cf419783846074c8ad0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.60876137
-      objectReference: {fileID: 0}
-    - target: {fileID: 3710186089939966687, guid: 649166a111081cf419783846074c8ad0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3710186089939966687, guid: 649166a111081cf419783846074c8ad0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3710186089939966687, guid: 649166a111081cf419783846074c8ad0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 649166a111081cf419783846074c8ad0, type: 3}

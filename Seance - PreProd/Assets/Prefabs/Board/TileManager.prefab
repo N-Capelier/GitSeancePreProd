@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _originPos: {x: 0, y: 0, z: 0}
   _instanceParent: {fileID: 1269377802199491320}
-  _roomShape: {fileID: 11400000, guid: c40fd20d96077b845943a2f45146c6ff, type: 2}
+  _roomShape: {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
   _tilePrefabs:
   - {fileID: 6154887793308164271, guid: 8caf4cefdd0d99c4c9415a66c42ded4e, type: 3}
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
@@ -85,7 +85,7 @@ MonoBehaviour:
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
   _enemyPrefabs:
   - {fileID: 7840296203232995454, guid: 8b70568e0eda9e94fbe0d8d8fd5c9a7d, type: 3}
-  - {fileID: 7840296203232995454, guid: 56b8eb1bc6cfcd449b32d2dba336ad06, type: 3}
+  - {fileID: 7840296203232995454, guid: e6ae32e65f4b83e4b9054a82fe5aaa6e, type: 3}
   _characterPrefabs:
   - {fileID: 7840296203232995454, guid: 800a88f5ee31e3b4b9fb4750f7dc0adb, type: 3}
   _tilesInScene:
@@ -161,9 +161,38 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _pawnsInScene: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _pawnsInScene:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _otherInstancesInScene: []
-  _currentNbOfPawnInScene: 0
+  _currentNbOfPawnInScene: 4
 --- !u!114 &8182744253737441598
 MonoBehaviour:
   m_ObjectHideFlags: 0

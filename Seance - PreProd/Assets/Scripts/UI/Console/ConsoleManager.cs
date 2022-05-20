@@ -10,8 +10,9 @@ namespace Seance.CheatConsole
 {
     public class ConsoleManager : Singleton<ConsoleManager>
     {
-        [SerializeField] private bool _showConsole = false;
-
+        [SerializeField] private bool _enableConsole = false;
+        
+        private bool _showConsole = false;
         private int _scrollIndex;
         private List<string> _commandHistory;
         private string _ongoingCommand;
@@ -80,6 +81,9 @@ namespace Seance.CheatConsole
 
         private void Update()
         {
+            if (!_enableConsole) return;
+
+
             // OnOpenConsole
             if(Input.GetKeyDown(_bindOpen))
             {

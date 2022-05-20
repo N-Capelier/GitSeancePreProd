@@ -12,7 +12,11 @@ namespace Seance.UI.Settings
     public class SettingsManager : Singleton<SettingsManager>
     {
         private Dictionary<SettingType,int> _settingsValues;
-        private Dictionary<SettingType,SettingBase> _settingsComponents;   
+        private Dictionary<SettingType,SettingBase> _settingsComponents;
+
+        private bool _enableConsole = false;
+        
+        public bool EnableConsole { get => _enableConsole; }
 
         #region Unity events
 
@@ -151,6 +155,10 @@ namespace Seance.UI.Settings
                     UpdateVolumes();
                     break;
 
+                case SettingType.ENABLE_CONSOLE:
+                    UpdateEnableConsole();
+                    break;
+
                 default:
                     break;
             }
@@ -180,6 +188,27 @@ namespace Seance.UI.Settings
         private void UpdateVolumes()
         {
             
+        }
+
+        private void UpdateEnableConsole()
+        {
+            if(_settingsValues.TryGetValue(SettingType.ENABLE_CONSOLE, out int value))
+            {
+                switch(value)
+                {
+                    case 0:
+                        _enableConsole = true;
+                        break;
+
+                    case 1:
+                        _enableConsole = false;
+                        break;
+
+                    default:
+                        _enableConsole = false;
+                        break;
+                }
+            }
         }
 
         #endregion

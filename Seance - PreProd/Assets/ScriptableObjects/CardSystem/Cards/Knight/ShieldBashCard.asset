@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d68b0f737fdca4d83dfc1278cb3a11, type: 3}
+  m_Name: ShieldBashCard
+  m_EditorClassIdentifier: 
+  _type: 2
+  _title: Shield Bash
+  _description: Deals damage equal to the caster's current armor
+  _corruption: 6
+  _castOnSelf: 0
+  _hasMovement: 1

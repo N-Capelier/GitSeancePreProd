@@ -29,7 +29,7 @@ namespace Seance.BoardManagment
             _armor = armor;
             _intiativeBase = initDice;
             _heroType = heroType;
-            _pawnType = TileManager.PawnType.character;
+            _pawnType = PawnType.Character;
         }
 
 
@@ -43,6 +43,16 @@ namespace Seance.BoardManagment
                 _corruption = 200;
             else
                 _corruption += amount;
+
+            return _corruption;
+		}
+
+        public int Purify(int amount)
+		{
+            if (_corruption - amount < 0)
+                _corruption = 0;
+            else
+                _corruption -= amount;
 
             return _corruption;
 		}

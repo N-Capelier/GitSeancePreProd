@@ -437,11 +437,5 @@ namespace Seance.BoardManagment
             total //always put this var on last position
         }
 
-        public enum PawnType
-        {
-            character,
-            enemy,
-            total
-        }
     }
 }

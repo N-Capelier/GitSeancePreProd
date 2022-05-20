@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54033a284d3aca044b8659e6de13777d, type: 3}
-  m_Name: StrikeCard
+  m_Script: {fileID: 11500000, guid: 8bfbf2f9453e1014c94c882640a1236a, type: 3}
+  m_Name: MysticShieldCard
   m_EditorClassIdentifier: 
-  _type: 0
-  _title: Strike
-  _description: Strike Card description
-  _corruption: 4
-  _hasMovement: 1
+  _type: 1
+  _title: Mystic shield
+  _description: Adds 2 armor until your next turn
+  _corruption: 8
+  _castOnSelf: 0
+  _hasMovement: 0
+  armorGain: 2

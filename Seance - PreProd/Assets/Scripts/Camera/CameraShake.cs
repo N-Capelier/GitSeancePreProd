@@ -11,7 +11,7 @@ namespace Seance.CameraManagement
     {
         private bool _isShaking = false;
 
-        IEnumerator Shake(float duration, float xMagnitude, float yMagnitude, float zMagnitude)
+        public IEnumerator Shake(float duration, float xMagnitude, float yMagnitude, float zMagnitude)
         {
             if(!_isShaking)
             {

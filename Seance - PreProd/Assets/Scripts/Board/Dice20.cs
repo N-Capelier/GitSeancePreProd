@@ -28,6 +28,8 @@ namespace Seance.BoardManagment.Dice
         //private CameraShake _mainCameraShake;
         [SerializeField] private Volume _volumePostprocess;
         private Vignette _vignetteEffect;
+
+        public int ExpectedValue { get => _expectedValue; set => _expectedValue = value; }
         
         public int DiceValue { get => _diceValue; set => _diceValue = Mathf.Clamp(value, 1, 20); }
 

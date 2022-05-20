@@ -19,6 +19,14 @@ namespace Seance.BoardManagment
     #if UNITY_EDITOR
         public TileManager.Tiles _currentTileSelected;
         public Color[] _tilesColor;
-    #endif
+#endif
+
+        /// <summary>
+        /// TODO for next year : create other scriptableObject for "RoomSave"
+        /// </summary>
+
+        //save
+        public Quaternion[] _tileRotationSave;
+        public Quaternion[] _otherTileRotationSave;
     }
 }

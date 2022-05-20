@@ -1,5 +1,6 @@
 using FishNet.Object;
 using Seance.BoardManagment;
+using Seance.CameraManagement;
 using Seance.Management;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Seance.Player
 
 		public PlayerCardZones _cardZones;
 		[HideInInspector] public CharacterPawn _pawn;
+		public CameraSwitch _camera;
 
 		#region Unity messages & Setup
 

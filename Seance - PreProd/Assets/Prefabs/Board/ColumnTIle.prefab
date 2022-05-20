@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6154887793308164243}
+  - component: {fileID: 4625847612585962622}
   - component: {fileID: 6154887793308164242}
-  - component: {fileID: 1494586318481055429}
-  - component: {fileID: 6137673063863377062}
   - component: {fileID: 6154887793308164269}
   - component: {fileID: 6154887793308164268}
   m_Layer: 0
-  m_Name: DoorTile
+  m_Name: ColumnTIle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,15 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6154887793308164242
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6154887793308164271}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1494586318481055429
+--- !u!114 &4625847612585962622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,23 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _x: 0
   _y: 0
-  _thisTileType: 3
+  _thisTileType: 9
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 0
   _savedTransform: {fileID: 0}
---- !u!114 &6137673063863377062
-MonoBehaviour:
+--- !u!33 &6154887793308164242
+MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6154887793308164271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d6653ce95d7044b82fe4fe86493ee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6154887793308164269
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +80,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e8d01f77c8128484bb85d4715535f3f0, type: 2}
+  - {fileID: 2100000, guid: 37ed398dbc177724d99832337c4b6e07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -16,6 +16,19 @@ namespace Seance.BoardManagment
         public List<Pawn> _pawnsOnTile;
         public int _nbOfPawnOnStart = 0;
         public int _maxPawnOnTile = 4;
+
+        //for angle
+        public Quaternion _savedRot;
+
+        public void ApplySavedRotation()
+        {
+            transform.rotation = _savedRot;
+        }
+
+        public void SaveRotation()
+        {
+            _savedRot = transform.rotation;
+        }
         
         public void Initialize(int x, int y, TileManager.Tiles tileType)
         {

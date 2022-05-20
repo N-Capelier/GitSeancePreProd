@@ -17,6 +17,7 @@ namespace Seance.Management
 		public LobbyManager _lobby;
 		public TurnManager _turnManager;
 		public EnemyManager _enemyManager;
+		public Camera _defaultCamera;
 
 		[Header("Debug")]
 		public TextMeshProUGUI _debugPlayerTurn;

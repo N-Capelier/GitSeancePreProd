@@ -665,5 +665,6 @@ MonoBehaviour:
   _cardTitle: {fileID: 5442202748783571999}
   _cardDescription: {fileID: 8968205580463469827}
   _cardCorruptionCost: {fileID: 7029898082580814020}
-  _boardIndex: 0
+  _background: {fileID: 6765684072189789136}
+  _cardIndex: 0
   _card: {fileID: 0}

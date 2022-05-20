@@ -16,7 +16,7 @@ namespace Seance.Networking
 	{
 		[SyncVar] int _connectedPlayerCount = 0;
 		[SyncObject] public readonly SyncList<NetworkConnection> _networkConnections = new SyncList<NetworkConnection>();
-		public PlayerManager _ownedPlayer;
+		[HideInInspector] public PlayerManager _ownedPlayer;
 		[HideInInspector] public NetworkConnection _ownedConnection;
 
 		public override void OnSpawnServer(NetworkConnection connection)
@@ -38,7 +38,7 @@ namespace Seance.Networking
 
 		void StartGame()
 		{
-			Debug.LogWarning("Starting game");
+			//Debug.LogWarning("Starting game");
 			GameManager.Instance._turnManager.ServerRpcPlayNextTurn();
 		}
 	}

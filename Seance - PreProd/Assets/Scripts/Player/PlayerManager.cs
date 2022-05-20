@@ -33,12 +33,6 @@ namespace Seance.Player
 			_gManager = GameManager.Instance;
 		}
 
-		private void Update()
-		{
-			if (!IsOwner)
-				return;
-		}
-
 		public override void OnStartClient()
 		{
 			base.OnStartClient();
@@ -48,6 +42,8 @@ namespace Seance.Player
 
 			GameManager.Instance._lobby._ownedPlayer = this;
 
+			_camera?.transform.parent.gameObject.SetActive(true);
+			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
 			_playerUI?.gameObject.SetActive(true);
 			_cardZones.InitZones();
 		}

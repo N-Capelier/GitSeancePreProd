@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Seance.Management;
+using UnityEngine.UI;
 
 namespace Seance.CardSystem
 {
@@ -10,6 +11,7 @@ namespace Seance.CardSystem
         [SerializeField] TextMeshProUGUI _cardTitle;
         [SerializeField] TextMeshProUGUI _cardDescription;
         [SerializeField] TextMeshProUGUI _cardCorruptionCost;
+        [SerializeField] Image _background;
         GameManager _gManager;
 
         [Space]
@@ -33,10 +35,20 @@ namespace Seance.CardSystem
             _cardCorruptionCost.text = _card._corruption.ToString();
 		}
 
+        public void Select()
+		{
+            _background.color = Color.green;
+		}
+
+        public void Deselect()
+		{
+            _background.color = Color.white;
+		}
+
         //UnityEvent OnClick
         public void OnClick()
 		{
-            _gManager._lobby._ownedPlayer._cardZones._selectedCardIndex = _cardIndex;
+            _gManager._lobby._ownedPlayer._cardZones.SelectCard(_cardIndex);
 		}
     }
 }

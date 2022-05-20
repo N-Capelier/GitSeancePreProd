@@ -11,39 +11,29 @@ namespace Seance.CameraManagement
     public class CameraSwitch : MonoBehaviour
     {
         [Header("Requirements")]
-        [SerializeField] private Animator camAnimator;
-        [SerializeField] private CinemachineBrain cameraBrain;
-        [SerializeField] private Seance.Player.PlayerManager playerManager;
-
-        public Camera currentCamera;
+        [SerializeField] private Animator _camAnimator;
+        [SerializeField] private CinemachineBrain _cameraBrain;
+		[SerializeField] public Camera _camera;
 
         [Header("Stats")]
-        //total number of cams
-        [SerializeField] private int camnbr;
+        [SerializeField] private int _camCount;
+        [SerializeField] private int _startCamIndex = 1;
+        private int _currentCamIndex;
 
-        [SerializeField] private int startCamIndex = 1;
-        //current cam
-        private int currentCamIndex;
-
-
-
-        private void Awake()
+        private void Start()
         {
             Initialize();
         }
 
         private void Initialize()
         {
-            currentCamIndex = startCamIndex;
-            currentCamera = Camera.main;
+            _currentCamIndex = _startCamIndex;
 
             SwitchCam();
         }
 
         private void Update()
         {
-            //if (!playerManager.IsOwner)
-            //    return;
             GetInput();
         }
 
@@ -62,32 +52,32 @@ namespace Seance.CameraManagement
 
         private void OnUpArrow()
         {
-            currentCamIndex += 1;
-            currentCamIndex = Mathf.Clamp(currentCamIndex, 0, camnbr - 1);
+            _currentCamIndex += 1;
+            _currentCamIndex = Mathf.Clamp(_currentCamIndex, 0, _camCount - 1);
 
             SwitchCam();
         }
 
         private void OnDownArrow()
         {
-            currentCamIndex -= 1;
-            currentCamIndex = Mathf.Clamp(currentCamIndex, 0, camnbr - 1);
+            _currentCamIndex -= 1;
+            _currentCamIndex = Mathf.Clamp(_currentCamIndex, 0, _camCount - 1);
 
             SwitchCam();
         }
 
         private void SwitchCam()
         {
-            switch (currentCamIndex)
+            switch (_currentCamIndex)
             {
                 case 0:
-                    camAnimator.Play("HandCamera");
+                    _camAnimator.Play("HandCamera");
                     break;
                 case 1:
-                    camAnimator.Play("GlobalCamera");
+                    _camAnimator.Play("GlobalCamera");
                     break;
                 case 2:
-                    camAnimator.Play("BoardCamera");
+                    _camAnimator.Play("BoardCamera");
                     break;
             }
         }

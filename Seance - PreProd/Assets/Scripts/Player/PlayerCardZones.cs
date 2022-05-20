@@ -22,6 +22,8 @@ namespace Seance.Player
 		[SerializeField] List<Card> _hand;
 		[SerializeField] List<Card> _discard;
 
+		List<VisualCard> _visualHand = new List<VisualCard>();
+
 		[HideInInspector] public int _selectedCardIndex = -1;
 
 		private void Start()
@@ -47,6 +49,17 @@ namespace Seance.Player
 
 			VisualCard newVisualCard = Instantiate(_visualCardPrefab, _cardsParent).GetComponent<VisualCard>();
 			newVisualCard.Init(_hand[_hand.Count - 1], _hand.Count - 1);
+			_visualHand.Add(newVisualCard);
+		}
+
+		public void SelectCard(int cardIndex)
+		{
+			if (_selectedCardIndex != -1)
+			{
+				_visualHand[_selectedCardIndex].Deselect();
+			}
+			_visualHand[cardIndex].Select();
+			_selectedCardIndex = cardIndex;
 		}
 
 		public void UseCard(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
@@ -65,6 +78,9 @@ namespace Seance.Player
 		{
 			_discard.Add(_hand[cardIndex]);
 			_hand.RemoveAt(cardIndex);
+
+			Destroy(_visualHand[_selectedCardIndex].gameObject);
+			_visualHand.RemoveAt(cardIndex);
 		}
 
 		public void RefreshCardIndexes()

@@ -421,7 +421,7 @@ namespace Seance.BoardManagment
                                 //spawn pawn
                                 GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, transform);
                                 enemyPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
-                                enemyPawn.GetComponent<Enemy>().Initialize(x, y, 4, 0, 4, EnemyType.enemy1, _currentNbOfPawnInScene);
+                                enemyPawn.GetComponent<EnemyPawn>().Initialize(x, y, 4, 0, 4, EnemyType.enemy1, _currentNbOfPawnInScene);
                                 _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Pawn>();
                             }
 
@@ -433,8 +433,8 @@ namespace Seance.BoardManagment
                                 //spawn pawn
                                 GameObject enemyPawn2 = Instantiate(_enemyPrefabs[1], thisBlockPos, Quaternion.identity, transform);
                                 enemyPawn2.transform.rotation = _tilePrefabs[2].transform.rotation;
-                                enemyPawn2.GetComponent<Enemy>().Initialize(x, y, 4, 0, 4, EnemyType.enemy2, _currentNbOfPawnInScene);
-                                _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn2.GetComponent<Enemy>();
+                                enemyPawn2.GetComponent<EnemyPawn>().Initialize(x, y, 4, 0, 4, EnemyType.enemy2, _currentNbOfPawnInScene);
+                                _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn2.GetComponent<EnemyPawn>();
                             }
 
                             break;

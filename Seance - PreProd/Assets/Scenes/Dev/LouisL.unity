@@ -6613,6 +6613,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1429461198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1429461202}
+  - component: {fileID: 1429461201}
+  - component: {fileID: 1429461200}
+  - component: {fileID: 1429461199}
+  m_Layer: 0
+  m_Name: PlateauDeJeu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1429461199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1429461200
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 533259d9330b0d94c87d4765b69f67b7, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1429461201
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_Mesh: {fileID: -8372763966957768565, guid: e8a30386d6f99a44ca4147dccb383b69, type: 3}
+--- !u!4 &1429461202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429461198}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1429499662
 GameObject:
   m_ObjectHideFlags: 0
@@ -11204,23 +11299,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280400, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: field of view
-      value: 65
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8699999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9848078
+      value: 0.8749554
       objectReference: {fileID: 0}
     - target: {fileID: 7368197872363280401, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.17364816
+      value: 0.48420358
       objectReference: {fileID: 0}
     - target: {fileID: 8017787785112268700, guid: 2e91b732480683148911ee74b81587fe, type: 3}
       propertyPath: m_Name

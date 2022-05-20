@@ -9,6 +9,8 @@ namespace Seance.Player
 {
     public class PlayerTileInteraction : MonoBehaviour
     {
+		[SerializeField] LayerMask _interactableLayerMask;
+
 		private void Update()
 		{
 			if (Input.GetMouseButtonDown(0))
@@ -19,7 +21,7 @@ namespace Seance.Player
 		{
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+			if(Physics.Raycast(ray, out hit, Mathf.Infinity, _interactableLayerMask))
 			{
 				if(hit.transform.GetComponent<Tile>() != null)
 				{

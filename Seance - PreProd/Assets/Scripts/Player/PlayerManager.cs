@@ -1,5 +1,6 @@
 using FishNet.Object;
 using Seance.BoardManagment;
+using Seance.CameraManagement;
 using Seance.Management;
 using UnityEngine;
 
@@ -23,18 +24,13 @@ namespace Seance.Player
 
 		public PlayerCardZones _cardZones;
 		[HideInInspector] public CharacterPawn _pawn;
+		public CameraSwitch _camera;
 
 		#region Unity messages & Setup
 
 		private void Start()
 		{
 			_gManager = GameManager.Instance;
-		}
-
-		private void Update()
-		{
-			if (!IsOwner)
-				return;
 		}
 
 		public override void OnStartClient()
@@ -46,6 +42,8 @@ namespace Seance.Player
 
 			GameManager.Instance._lobby._ownedPlayer = this;
 
+			_camera?.transform.parent.gameObject.SetActive(true);
+			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
 			_playerUI?.gameObject.SetActive(true);
 			_cardZones.InitZones();
 		}

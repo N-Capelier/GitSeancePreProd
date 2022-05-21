@@ -20,6 +20,7 @@ namespace Seance.BoardManagment
             {
                 FloorManager.Instance._playersPositionInFloor = nextRoomNumber;
                 TileManager.Instance.GenerateRoom(_linkedRoom._data);
+                TileManager.Instance.LoadRotationSave();
             }
             else
             {

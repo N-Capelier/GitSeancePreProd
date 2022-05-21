@@ -110,6 +110,7 @@ namespace Seance.BoardManagment
             statDisplay.ActualizeDisplayArmor(_armor);
         }
 
+        [ContextMenu("Die()")]
         public override void Die()
         {
             //Calcul que je veux - Tester des trucs.
@@ -119,19 +120,27 @@ namespace Seance.BoardManagment
             pawnList.Remove(this);
             TileManager.Instance._pawnsInScene = pawnList.ToArray();
 
-            foreach (EnemyPawn enemy in TileManager.Instance._pawnsInScene)
+            for (int i = 0; i < TileManager.Instance._pawnsInScene.Length; i++)
             {
-                counter++;
+                if (TileManager.Instance._pawnsInScene[i] != null)
+                {
+                    if (TileManager.Instance._pawnsInScene[i]._pawnType == PawnType.Enemy)
+                    {
+                        counter++;
+                    }
+                }
             }
 
             if(counter == 0)
             {
-                //Lancer fonction sur TileManager;
+                TileManager.Instance.NextRoomFeedback();
             }
 
             base.Die();
         }
     }
+
+
     public enum EnemyType
     {
         enemy1,

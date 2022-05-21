@@ -313,8 +313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d6653ce95d7044b82fe4fe86493ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconDisplay: {fileID: 0}
+  iconDisplay: {fileID: 4318171855567809181}
   nextRoomIcone:
   - {fileID: 21300000, guid: 729f5069248997a49b9b8a9356aa0c4d, type: 3}
   - {fileID: 21300000, guid: bfc68e742c88eb84f88fbd0fa907e36e, type: 3}
   - {fileID: 21300000, guid: c7a25052c4e2f9c4a9d7a0040fe4aeec, type: 3}
+  - {fileID: 21300000, guid: 4161c0839bcab854ca40ba8f25b8ecd4, type: 3}

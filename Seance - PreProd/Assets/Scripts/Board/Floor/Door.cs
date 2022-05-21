@@ -30,7 +30,7 @@ namespace Seance.BoardManagment
 
         public void UpdateIcon()
         {
-
+            
         }
     }
 }

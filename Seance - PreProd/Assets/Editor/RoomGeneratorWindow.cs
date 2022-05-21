@@ -15,7 +15,7 @@ namespace Seance.BoardManagment
         RoomProfile _currentRoom;
 
 
-        SerializedProperty _roomID, _xLength, _yLength, _tiles, _tilesWeight, _currentTileSelected, _tilesColor;
+        SerializedProperty _roomID, _xLength, _yLength, _tiles, _tilesWeight, _currentTileSelected, _tilesColor, _tileRotationSave, _otherTileRotationSave;
 
         //editor window var
         private bool isMouseLeftDown;
@@ -35,6 +35,8 @@ namespace Seance.BoardManagment
             _tilesWeight = _serializedObject.FindProperty("_tilesWeight");
             _currentTileSelected = _serializedObject.FindProperty("_currentTileSelected");
             _tilesColor = _serializedObject.FindProperty("_tilesColor");
+            _tileRotationSave = _serializedObject.FindProperty("_tileRotationSave");
+            _otherTileRotationSave = _serializedObject.FindProperty("_otherTileRotationSave");
 
             isMouseLeftDown = false;
             isMouseRightDown = false;
@@ -52,6 +54,16 @@ namespace Seance.BoardManagment
             //affichage de l'objet level actuel
             EditorGUI.BeginDisabledGroup(true);
             EditorGUI.EndDisabledGroup();
+
+            //for rotation save
+            /*if (_tileRotationSave.arraySize < 1)
+            {
+                _tileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;
+            }
+            if (_otherTileRotationSave.arraySize < 1)
+            {
+                _otherTileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;
+            }*/
 
             //
             EditorGUILayout.Space(5);
@@ -111,6 +123,13 @@ namespace Seance.BoardManagment
                     {
                         _tilesWeight.GetArrayElementAtIndex(i).intValue = 0;
                     }
+
+                    //for rotation save
+                    /*_tileRotationSave.ClearArray();
+                    _tileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;
+                    _otherTileRotationSave.ClearArray();
+                    _otherTileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;*/
+
                 }
             }
 

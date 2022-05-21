@@ -82,7 +82,8 @@ MonoBehaviour:
   - {fileID: 6154887793308164271, guid: 8caf4cefdd0d99c4c9415a66c42ded4e, type: 3}
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
   - {fileID: 6154887793308164271, guid: c4008619dc107244bae2d62659ece606, type: 3}
-  - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
+  - {fileID: 6154887793308164271, guid: 281ab1ab81a36a84c9ef2b8fdacaa122, type: 3}
+  - {fileID: 6154887793308164271, guid: 3c4ab2fbdc0e14540a8103c370193ee0, type: 3}
   _enemyPrefabs:
   - {fileID: 7840296203232995454, guid: 8b70568e0eda9e94fbe0d8d8fd5c9a7d, type: 3}
   - {fileID: 7840296203232995454, guid: e6ae32e65f4b83e4b9054a82fe5aaa6e, type: 3}

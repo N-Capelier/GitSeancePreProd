@@ -20,7 +20,7 @@ namespace Seance.BoardManagment
         /// </summary>
 
 
-        SerializedProperty _roomID, _xLength, _yLength, _tilesColor;
+        SerializedProperty _roomID, _xLength, _yLength, _tilesColor, _tileRotationSave, _otherTileRotationSave;
 
         private void OnEnable()
         {
@@ -28,6 +28,11 @@ namespace Seance.BoardManagment
             _xLength = serializedObject.FindProperty("_xLength");
             _yLength = serializedObject.FindProperty("_yLength");
             _tilesColor = serializedObject.FindProperty("_tilesColor");
+
+            //show save lists
+            _tileRotationSave = serializedObject.FindProperty("_tileRotationSave");
+            _otherTileRotationSave = serializedObject.FindProperty("_otherTileRotationSave");
+
         }
 
         public override void OnInspectorGUI()
@@ -40,6 +45,9 @@ namespace Seance.BoardManagment
             EditorGUILayout.PropertyField(_yLength);
             EditorGUILayout.PropertyField(_tilesColor);
 
+            //show save lists
+            EditorGUILayout.PropertyField(_tileRotationSave);
+            EditorGUILayout.PropertyField(_otherTileRotationSave);
 
             serializedObject.ApplyModifiedProperties();
         }

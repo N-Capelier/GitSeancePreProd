@@ -529,7 +529,16 @@ namespace Seance.BoardManagment
             }
         }*/
 
-
+        public void NextRoomFeedback()
+        {
+            for (int i = 0; i < _tilesInScene.Length; i++)
+            {
+                if (_tilesInScene[i]._thisTileType == Tiles.door)
+                {
+                    _tilesInScene[i].gameObject.GetComponent<Door>().UpdateIcon();
+                }
+            }
+        }
         public Tile GetTile(int x, int y)
         {
             if (_tilesInScene.Length >= x * y)

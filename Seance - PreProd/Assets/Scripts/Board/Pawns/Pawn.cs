@@ -100,7 +100,7 @@ namespace Seance.BoardManagment
             throw new System.ArgumentNullException("Other pawn is null");
         }
 
-        public void Die()
+        public virtual void Die()
         {
             Destroy(gameObject);
         }

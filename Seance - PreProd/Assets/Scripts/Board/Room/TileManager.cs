@@ -137,8 +137,8 @@ namespace Seance.BoardManagment
                             angleGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = angleGround.GetComponent<Tile>();
 
-                            GameObject angle = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
-                            angle.transform.rotation = _tilePrefabs[3].transform.rotation;
+                            GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            angle.transform.rotation = _tilePrefabs[4].transform.rotation;
                             angle.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(angle);
                             break;
@@ -296,7 +296,7 @@ namespace Seance.BoardManagment
                             angleGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[x * _roomShape._yLength + y] = angleGround.GetComponent<Tile>();
 
-                            GameObject angle = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
                             angle.transform.rotation = _tilePrefabs[3].transform.rotation;
                             angle.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(angle);

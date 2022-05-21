@@ -17,6 +17,7 @@ namespace Seance.BoardManagment
         }
 
         //load next room
+        [ContextMenu("Open Door")]
         public void OpenDoor()
         {
             // //TODO : change _linkedRoomNumber value in FloorManager.Instance 
@@ -25,7 +26,6 @@ namespace Seance.BoardManagment
             {
                 FloorManager.Instance._playersPositionInFloor = nextRoomNumber;
                 TileManager.Instance.GenerateRoom(_linkedRoom._data);
-                TileManager.Instance.LoadRotationSave();
             }
             else
             {

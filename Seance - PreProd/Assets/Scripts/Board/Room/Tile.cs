@@ -17,6 +17,10 @@ namespace Seance.BoardManagment
         public int _nbOfPawnOnStart = 0;
         public int _maxPawnOnTile = 4;
 
+        [SerializeField] private MeshRenderer tileRenderer;
+        [SerializeField] private Material color1;
+        [SerializeField] private Material color2;
+
         //for angle
         public Quaternion _savedRot;
 
@@ -34,7 +38,23 @@ namespace Seance.BoardManagment
         {
             _x = x;
             _y = y;
+
+            if (tileRenderer != null)
+            {
+                //pair
+                if ((_x % 2 == 0 && _y % 2 == 1) ||(_x %2 ==1 && _y % 2 ==0))
+                {
+                    tileRenderer.material = color1;
+                }
+                else
+                {
+                    tileRenderer.material = color2;
+                }
+            }
+
             _thisTileType = tileType;
+
+           
         }
     }
 }

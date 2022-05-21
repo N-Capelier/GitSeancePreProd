@@ -233,6 +233,7 @@ namespace Seance.BoardManagment
                 }
             }
             SpawnPawns();
+            NextRoomFeedback();
             LoadRotationSave();
         }
 
@@ -446,7 +447,7 @@ namespace Seance.BoardManagment
                             }
 
                             _pawnSpawn.UpdatePawnsPositionOnTile();
-
+                            
                             break;
                         case Tiles.enemySpawn1:
                             Tile _pawnSpawn2 = GetTile(x, y);
@@ -462,7 +463,7 @@ namespace Seance.BoardManagment
                             }
 
                             _pawnSpawn2.UpdatePawnsPositionOnTile();
-
+                           
                             break;
                         case Tiles.enemySpawn2:
                             Tile _pawnSpawn3 = GetTile(x, y);
@@ -478,7 +479,7 @@ namespace Seance.BoardManagment
                             }
 
                             _pawnSpawn3.UpdatePawnsPositionOnTile();
-
+                        
                             break;
                     }
                 }
@@ -562,13 +563,40 @@ namespace Seance.BoardManagment
             }
         }*/
 
+        List<GameObject> storedTile = new List<GameObject>();
+
         public void NextRoomFeedback()
         {
-            for (int i = 0; i < _tilesInScene.Length; i++)
+            Debug.Log("called");
+            int counter = 0;
+
+            for (int i = 0; i < _pawnsInScene.Length; i++)
             {
-                if (_tilesInScene[i]._thisTileType == Tiles.door)
+                if (_pawnsInScene[i] !=null)
                 {
-                    _tilesInScene[i].gameObject.GetComponent<Door>().UpdateIcon();
+                    if (_pawnsInScene[i]._pawnType == PawnType.Enemy)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            if (counter ==0)
+            {
+                foreach (Transform item in _otherInstanceParent.transform)
+                {
+                    storedTile.Add(item.gameObject);
+                }
+
+                foreach (var item in storedTile)
+                {
+                    if(item != null)
+                    {
+                        if (item.GetComponent<Door>() != null)
+                        {
+                            item.GetComponent<Door>().UpdateIcon();
+                        }
+                    }  
                 }
             }
         }

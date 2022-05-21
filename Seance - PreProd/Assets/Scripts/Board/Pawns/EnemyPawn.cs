@@ -116,6 +116,8 @@ namespace Seance.BoardManagment
             //Calcul que je veux - Tester des trucs.
             int counter = 0;
 
+            Debug.Log(TileManager.Instance._pawnsInScene);
+
             List<Pawn> pawnList = TileManager.Instance._pawnsInScene.ToList();
             pawnList.Remove(this);
             TileManager.Instance._pawnsInScene = pawnList.ToArray();
@@ -133,6 +135,7 @@ namespace Seance.BoardManagment
 
             if(counter == 0)
             {
+                Debug.Log("Called");
                 TileManager.Instance.NextRoomFeedback();
             }
 

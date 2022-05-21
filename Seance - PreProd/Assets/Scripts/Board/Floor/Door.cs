@@ -46,42 +46,42 @@ namespace Seance.BoardManagment
                     {
                         //Osef (init room)
                         case 0:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
+                            iconDisplay.SetActive(true);
                             break;
                         //Combat
                         case 1:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
+                            iconDisplay.SetActive(true);
                             break;
                         //Trésor
                         case 2:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
+                            iconDisplay.SetActive(true);
                             break;
                         //Trésor
                         case 3:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
+                            iconDisplay.SetActive(true);
                             break;
                         //Combat
                         case 4:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
+                            iconDisplay.SetActive(true);
                             break;
                         //Trésor
                         case 5:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
+                            iconDisplay.SetActive(true);
                             break;
                         //Fin
                         case 6:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[2];
+                            iconDisplay.SetActive(true);
                             break;
                         default:
-                            iconDisplay.SetActive(true);
                             iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[3];
+                            iconDisplay.SetActive(true);
                             break;
                     }
                 }

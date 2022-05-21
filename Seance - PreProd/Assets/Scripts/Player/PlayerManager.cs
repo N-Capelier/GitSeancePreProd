@@ -3,6 +3,8 @@ using Seance.BoardManagment;
 using Seance.CameraManagement;
 using Seance.Management;
 using UnityEngine;
+using Seance.BoardManagment.Dice;
+using UnityEngine.Rendering;
 
 namespace Seance.Player
 {
@@ -14,6 +16,7 @@ namespace Seance.Player
 		[Header("References")]
 		GameManager _gManager;
 		[SerializeField] PlayerUIMode _playerUI;
+		[SerializeField] Volume _cheatPostProcessVolume;
 
 		[Header("Control")]
 		bool _isPlaying = false;
@@ -46,6 +49,7 @@ namespace Seance.Player
 			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
 			_playerUI?.gameObject.SetActive(true);
 			_cardZones.InitZones();
+			Dice20.Instance.Init(_cheatPostProcessVolume);
 		}
 
 		#endregion

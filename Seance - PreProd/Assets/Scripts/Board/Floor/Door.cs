@@ -17,21 +17,23 @@ namespace Seance.BoardManagment
         }
 
         //load next room
+        [ContextMenu("Open Door")]
         public void OpenDoor()
         {
             // //TODO : change _linkedRoomNumber value in FloorManager.Instance 
-            int nextRoomNumber = FloorManager.Instance._rooms.GetNodePositionInTree(_linkedRoom);
-            if (nextRoomNumber != -1)
+            if (FloorManager.Instance != null)
             {
-                FloorManager.Instance._playersPositionInFloor = nextRoomNumber;
-                TileManager.Instance.GenerateRoom(_linkedRoom._data);
-                TileManager.Instance.LoadRotationSave();
+                int nextRoomNumber = FloorManager.Instance._rooms.GetNodePositionInTree(_linkedRoom);
+                if (nextRoomNumber != -1)
+                {
+                    FloorManager.Instance._playersPositionInFloor = nextRoomNumber;
+                    TileManager.Instance.GenerateRoom(_linkedRoom._data);
+                }
+                else
+                {
+                    Debug.Log("Error : Room not found in BinaryTreeOfRoom");
+                }
             }
-            else
-            {
-                Debug.Log("Error : Room not found in BinaryTreeOfRoom");
-            }
-
         }
 
         public void UpdateIcon()
@@ -45,7 +47,7 @@ namespace Seance.BoardManagment
                         //Osef (init room)
                         case 0:
                             iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0]; 
+                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
                             break;
                         //Combat
                         case 1:

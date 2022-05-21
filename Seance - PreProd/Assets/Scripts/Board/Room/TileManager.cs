@@ -56,6 +56,7 @@ namespace Seance.BoardManagment
         {
             _roomShape = rp;
             GenerateRoom();
+            LoadRotationSave();
         }
 
         //For Room Decoration Editing purposes
@@ -64,9 +65,9 @@ namespace Seance.BoardManagment
         {
             GetComponent<FloorManager>().CreateFloor();
 
-          
+
             //empty grid and delete game objects
-            if (_tilesInScene.Length > 0)
+            if (_tilesInScene != null && _tilesInScene.Length > 0)
             {
                 for (int i = 0; i < _tilesInScene.Length; i++)
                 {
@@ -89,10 +90,15 @@ namespace Seance.BoardManagment
             //get nb of door in room
             int nbOfDoorTotal = 0;
             int nbOfDoorActu = 0;
-            
-            if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
-            else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
-            
+
+            if (FloorManager.Instance != null)
+            {
+                if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
+                else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
+            }
+
+
+
             isLastRoom = false;
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
@@ -101,7 +107,7 @@ namespace Seance.BoardManagment
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
 
 
-        
+
             //generate tile prefabs
             for (int x = 0; x < _roomShape._yLength; x++)
             {
@@ -112,7 +118,7 @@ namespace Seance.BoardManagment
                     switch (_roomShape._tiles[y * _roomShape._yLength + x])
                     {
                         case Tiles.empty:
-                             _tilesInScene[y * _roomShape._yLength + x] = null;
+                            _tilesInScene[y * _roomShape._yLength + x] = null;
                             break;
                         case Tiles.wall:
                             //wall ground
@@ -162,7 +168,7 @@ namespace Seance.BoardManagment
                             _otherInstancesInScene.Add(door);
 
                             //apply reference of next room to appropriate door
-                            if(nbOfDoorTotal == 2)
+                            if (nbOfDoorTotal == 2)
                             {
                                 if (nbOfDoorActu == 0)
                                 {
@@ -192,7 +198,7 @@ namespace Seance.BoardManagment
                             {
                                 //no door in the room => last room (boos)
                             }
-                            
+
                             break;
                         case Tiles.oil:
                             GameObject oilGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
@@ -226,6 +232,8 @@ namespace Seance.BoardManagment
                     }
                 }
             }
+            SpawnPawns();
+            LoadRotationSave();
         }
 
         public void GenerateRoom()
@@ -481,7 +489,7 @@ namespace Seance.BoardManagment
         public void SaveTileRotation()
         {
 
-            if(_roomShape._tileRotationSave.Length < 1)
+            if (_roomShape._tileRotationSave.Length < 1)
             {
                 Debug.Log("initialise save list");
                 _roomShape._tileRotationSave = new Quaternion[_roomShape._xLength * _roomShape._yLength];
@@ -519,9 +527,9 @@ namespace Seance.BoardManagment
         public void LoadRotationSave()
         {
             //ground tile (z = 0)
-            for (int i = 0; i < _tilesInScene.Length; i++)
+            for (int i = 0; i < _roomShape._tileRotationSave.Length; i++)
             {
-                if (_tilesInScene[i] != null)
+                if (_tilesInScene[i] != null && _roomShape._tileRotationSave[i] != null)
                 {
                     //load tile from save
                     _tilesInScene[i]._savedRot = _roomShape._tileRotationSave[i];
@@ -532,7 +540,7 @@ namespace Seance.BoardManagment
             //tile on top (z = 1)
             for (int i = 0; i < _otherInstancesInScene.Count; i++)
             {
-                if (_otherInstancesInScene[i] != null)
+                if (_otherInstancesInScene[i] != null && _roomShape._otherTileRotationSave.Length > i)
                 {
                     //apply save manualy
                     _otherInstancesInScene[i].GetComponent<Tile>()._savedRot = _roomShape._otherTileRotationSave[i];

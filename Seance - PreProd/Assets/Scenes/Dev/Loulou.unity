@@ -301,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f2b460b70ab48ef4692ce0241e5e2c08, type: 2}
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _currentNbOfPawnInScene
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6170585041670202421, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
       propertyPath: _tilePrefabs.Array.size

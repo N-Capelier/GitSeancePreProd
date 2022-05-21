@@ -16,7 +16,11 @@ namespace Seance.BoardManagment
 
         //origin spawn position
         public Vector3 _originPos = Vector3.zero;
-        public GameObject _instanceParent;
+
+        //intances parent (for hierarchy visibility)
+        public GameObject _tilesParent;
+        public GameObject _otherInstanceParent;
+        public GameObject _pawnsParent;
 
         public RoomProfile _roomShape;
         public GameObject[] _tilePrefabs;
@@ -29,6 +33,8 @@ namespace Seance.BoardManagment
         public List<GameObject> _otherInstancesInScene;
         //compteur
         public int _currentNbOfPawnInScene;
+
+        public bool isLastRoom = false;
 
 
         void Awake()
@@ -76,18 +82,9 @@ namespace Seance.BoardManagment
                 _otherInstancesInScene.Clear();
             }
 
-            /*Transform[] oldRoomTiles = _instanceParent.GetComponentsInChildren<Transform>();
-            for (int i = 0; i<oldRoomTiles.Length; i++)
-            {
-                DestroyImmediate(oldRoomTiles[i].gameObject);
-            }*/
 
-            //get nb of door in room
-            /*int nbOfDoorTotal = 0;
-            int nbOfDoorActu = 0;
-            if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
-            else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
-            */
+            isLastRoom = false;
+
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
 
@@ -104,52 +101,52 @@ namespace Seance.BoardManagment
                     switch (_roomShape._tiles[y * _roomShape._yLength + x])
                     {
                         case Tiles.empty:
-                            _tilesInScene[x * _roomShape._yLength + y] = null;
+                             _tilesInScene[y * _roomShape._yLength + x] = null;
                             break;
                         case Tiles.wall:
                             //wall ground
-                            GameObject wallGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject wallGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             wallGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             wallGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = wallGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = wallGround.GetComponent<Tile>();
 
-                            GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             wall.transform.rotation = _tilePrefabs[1].transform.rotation;
                             wall.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(wall);
                             break;
                         case Tiles.column:
                             //column ground
-                            GameObject columnGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject columnGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             columnGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             columnGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = columnGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = columnGround.GetComponent<Tile>();
 
-                            GameObject column = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject column = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             column.transform.rotation = _tilePrefabs[3].transform.rotation;
                             column.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(column);
                             break;
                         case Tiles.angle:
                             //column ground
-                            GameObject angleGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject angleGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             angleGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             angleGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = angleGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = angleGround.GetComponent<Tile>();
 
-                            GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             angle.transform.rotation = _tilePrefabs[4].transform.rotation;
                             angle.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(angle);
                             break;
                         case Tiles.door:
                             //block under door
-                            GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             doorBlock.transform.rotation = _tilePrefabs[2].transform.rotation;
                             doorBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = doorBlock.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = doorBlock.GetComponent<Tile>();
 
-                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             door.transform.rotation = _tilePrefabs[2].transform.rotation;
                             _otherInstancesInScene.Add(door);
 
@@ -187,20 +184,20 @@ namespace Seance.BoardManagment
                             */
                             break;
                         case Tiles.oil:
-                            GameObject oilGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            GameObject oilGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             oilGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             oilGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
 
                             //add oil script
                             oilGround.AddComponent<Oil>();
-                            _tilesInScene[x * _roomShape._yLength + y] = oilGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = oilGround.GetComponent<Tile>();
 
                             break;
                         case Tiles.chest:
-                            GameObject chestGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            GameObject chestGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             chestGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             chestGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = chestGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = chestGround.GetComponent<Tile>();
 
                             //TODO : add prefab "chest"
                             //waiting for nico's part
@@ -210,10 +207,10 @@ namespace Seance.BoardManagment
                         case Tiles.enemySpawn1:
                         case Tiles.enemySpawn2:
                         case Tiles.basicTile:
-                            GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject go = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             go.transform.rotation = _tilePrefabs[0].transform.rotation;
                             go.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = go.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = go.GetComponent<Tile>();
                             break;
                     }
                 }
@@ -241,6 +238,9 @@ namespace Seance.BoardManagment
                 _otherInstancesInScene.Clear();
             }
 
+            //init var
+            isLastRoom = false;
+
             //get nb of door in room
             int nbOfDoorTotal = 0;
             int nbOfDoorActu = 0;
@@ -263,53 +263,53 @@ namespace Seance.BoardManagment
                     switch (_roomShape._tiles[y * _roomShape._yLength + x])
                     {
                         case Tiles.empty:
-                            _tilesInScene[x * _roomShape._yLength + y] = null;
+                            _tilesInScene[y * _roomShape._yLength + x] = null;
                             break;
                         case Tiles.wall:
                             //wall ground
-                            GameObject wallGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject wallGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             wallGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             wallGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = wallGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = wallGround.GetComponent<Tile>();
 
-                            GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             wall.transform.rotation = _tilePrefabs[1].transform.rotation;
                             wall.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(wall);
                             break;
                         case Tiles.column:
                             //column ground
-                            GameObject columnGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject columnGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             columnGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             columnGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = columnGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = columnGround.GetComponent<Tile>();
 
-                            GameObject column = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject column = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             column.transform.rotation = _tilePrefabs[3].transform.rotation;
                             column.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(column);
                             break;
                         case Tiles.angle:
                             //column ground
-                            GameObject angleGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                            GameObject angleGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             angleGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             angleGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = angleGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = angleGround.GetComponent<Tile>();
 
-                            GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             angle.transform.rotation = _tilePrefabs[3].transform.rotation;
                             angle.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _otherInstancesInScene.Add(angle);
                             break;
                         case Tiles.door:
                             //block under door
-                            GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             doorBlock.transform.rotation = _tilePrefabs[0].transform.rotation;
                             doorBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             doorBlock.transform.rotation = _tilePrefabs[0].transform.rotation;
-                            _tilesInScene[x * _roomShape._yLength + y] = doorBlock.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = doorBlock.GetComponent<Tile>();
 
-                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _instanceParent.transform);
+                            GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             door.transform.rotation = _tilePrefabs[2].transform.rotation;
                             _otherInstancesInScene.Add(door);
 
@@ -342,24 +342,25 @@ namespace Seance.BoardManagment
                             }
                             else
                             {
-                                //no door in the room => last room (boos)
+                                //no door in the room => last room (boss)
+                                isLastRoom = true;
                             }
                             break;
                         case Tiles.oil:
-                            GameObject oilGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            GameObject oilGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             oilGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             oilGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
 
                             //add oil script
                             oilGround.AddComponent<Oil>();
-                            _tilesInScene[x * _roomShape._yLength + y] = oilGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = oilGround.GetComponent<Tile>();
 
                             break;
                         case Tiles.chest:
-                            GameObject chestGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            GameObject chestGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             chestGround.transform.rotation = _tilePrefabs[0].transform.rotation;
                             chestGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = chestGround.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = chestGround.GetComponent<Tile>();
 
                             //TODO : add prefab "chest"
                             //waiting for nico's part
@@ -369,10 +370,10 @@ namespace Seance.BoardManagment
                         case Tiles.enemySpawn1:
                         case Tiles.enemySpawn2:
                         case Tiles.basicTile:
-                            GameObject basicTile = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);
+                            GameObject basicTile = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
                             basicTile.transform.rotation = _tilePrefabs[0].transform.rotation;
                             basicTile.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _tilesInScene[x * _roomShape._yLength + y] = basicTile.GetComponent<Tile>();
+                            _tilesInScene[y * _roomShape._yLength + x] = basicTile.GetComponent<Tile>();
                             break;
                     }
                 }
@@ -413,38 +414,51 @@ namespace Seance.BoardManagment
                     {
 
                         case Tiles.characterSpawn:
-                            //TODO : change pawn place
+                            Tile _pawnSpawn = GetTile(x, y);
+
                             for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
                             {
                                 //spawn pawn
-                                GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                                GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
                                 characterPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
                                 characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, HeroType.Wizard, _currentNbOfPawnInScene);
                                 _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
+                                _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
                             }
+
+                            _pawnSpawn.UpdatePawnsPositionOnTile();
+
                             break;
                         case Tiles.enemySpawn1:
-                            //TODO : change pawn place
+                            Tile _pawnSpawn2 = GetTile(x, y);
+
                             for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
                             {
                                 //spawn pawn
-                                GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, transform);
+                                GameObject enemyPawn = Instantiate(_enemyPrefabs[0], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
                                 enemyPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
                                 enemyPawn.GetComponent<EnemyPawn>().Initialize(x, y, 4, 0, 4, EnemyType.enemy1, _currentNbOfPawnInScene);
                                 _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn.GetComponent<Pawn>();
+                                _pawnSpawn2._pawnsOnTile.Add(enemyPawn.GetComponent<Pawn>());
                             }
+
+                            _pawnSpawn2.UpdatePawnsPositionOnTile();
 
                             break;
                         case Tiles.enemySpawn2:
-                            //TODO : change pawn place
+                            Tile _pawnSpawn3 = GetTile(x, y);
+
                             for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
                             {
                                 //spawn pawn
-                                GameObject enemyPawn2 = Instantiate(_enemyPrefabs[1], thisBlockPos, Quaternion.identity, transform);
+                                GameObject enemyPawn2 = Instantiate(_enemyPrefabs[1], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
                                 enemyPawn2.transform.rotation = _tilePrefabs[2].transform.rotation;
                                 enemyPawn2.GetComponent<EnemyPawn>().Initialize(x, y, 4, 0, 4, EnemyType.enemy2, _currentNbOfPawnInScene);
                                 _pawnsInScene[_currentNbOfPawnInScene++] = enemyPawn2.GetComponent<EnemyPawn>();
+                                _pawnSpawn3._pawnsOnTile.Add(enemyPawn2.GetComponent<Pawn>());
                             }
+
+                            _pawnSpawn3.UpdatePawnsPositionOnTile();
 
                             break;
                     }
@@ -529,7 +543,16 @@ namespace Seance.BoardManagment
             }
         }*/
 
-
+        public void NextRoomFeedback()
+        {
+            for (int i = 0; i < _tilesInScene.Length; i++)
+            {
+                if (_tilesInScene[i]._thisTileType == Tiles.door)
+                {
+                    _tilesInScene[i].gameObject.GetComponent<Door>().UpdateIcon();
+                }
+            }
+        }
         public Tile GetTile(int x, int y)
         {
             if (_tilesInScene.Length >= x * y)

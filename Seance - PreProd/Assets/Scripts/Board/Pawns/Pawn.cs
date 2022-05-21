@@ -40,9 +40,16 @@ namespace Seance.BoardManagment
         {
             if (TileManager.Instance.GetTile(x, y) != null)
             {
-                Vector3 ground = TileManager.Instance.GetTile(x, y).gameObject.transform.position;
+                Tile origin = TileManager.Instance.GetTile(_x, _y);
+                Tile destiation = TileManager.Instance.GetTile(x, y);
 
+                origin._pawnsOnTile.Remove(this);
+                origin.UpdatePawnsPositionOnTile();
+
+                Vector3 ground = destiation.gameObject.transform.position;
                 transform.position = ground + new Vector3(0, TileManager.Instance._tilePrefabs[0].transform.lossyScale.x, 0);
+                destiation._pawnsOnTile.Add(this);
+                destiation.UpdatePawnsPositionOnTile();
             }
         }
 

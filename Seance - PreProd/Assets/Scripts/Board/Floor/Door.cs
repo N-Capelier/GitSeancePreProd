@@ -8,6 +8,8 @@ namespace Seance.BoardManagment
     {
         public Node _linkedRoom;
 
+        public GameObject iconDisplay;
+        public Sprite[] nextRoomIcone;
 
         //load next room
         public void OpenDoor()
@@ -18,12 +20,18 @@ namespace Seance.BoardManagment
             {
                 FloorManager.Instance._playersPositionInFloor = nextRoomNumber;
                 TileManager.Instance.GenerateRoom(_linkedRoom._data);
+                TileManager.Instance.LoadRotationSave();
             }
             else
             {
                 Debug.Log("Error : Room not found in BinaryTreeOfRoom");
             }
 
+        }
+
+        public void UpdateIcon()
+        {
+            
         }
     }
 }

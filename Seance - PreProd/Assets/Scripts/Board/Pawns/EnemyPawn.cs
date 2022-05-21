@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Seance.UI;
+using System.Linq;
 
 namespace Seance.BoardManagment
 {
@@ -107,6 +108,28 @@ namespace Seance.BoardManagment
         {
             base.DecreaseArmor(amount);
             statDisplay.ActualizeDisplayArmor(_armor);
+        }
+
+        public override void Die()
+        {
+            //Calcul que je veux - Tester des trucs.
+            int counter = 0;
+
+            List<Pawn> pawnList = TileManager.Instance._pawnsInScene.ToList();
+            pawnList.Remove(this);
+            TileManager.Instance._pawnsInScene = pawnList.ToArray();
+
+            foreach (EnemyPawn enemy in TileManager.Instance._pawnsInScene)
+            {
+                counter++;
+            }
+
+            if(counter == 0)
+            {
+                //Lancer fonction sur TileManager;
+            }
+
+            base.Die();
         }
     }
     public enum EnemyType

@@ -50,6 +50,9 @@ MonoBehaviour:
   _pawnsOnTile: []
   _nbOfPawnOnStart: 0
   _maxPawnOnTile: 4
+  tileRenderer: {fileID: 1760073215541980969}
+  color1: {fileID: 2100000, guid: 92037862104ad324f9e173c4a2610a87, type: 2}
+  color2: {fileID: 2100000, guid: 75b14a9674beec249ad82e317aff7bd7, type: 2}
   _savedRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6529050389100565018
 GameObject:
@@ -111,7 +114,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 92037862104ad324f9e173c4a2610a87, type: 2}
+  - {fileID: 2100000, guid: 75b14a9674beec249ad82e317aff7bd7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

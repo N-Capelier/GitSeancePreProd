@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _originPos: {x: 0, y: 0, z: 0}
   _instanceParent: {fileID: 1269377802199491320}
-  _roomShape: {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
+  _roomShape: {fileID: 11400000, guid: f2b460b70ab48ef4692ce0241e5e2c08, type: 2}
   _tilePrefabs:
   - {fileID: 6154887793308164271, guid: 8caf4cefdd0d99c4c9415a66c42ded4e, type: 3}
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
@@ -192,8 +192,39 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _otherInstancesInScene: []
-  _currentNbOfPawnInScene: 4
+  _otherInstancesInScene:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _currentNbOfPawnInScene: 7
 --- !u!114 &8182744253737441598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,11 +238,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomProfiles:
-  - {fileID: 11400000, guid: 37e4cc234936917459604c77e4fe5a65, type: 2}
+  - {fileID: 11400000, guid: 15d88898f540cf24386ab6e445e7206b, type: 2}
   - {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
+  - {fileID: 11400000, guid: 654dc3c1bd322584186856504d87031c, type: 2}
+  - {fileID: 11400000, guid: 42967f179557cf448886f039ebdb5540, type: 2}
   - {fileID: 11400000, guid: cc1a276ec6a178a4ca6113073abdac34, type: 2}
-  - {fileID: 11400000, guid: 639a58d7053d5e447b1dba23b8fc4268, type: 2}
-  - {fileID: 11400000, guid: c174895cdee549a4399e746271a552fa, type: 2}
-  - {fileID: 11400000, guid: 390c49a5ee279de4a8fcd50382f9c3ef, type: 2}
-  - {fileID: 11400000, guid: a4e4c89a5426cd645ac203a681a27de6, type: 2}
+  - {fileID: 11400000, guid: cbd1fff8464d8a14c8f8898e5e2d2116, type: 2}
+  - {fileID: 11400000, guid: f2b460b70ab48ef4692ce0241e5e2c08, type: 2}
   _playersPositionInFloor: 0

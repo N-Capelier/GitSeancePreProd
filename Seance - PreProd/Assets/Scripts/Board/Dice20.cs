@@ -7,124 +7,127 @@ using UnityEngine.Rendering.Universal;
 
 namespace Seance.BoardManagment.Dice
 {
-    /// <summary>
-    /// Edouard
-    /// </summary>
-    public class Dice20 : Singleton<Dice20>
-    {
-        [Header("Dice")]
-        [SerializeField] private int _diceValue = 20;
-        [SerializeField] private int _expectedValue = 20;
+	/// <summary>
+	/// Edouard
+	/// </summary>
+	public class Dice20 : Singleton<Dice20>
+	{
+		[Header("Dice")]
+		[SerializeField] private int _diceValue = 20;
+		[SerializeField] private int _expectedValue = 20;
 
-        [Header("Cheat values")]
-        [SerializeField] private float _cheatScore = 0f;
-        [SerializeField] private float _cheatScoreDecay = 0.666f;
-        [SerializeField] private float _cheatScorePunish = 1f;
-        [SerializeField] private float _cheatTolerance = 2f;
-        
-        [Header("Components")]
-        private Animator _animator;
-        private DiceClick _diceClick;
-        //private CameraShake _mainCameraShake;
-        private Vignette _vignetteEffect;
+		[Header("Cheat values")]
+		[SerializeField] private float _cheatScore = 0f;
+		[SerializeField] private float _cheatScoreDecay = 0.666f;
+		[SerializeField] private float _cheatScorePunish = 1f;
+		[SerializeField] private float _cheatTolerance = 2f;
 
-        public int ExpectedValue { get => _expectedValue; set => _expectedValue = value; }
-        
-        public int DiceValue { get => _diceValue; set => _diceValue = Mathf.Clamp(value, 1, 20); }
+		[Header("Components")]
+		private Animator _animator;
+		private DiceClick _diceClick;
+		//private CameraShake _mainCameraShake;
+		private Vignette _vignetteEffect;
 
-        #region Unity events
+		public int ExpectedValue { get => _expectedValue; set => _expectedValue = value; }
 
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-            _diceClick = GetComponentInChildren<DiceClick>();
-            //_mainCameraShake = Camera.main.GetComponent<CameraShake>();
+		public int DiceValue { get => _diceValue; set => _diceValue = Mathf.Clamp(value, 1, 20); }
 
-            _diceClick.onLeftClick += IncreaseDiceValue;
-            _diceClick.onRightClick += DecreaseDiceValue;
-        }
+		#region Unity events
 
-        public void Init(Volume volumePostprocess)
+		private void Awake()
 		{
-            _vignetteEffect = (Vignette)volumePostprocess.profile.components[0];
+			_animator = GetComponent<Animator>();
+			_diceClick = GetComponentInChildren<DiceClick>();
+			//_mainCameraShake = Camera.main.GetComponent<CameraShake>();
+
+			_diceClick.onLeftClick += IncreaseDiceValue;
+			_diceClick.onRightClick += DecreaseDiceValue;
 		}
 
-        private void Start()
-        {
-            UpdateAnimator();
-        }
+		public void Init(Volume volumePostprocess)
+		{
+			_vignetteEffect = (Vignette)volumePostprocess.profile.components[0];
+		}
 
-        #endregion
+		private void Start()
+		{
+			UpdateAnimator();
+		}
 
-        #region Public methods
+		#endregion
 
-        #endregion
+		#region Public methods
 
-        #region Private methods
+		#endregion
 
-        private void IncreaseDiceValue()
-        {
-            CheckCheat(1);
-            DiceValue++;
-            UpdateAnimator();
-        }
+		#region Private methods
 
-        private void DecreaseDiceValue()
-        {
-            CheckCheat(-1);
-            DiceValue--;
-            UpdateAnimator();
-        }
+		private void IncreaseDiceValue()
+		{
+			CheckCheat(1);
+			DiceValue++;
+			UpdateAnimator();
+		}
 
-        private void CheckCheat(int valueDirection)
-        {
-            if (valueDirection == Sign(_expectedValue - _diceValue))
-            {
-                _cheatScore = Mathf.Max(_cheatScore - _cheatScoreDecay, 0f);
-            }
-            else
-            {
-                _cheatScore += _cheatScorePunish;
-                if(_cheatScore >= _cheatTolerance)
-                {
-                    CheatFeedback();
-                }
-            }
-        }
+		private void DecreaseDiceValue()
+		{
+			CheckCheat(-1);
+			DiceValue--;
+			UpdateAnimator();
+		}
 
-        private void CheatFeedback()
-        {
-            // Don't work: Cinemachine freeze camera position
-            //StartCoroutine(_mainCameraShake.Shake(0.2f, 1f, 0.1f, 0.1f));
+		private void CheckCheat(int valueDirection)
+		{
+			if (valueDirection == Sign(_expectedValue - _diceValue))
+			{
+				_cheatScore = Mathf.Max(_cheatScore - _cheatScoreDecay, 0f);
+			}
+			else
+			{
+				_cheatScore += _cheatScorePunish;
+				if (_cheatScore >= _cheatTolerance)
+				{
+					CheatFeedback();
+				}
+			}
+		}
 
-            StartCoroutine(VignetteEffect(0.2f,0.1f));
-        }
+		private void CheatFeedback()
+		{
+			// Don't work: Cinemachine freeze camera position
+			//StartCoroutine(_mainCameraShake.Shake(0.2f, 1f, 0.1f, 0.1f));
 
-        // Mathf.Sign() sucks...
-        private int Sign(float number)
-        {
-            return number < 0 ? -1 : (number > 0 ? 1 : 0);
-        }
+			StartCoroutine(VignetteEffect(0.2f, 0.1f));
+		}
 
-        private IEnumerator VignetteEffect(float duration,float baseIntensity)
-        {
-            float elapsed = 0;
-            while(elapsed < duration)
-            {
-                float intensity = baseIntensity * (1 + ((_cheatScore - _cheatTolerance) / 20));
-                _vignetteEffect.intensity.overrideState = true;
-                _vignetteEffect.intensity.value = Mathf.Lerp(0,intensity,Mathf.Sin((elapsed / duration)*Mathf.PI));
+		// Mathf.Sign() sucks...
+		private int Sign(float number)
+		{
+			return number < 0 ? -1 : (number > 0 ? 1 : 0);
+		}
 
-                elapsed += Time.deltaTime;
-                yield return 0;
-            }
-        }
+		private IEnumerator VignetteEffect(float duration, float baseIntensity)
+		{
+			float elapsed = 0;
+			while (elapsed < duration)
+			{
+				float intensity = baseIntensity * (1 + ((_cheatScore - _cheatTolerance) / 20));
+				if (_vignetteEffect != null)
+				{
+					_vignetteEffect.intensity.overrideState = true;
+					_vignetteEffect.intensity.value = Mathf.Lerp(0, intensity, Mathf.Sin((elapsed / duration) * Mathf.PI));
+				}
 
-        private void UpdateAnimator()
-        {
-            _animator.SetInteger("diceValue", _diceValue);
-        }
+				elapsed += Time.deltaTime;
+				yield return 0;
+			}
+		}
 
-        #endregion
-    }
+		private void UpdateAnimator()
+		{
+			_animator.SetInteger("diceValue", _diceValue);
+		}
+
+		#endregion
+	}
 }

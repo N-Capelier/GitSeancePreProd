@@ -56,6 +56,9 @@ namespace Seance.BoardManagment
         [ContextMenu("Generate Room")]
         public void GenerateRoomEditor()
         {
+            GetComponent<FloorManager>().CreateFloor();
+
+          
             //empty grid and delete game objects
             if (_tilesInScene.Length > 0)
             {
@@ -83,17 +86,20 @@ namespace Seance.BoardManagment
             }*/
 
             //get nb of door in room
-            /*int nbOfDoorTotal = 0;
+            int nbOfDoorTotal = 0;
             int nbOfDoorActu = 0;
+            
             if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
             else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
-            */
+            
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
 
             //determine grid and tiles margin ratio
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
 
+
+        
             //generate tile prefabs
             for (int x = 0; x < _roomShape._yLength; x++)
             {
@@ -154,7 +160,7 @@ namespace Seance.BoardManagment
                             _otherInstancesInScene.Add(door);
 
                             //apply reference of next room to appropriate door
-                            /*if(nbOfDoorTotal == 2)
+                            if(nbOfDoorTotal == 2)
                             {
                                 if (nbOfDoorActu == 0)
                                 {
@@ -184,7 +190,7 @@ namespace Seance.BoardManagment
                             {
                                 //no door in the room => last room (boos)
                             }
-                            */
+                            
                             break;
                         case Tiles.oil:
                             GameObject oilGround = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _instanceParent.transform);

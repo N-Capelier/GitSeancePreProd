@@ -19,19 +19,21 @@ namespace Seance.BoardManagment
         public Node(RoomProfile init)
         {
             _data = init;
+            _parents = new List<Node>();
             _parents = null;
         }
 
         public Node(RoomProfile rp, Node parent)
         {
             _data = rp;
+            _parents = new List<Node>();
             _parents.Add(parent);
         }
 
         public Node(RoomProfile rp, Node[] parents)
         {
             _data = rp;
-
+            _parents = new List<Node>();
             for (int i = 0; i < parents.Length; i++)
             {
                 _parents.Add(parents[i]);
@@ -47,6 +49,7 @@ namespace Seance.BoardManagment
         public BinaryTreeOfRoom(RoomProfile init, int nbOfNode)
         {
             _root = new Node(init);
+            _floor = new List<Node>();
             _floor.Add(_root);
         }
 

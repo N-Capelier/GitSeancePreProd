@@ -13,7 +13,7 @@ namespace Seance.BoardManagment
 
         private void Start()
         {
-            UpdateIcon();
+            //UpdateIcon();
         }
 
         //load next room

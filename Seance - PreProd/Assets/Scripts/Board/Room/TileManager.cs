@@ -37,9 +37,9 @@ namespace Seance.BoardManagment
 
         static TileManager _instance;
         static public TileManager Instance
-		{
-			get { return _instance; }
-		}
+        {
+            get { return _instance; }
+        }
 
         GameManager _gManager;
 
@@ -52,13 +52,13 @@ namespace Seance.BoardManagment
             CreateSingleton();
         }
 
-		private void Start()
-		{
-			_gManager = GameManager.Instance;
-		}
+        private void Start()
+        {
+            _gManager = GameManager.Instance;
+        }
 
-		void CreateSingleton()
-		{
+        void CreateSingleton()
+        {
             if (_instance == null)
             {
                 _instance = this;
@@ -68,12 +68,13 @@ namespace Seance.BoardManagment
                 Destroy(gameObject);
                 return;
             }
-		}
+        }
 
         public void GenerateRoom(RoomProfile rp)
         {
             _roomShape = rp;
             GenerateRoom();
+            SpawnPawns();
             LoadRotationSave();
         }
 
@@ -90,7 +91,7 @@ namespace Seance.BoardManagment
                 for (int i = 0; i < _tilesInScene.Length; i++)
                 {
                     if (_tilesInScene[i] != null)
-                        Destroy(_tilesInScene[i].gameObject);
+                        DestroyImmediate(_tilesInScene[i].gameObject);
                 }
                 _tilesInScene = new Tile[0];
             }
@@ -421,20 +422,33 @@ namespace Seance.BoardManagment
         [ContextMenu("Spawn Pawns")]
         public void SpawnPawns()
         {
-            //empty grid and delete game objects
-            if (_pawnsInScene.Length > 0)
+            bool isInPlayMode = false;
+            if (FloorManager.Instance != null)
+            {
+                isInPlayMode = true;
+            }
+
+            if (_pawnsInScene.Length > 0 && !isInPlayMode)
             {
                 for (int i = 0; i < _pawnsInScene.Length; i++)
                 {
                     if (_pawnsInScene[i] != null)
                         DestroyImmediate(_pawnsInScene[i].gameObject);
                 }
-                _pawnsInScene = new Pawn[0];
+                _pawnsInScene = new Pawn[50];
             }
-
-            //init array size
-            _pawnsInScene = new Pawn[20]; //TODO : Get actual nb of pawn in scene
+            else if (_pawnsInScene.Length > 0 && isInPlayMode)
+            {
+                //dont depop character prefab when in play mode
+            }
             _currentNbOfPawnInScene = 0;
+
+            //get nb of pawn in already in _pawnInScene
+            int nbOfPawn = 0;
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
+                if (_pawnsInScene[i] != null && _pawnsInScene[i]._pawnType == PawnType.Character) nbOfPawn++;
+            }
 
             //determine grid and tiles margin ratio
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
@@ -457,36 +471,64 @@ namespace Seance.BoardManagment
                         case Tiles.characterSpawn:
                             Tile _pawnSpawn = GetTile(x, y);
 
-                            for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
+                            if (!isInPlayMode || (nbOfPawn == 0 && isInPlayMode))
                             {
-                                //spawn pawn
-                                GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
-                                characterPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
-
-                                switch (spawnedCharacterPawnsCount)
+                                for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
                                 {
-                                    case 0:
-                                        heroType = HeroType.Ranger;
-                                        break;
-                                    case 1:
-                                        heroType = HeroType.Wizard;
-                                        break;
-                                    case 2:
-                                        heroType = HeroType.Knight;
-                                        break;
-                                    default:
-                                        throw new System.ArgumentOutOfRangeException("Wrong character pawn index.");
+                                    //spawn pawn
+                                    GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
+                                    characterPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
+
+                                    switch (spawnedCharacterPawnsCount)
+                                    {
+                                        case 0:
+                                            heroType = HeroType.Ranger;
+                                            break;
+                                        case 1:
+                                            heroType = HeroType.Wizard;
+                                            break;
+                                        case 2:
+                                            heroType = HeroType.Knight;
+                                            break;
+                                        default:
+                                            throw new System.ArgumentOutOfRangeException("Wrong character pawn index.");
+                                    }
+
+                                    characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, heroType, _currentNbOfPawnInScene);
+                                    _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
+                                    _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
+
+                                    //for editor testing purposes
+                                    if (_gManager != null)
+                                    {
+                                        //network
+                                        _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                        _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                        spawnedCharacterPawnsCount++;
+                                    }
                                 }
-
-                                characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, heroType, _currentNbOfPawnInScene);
-                                _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<CharacterPawn>();
-                                Debug.LogWarning($"TileManager/SpawnPawns: Referenced pawn at index {spawnedCharacterPawnsCount}.");
-                                _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
-
-                                _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
-                                _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-                                spawnedCharacterPawnsCount++;
                             }
+                            else if (isInPlayMode && nbOfPawn > 0)
+                            {
+                                //read when fnct called from OpenDoor (to resume)
+                                for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
+                                {
+                                    GameObject characterPawn = _pawnsInScene[_currentNbOfPawnInScene++].gameObject;
+                                    characterPawn.transform.position = thisBlockPos;
+                                    characterPawn.GetComponent<CharacterPawn>().ResetPosition(x, y);
+                                    _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
+
+                                    //for editor testing purposes
+                                    if (_gManager != null)
+                                    {
+                                        //network
+                                        _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                        _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                        spawnedCharacterPawnsCount++;
+                                    }
+                                }
+                            }
+
 
                             _pawnSpawn.UpdatePawnsPositionOnTile();
 
@@ -563,6 +605,12 @@ namespace Seance.BoardManagment
                     _roomShape._otherTileRotationSave[i] = _otherInstancesInScene[i].GetComponent<Tile>()._savedRot;
                 }
             }
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(_roomShape);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+#endif
 
         }
 

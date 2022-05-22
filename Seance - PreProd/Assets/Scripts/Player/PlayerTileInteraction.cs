@@ -23,9 +23,9 @@ namespace Seance.Player
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if(Physics.Raycast(ray, out hit, Mathf.Infinity, _interactableLayerMask))
 			{
-				if(hit.transform.GetComponent<Tile>() != null)
+				if(hit.transform.parent.GetComponent<Tile>() != null && GameManager.Instance._lobby._ownedPlayer._cardZones._selectedCardIndex != -1)
 				{
-					Tile targetTile = hit.transform.GetComponent<Tile>();
+					Tile targetTile = hit.transform.parent.GetComponent<Tile>();
 					GameManager.Instance._lobby._ownedPlayer._cardZones.UseCard(GameManager.Instance._lobby._ownedPlayer._pawn, targetTile, TileManager.Instance.GetPawnsOn(targetTile._x, targetTile._y));
 				}
 			}

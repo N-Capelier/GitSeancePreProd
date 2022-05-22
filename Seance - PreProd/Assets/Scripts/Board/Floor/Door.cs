@@ -20,6 +20,7 @@ namespace Seance.BoardManagment
         [ContextMenu("Open Door")]
         public void OpenDoor()
         {
+
             // //TODO : change _linkedRoomNumber value in FloorManager.Instance 
             if (FloorManager.Instance != null)
             {
@@ -38,54 +39,80 @@ namespace Seance.BoardManagment
 
         public void UpdateIcon()
         {
-            for (int i = 0; i < FloorManager.Instance._roomProfiles.Length; i++)
+            if (Application.isPlaying)
             {
-                if (FloorManager.Instance._roomProfiles[i] == _linkedRoom._data)
+                if (TileManager.Instance.isLastRoom)
                 {
-                    switch (i)
+
+                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[3];
+                    iconDisplay.SetActive(true);
+
+                }
+                else
+                {
+                    for (int i = 0; i < FloorManager.Instance._roomProfiles.Length; i++)
                     {
-                        //Osef (init room)
-                        case 0:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
-                            break;
-                        //Combat
-                        case 1:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
-                            break;
-                        //Trésor
-                        case 2:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
-                            break;
-                        //Trésor
-                        case 3:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
-                            break;
-                        //Combat
-                        case 4:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
-                            break;
-                        //Trésor
-                        case 5:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
-                            break;
-                        //Fin
-                        case 6:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[2];
-                            break;
-                        default:
-                            iconDisplay.SetActive(true);
-                            iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[3];
-                            break;
+                        if (FloorManager.Instance._roomProfiles[i] == _linkedRoom._data)
+                        {
+                            switch (i)
+                            {
+                                //Osef (init room)
+                                case 0:
+                                    Debug.Log("0");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                //Combat
+                                case 1:
+                                    Debug.Log("1");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                //Trésor
+                                case 2:
+                                    Debug.Log("2");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                //Trésor
+                                case 3:
+                                    Debug.Log("3");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                //Combat
+                                case 4:
+                                    Debug.Log("4");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[0];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                //Trésor
+                                case 5:
+                                    Debug.Log("5");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[1];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                //Fin
+                                case 6:
+                                    Debug.Log("6");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[2];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                                default:
+                                    Debug.Log("Default");
+                                    iconDisplay.GetComponent<SpriteRenderer>().sprite = nextRoomIcone[3];
+                                    iconDisplay.SetActive(true);
+                                    break;
+                            }
+                        }
+
                     }
                 }
             }
+
+            
+
+            
         }
     }
 }

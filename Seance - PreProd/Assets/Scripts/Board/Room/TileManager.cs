@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Seance.CardSystem;
+using Seance.Management;
 
 namespace Seance.BoardManagment
 {
@@ -11,9 +13,6 @@ namespace Seance.BoardManagment
 
     public class TileManager : MonoBehaviour
     {
-        //Singleton
-        public static TileManager Instance;
-
         //origin spawn position
         public Vector3 _originPos = Vector3.zero;
 
@@ -36,21 +35,40 @@ namespace Seance.BoardManagment
 
         public bool isLastRoom = false;
 
+        static TileManager _instance;
+        static public TileManager Instance
+		{
+			get { return _instance; }
+		}
+
+        GameManager _gManager;
+
+        [HideInInspector] public Deck _rangerDeck;
+        [HideInInspector] public Deck _wizardDeck;
+        [HideInInspector] public Deck _knightDeck;
 
         void Awake()
         {
-            #region Make Singleton
-            if (Instance == null)
+            CreateSingleton();
+        }
+
+		private void Start()
+		{
+			_gManager = GameManager.Instance;
+		}
+
+		void CreateSingleton()
+		{
+            if (_instance == null)
             {
-                Instance = this;
+                _instance = this;
             }
             else
             {
                 Destroy(gameObject);
                 return;
             }
-            #endregion
-        }
+		}
 
         public void GenerateRoom(RoomProfile rp)
         {
@@ -72,7 +90,7 @@ namespace Seance.BoardManagment
                 for (int i = 0; i < _tilesInScene.Length; i++)
                 {
                     if (_tilesInScene[i] != null)
-                        DestroyImmediate(_tilesInScene[i].gameObject);
+                        Destroy(_tilesInScene[i].gameObject);
                 }
                 _tilesInScene = new Tile[0];
             }
@@ -233,6 +251,7 @@ namespace Seance.BoardManagment
                 }
             }
             SpawnPawns();
+            NextRoomFeedback();
             LoadRotationSave();
         }
 
@@ -422,6 +441,9 @@ namespace Seance.BoardManagment
 
             Vector3 originPos = _originPos + new Vector3(0, tileSize, 0); //one level upper than ground tiles in scene
 
+            int spawnedCharacterPawnsCount = 0;
+            HeroType heroType;
+
             //generate pawns prefabs
             for (int x = 0; x < _roomShape._yLength; x++)
             {
@@ -440,9 +462,30 @@ namespace Seance.BoardManagment
                                 //spawn pawn
                                 GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
                                 characterPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
-                                characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, HeroType.Wizard, _currentNbOfPawnInScene);
-                                _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
+
+                                switch (spawnedCharacterPawnsCount)
+                                {
+                                    case 0:
+                                        heroType = HeroType.Ranger;
+                                        break;
+                                    case 1:
+                                        heroType = HeroType.Wizard;
+                                        break;
+                                    case 2:
+                                        heroType = HeroType.Knight;
+                                        break;
+                                    default:
+                                        throw new System.ArgumentOutOfRangeException("Wrong character pawn index.");
+                                }
+
+                                characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, heroType, _currentNbOfPawnInScene);
+                                _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<CharacterPawn>();
+                                Debug.LogWarning($"TileManager/SpawnPawns: Referenced pawn at index {spawnedCharacterPawnsCount}.");
                                 _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
+
+                                _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                spawnedCharacterPawnsCount++;
                             }
 
                             _pawnSpawn.UpdatePawnsPositionOnTile();
@@ -562,13 +605,40 @@ namespace Seance.BoardManagment
             }
         }*/
 
+        List<GameObject> storedTile = new List<GameObject>();
+
         public void NextRoomFeedback()
         {
-            for (int i = 0; i < _tilesInScene.Length; i++)
+            Debug.Log("called");
+            int counter = 0;
+
+            for (int i = 0; i < _pawnsInScene.Length; i++)
             {
-                if (_tilesInScene[i]._thisTileType == Tiles.door)
+                if (_pawnsInScene[i] != null)
                 {
-                    _tilesInScene[i].gameObject.GetComponent<Door>().UpdateIcon();
+                    if (_pawnsInScene[i]._pawnType == PawnType.Enemy)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            if (counter == 0)
+            {
+                foreach (Transform item in _otherInstanceParent.transform)
+                {
+                    storedTile.Add(item.gameObject);
+                }
+
+                foreach (var item in storedTile)
+                {
+                    if (item != null)
+                    {
+                        if (item.GetComponent<Door>() != null)
+                        {
+                            item.GetComponent<Door>().UpdateIcon();
+                        }
+                    }
                 }
             }
         }

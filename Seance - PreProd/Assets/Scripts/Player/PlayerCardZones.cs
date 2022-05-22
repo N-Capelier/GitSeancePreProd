@@ -31,14 +31,27 @@ namespace Seance.Player
 			_gManager = GameManager.Instance;
 		}
 
-		public void InitZones()
+		public void InitZones(int deckIndex)
 		{
+			_deck = deckIndex switch
+			{
+				1 => TileManager.Instance._rangerDeck.cards,
+				2 => TileManager.Instance._wizardDeck.cards,
+				3 => TileManager.Instance._knightDeck.cards,
+				_ => throw new System.ArgumentException(),
+			};
+
+			for (int i = 0; i < _deck.Count; i++)
+			{
+				_deck[i] = Instantiate(_deck[i]);
+			}
+
 			StartCoroutine(InitZonesCoroutine());
 		}
 
 		public void DrawCard()
 		{
-			if(_deck.Count == 0)
+			if (_deck.Count == 0)
 			{
 				_deck = _discard;
 				_discard = new List<Card>();
@@ -102,7 +115,7 @@ namespace Seance.Player
 			_gManager._lobby._ownedPlayer.AddInteraction();
 
 			yield return new WaitForSeconds(.2f);
-			
+
 			for (int i = 0; i < 5; i++)
 			{
 				DrawCard();

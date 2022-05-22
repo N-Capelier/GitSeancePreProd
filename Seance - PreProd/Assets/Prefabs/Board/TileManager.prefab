@@ -108,10 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _originPos: {x: 0, y: 0, z: 0}
-  _otherInstanceParent: {fileID: 4799173518528502508}
   _tilesParent: {fileID: 1269377802199491320}
+  _otherInstanceParent: {fileID: 4799173518528502508}
   _pawnsParent: {fileID: 2920516231426513330}
-  _roomShape: {fileID: 11400000, guid: ae4f0770e2d35f245ac55765c3256666, type: 2}
+  _roomShape: {fileID: 11400000, guid: 15d88898f540cf24386ab6e445e7206b, type: 2}
   _tilePrefabs:
   - {fileID: 6154887793308164271, guid: 8caf4cefdd0d99c4c9415a66c42ded4e, type: 3}
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
@@ -226,8 +226,46 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _otherInstancesInScene: []
-  _currentNbOfPawnInScene: 4
+  _otherInstancesInScene:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _currentNbOfPawnInScene: 3
   isLastRoom: 0
 --- !u!114 &8182744253737441598
 MonoBehaviour:

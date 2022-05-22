@@ -6,6 +6,7 @@ using FishNet.Connection;
 using FishNet.Object;
 using Seance.Player;
 using Seance.Management;
+using Seance.BoardManagment;
 
 namespace Seance.Networking
 {
@@ -38,7 +39,7 @@ namespace Seance.Networking
 
 		void StartGame()
 		{
-			//Debug.LogWarning("Starting game");
+			TileManager.Instance.SpawnPawns();
 			GameManager.Instance._turnManager.ServerRpcPlayNextTurn();
 		}
 	}

@@ -5,6 +5,7 @@ using Seance.Management;
 using UnityEngine;
 using Seance.BoardManagment.Dice;
 using UnityEngine.Rendering;
+using FishNet.Connection;
 
 namespace Seance.Player
 {
@@ -48,8 +49,34 @@ namespace Seance.Player
 			_camera?.transform.parent.gameObject.SetActive(true);
 			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
 			_playerUI?.gameObject.SetActive(true);
-			_cardZones.InitZones();
 			Dice20.Instance.Init(_cheatPostProcessVolume);
+		}
+
+		[ServerRpc(RequireOwnership = false)]
+		public void ServerRpcSetPawn(int pawnIndex)
+		{
+			TargetRpcSetPawn(_gManager._lobby._networkConnections[pawnIndex], pawnIndex);
+		}
+
+		[TargetRpc]
+		void TargetRpcSetPawn(NetworkConnection conn, int pawnIndex)
+		{
+			if (_gManager._lobby._ownedConnection != conn)
+				return;
+
+			_pawn = TileManager.Instance._pawnsInScene[pawnIndex] as CharacterPawn;
+		}
+
+		[ServerRpc(RequireOwnership = false)]
+		public void ServerRpcInitZones(int deckIndex)
+		{
+			TargetRpcInitZones(_gManager._lobby._networkConnections[deckIndex], deckIndex);
+		}
+
+		[TargetRpc]
+		void TargetRpcInitZones(NetworkConnection conn, int deckIndex)
+		{
+			_cardZones.InitZones(deckIndex);
 		}
 
 		#endregion

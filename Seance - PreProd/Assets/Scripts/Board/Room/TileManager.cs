@@ -1,21 +1,18 @@
-using FishNet.Object;
-using Seance.Management;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Seance.CardSystem;
+using Seance.Management;
 
 namespace Seance.BoardManagment
 {
-	/// <summary>
-	/// This script was created by Julien haigron
-	/// </summary>
+    /// <summary>
+    /// This script was created by Julien haigron
+    /// </summary>
 
-	public class TileManager : NetworkBehaviour
-	{
-		//origin spawn position
-		public Vector3 _originPos = Vector3.zero;
-		public GameObject _instanceParent;
-
+    public class TileManager : MonoBehaviour
+    {
         //origin spawn position
         public Vector3 _originPos = Vector3.zero;
 
@@ -29,43 +26,50 @@ namespace Seance.BoardManagment
         public GameObject[] _enemyPrefabs;
         public GameObject[] _characterPrefabs;
 
-		[HideInInspector] public Deck _rangerDeck;
-		[HideInInspector] public Deck _wizardDeck;
-		[HideInInspector] public Deck _knightDeck;
+        //instances in scene
+        public Tile[] _tilesInScene;
+        public Pawn[] _pawnsInScene;
+        public List<GameObject> _otherInstancesInScene;
+        //compteur
+        public int _currentNbOfPawnInScene;
 
-		//instances in scene
-		public Tile[] _tilesInScene;
-		public Pawn[] _pawnsInScene;
-		public List<GameObject> _otherInstancesInScene;
-		//compteur
-		public int _currentNbOfPawnInScene;
         public bool isLastRoom = false;
 
-		static TileManager _instance;
-		public static TileManager Instance
+        static TileManager _instance;
+        static public TileManager Instance
 		{
 			get { return _instance; }
 		}
 
+        GameManager _gManager;
+
+        [HideInInspector] public Deck _rangerDeck;
+        [HideInInspector] public Deck _wizardDeck;
+        [HideInInspector] public Deck _knightDeck;
+
         void Awake()
         {
-            #region Make Singleton
-            if (Instance == null)
+            CreateSingleton();
+        }
+
+		private void Start()
+		{
+			_gManager = GameManager.Instance;
+		}
+
+		void CreateSingleton()
+		{
+            if (_instance == null)
             {
-                Instance = this;
+                _instance = this;
             }
             else
             {
                 Destroy(gameObject);
                 return;
             }
-            #endregion
-        }
-
-		void Awake()
-		{
-			CreateSingleton();
 		}
+
         public void GenerateRoom(RoomProfile rp)
         {
             _roomShape = rp;
@@ -73,10 +77,6 @@ namespace Seance.BoardManagment
             LoadRotationSave();
         }
 
-		private void Start()
-		{
-			_gManager = GameManager.Instance;
-		}
         //For Room Decoration Editing purposes
         [ContextMenu("Generate Room")]
         public void GenerateRoomEditor()
@@ -90,22 +90,19 @@ namespace Seance.BoardManagment
                 for (int i = 0; i < _tilesInScene.Length; i++)
                 {
                     if (_tilesInScene[i] != null)
-                        DestroyImmediate(_tilesInScene[i].gameObject);
+                        Destroy(_tilesInScene[i].gameObject);
                 }
                 _tilesInScene = new Tile[0];
             }
 
-		void CreateSingleton()
-		{
-			if (_instance == null)
-			{
-				_instance = this;
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
-		}
+            if (_otherInstancesInScene.Count > 0)
+            {
+                for (int i = 0; i < _otherInstancesInScene.Count; i++)
+                {
+                    DestroyImmediate(_otherInstancesInScene[i]);
+                }
+                _otherInstancesInScene.Clear();
+            }
 
 
             //get nb of door in room
@@ -124,8 +121,8 @@ namespace Seance.BoardManagment
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
 
-			//determine grid and tiles margin ratio
-			float tileSize = _tilePrefabs[0].transform.lossyScale.x;
+            //determine grid and tiles margin ratio
+            float tileSize = _tilePrefabs[0].transform.lossyScale.x;
 
 
 
@@ -237,8 +234,8 @@ namespace Seance.BoardManagment
                             chestGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[y * _roomShape._yLength + x] = chestGround.GetComponent<Tile>();
 
-							//TODO : add prefab "chest"
-							//waiting for nico's part
+                            //TODO : add prefab "chest"
+                            //waiting for nico's part
 
                             break;
                         case Tiles.characterSpawn:
@@ -258,26 +255,26 @@ namespace Seance.BoardManagment
             LoadRotationSave();
         }
 
-		public void GenerateRoom()
-		{
-			//empty grid and delete game objects
-			if (_tilesInScene.Length > 0)
-			{
-				for (int i = 0; i < _tilesInScene.Length; i++)
-				{
-					if (_tilesInScene[i] != null)
-						DestroyImmediate(_tilesInScene[i].gameObject);
-				}
-				_tilesInScene = new Tile[0];
-			}
-			if (_otherInstancesInScene.Count > 0)
-			{
-				for (int i = 0; i < _otherInstancesInScene.Count; i++)
-				{
-					DestroyImmediate(_otherInstancesInScene[i]);
-				}
-				_otherInstancesInScene.Clear();
-			}
+        public void GenerateRoom()
+        {
+            //empty grid and delete game objects
+            if (_tilesInScene.Length > 0)
+            {
+                for (int i = 0; i < _tilesInScene.Length; i++)
+                {
+                    if (_tilesInScene[i] != null)
+                        DestroyImmediate(_tilesInScene[i].gameObject);
+                }
+                _tilesInScene = new Tile[0];
+            }
+            if (_otherInstancesInScene.Count > 0)
+            {
+                for (int i = 0; i < _otherInstancesInScene.Count; i++)
+                {
+                    DestroyImmediate(_otherInstancesInScene[i]);
+                }
+                _otherInstancesInScene.Clear();
+            }
 
             //init var
             isLastRoom = false;
@@ -288,18 +285,18 @@ namespace Seance.BoardManagment
             if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
             else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
 
-			//init array size
-			_tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
+            //init array size
+            _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
 
-			//determine grid and tiles margin ratio
-			float tileSize = _tilePrefabs[0].transform.lossyScale.x;
+            //determine grid and tiles margin ratio
+            float tileSize = _tilePrefabs[0].transform.lossyScale.x;
 
-			//generate tile prefabs
-			for (int x = 0; x < _roomShape._yLength; x++)
-			{
-				for (int y = 0; y < _roomShape._xLength; y++)
-				{
-					Vector3 thisBlockPos = _originPos + new Vector3(tileSize * x, 0, tileSize * y);
+            //generate tile prefabs
+            for (int x = 0; x < _roomShape._yLength; x++)
+            {
+                for (int y = 0; y < _roomShape._xLength; y++)
+                {
+                    Vector3 thisBlockPos = _originPos + new Vector3(tileSize * x, 0, tileSize * y);
 
                     switch (_roomShape._tiles[y * _roomShape._yLength + x])
                     {
@@ -403,8 +400,8 @@ namespace Seance.BoardManagment
                             chestGround.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             _tilesInScene[y * _roomShape._yLength + x] = chestGround.GetComponent<Tile>();
 
-							//TODO : add prefab "chest"
-							//waiting for nico's part
+                            //TODO : add prefab "chest"
+                            //waiting for nico's part
 
                             break;
                         case Tiles.characterSpawn:
@@ -421,38 +418,41 @@ namespace Seance.BoardManagment
             }
         }
 
-		[ContextMenu("Spawn Pawns")]
-		public void SpawnPawns()
-		{
-			//empty grid and delete game objects
-			if (_pawnsInScene.Length > 0)
-			{
-				for (int i = 0; i < _pawnsInScene.Length; i++)
-				{
-					if (_pawnsInScene[i] != null)
-						Destroy(_pawnsInScene[i].gameObject);
-				}
-				_pawnsInScene = new Pawn[0];
-			}
+        [ContextMenu("Spawn Pawns")]
+        public void SpawnPawns()
+        {
+            //empty grid and delete game objects
+            if (_pawnsInScene.Length > 0)
+            {
+                for (int i = 0; i < _pawnsInScene.Length; i++)
+                {
+                    if (_pawnsInScene[i] != null)
+                        DestroyImmediate(_pawnsInScene[i].gameObject);
+                }
+                _pawnsInScene = new Pawn[0];
+            }
 
-			//init array size
-			_pawnsInScene = new Pawn[20]; //TODO : Get actual nb of pawn in scene
-			_currentNbOfPawnInScene = 0;
+            //init array size
+            _pawnsInScene = new Pawn[20]; //TODO : Get actual nb of pawn in scene
+            _currentNbOfPawnInScene = 0;
 
-			//determine grid and tiles margin ratio
-			float tileSize = _tilePrefabs[0].transform.lossyScale.x;
+            //determine grid and tiles margin ratio
+            float tileSize = _tilePrefabs[0].transform.lossyScale.x;
 
-			Vector3 originPos = _originPos + new Vector3(0, tileSize, 0); //one level upper than ground tiles in scene
+            Vector3 originPos = _originPos + new Vector3(0, tileSize, 0); //one level upper than ground tiles in scene
 
-			int spawnedCharacterPawnsCount = 0;
-			HeroType heroType;
+            int spawnedCharacterPawnsCount = 0;
+            HeroType heroType;
 
-			//generate pawns prefabs
-			for (int x = 0; x < _roomShape._yLength; x++)
-			{
-				for (int y = 0; y < _roomShape._xLength; y++)
-				{
-					Vector3 thisBlockPos = originPos + new Vector3(tileSize * x, 0, tileSize * y);
+            //generate pawns prefabs
+            for (int x = 0; x < _roomShape._yLength; x++)
+            {
+                for (int y = 0; y < _roomShape._xLength; y++)
+                {
+                    Vector3 thisBlockPos = originPos + new Vector3(tileSize * x, 0, tileSize * y);
+
+                    switch (_roomShape._tiles[y * _roomShape._yLength + x])
+                    {
 
                         case Tiles.characterSpawn:
                             Tile _pawnSpawn = GetTile(x, y);
@@ -462,13 +462,34 @@ namespace Seance.BoardManagment
                                 //spawn pawn
                                 GameObject characterPawn = Instantiate(_characterPrefabs[0], thisBlockPos, Quaternion.identity, _pawnsParent.transform);
                                 characterPawn.transform.rotation = _tilePrefabs[2].transform.rotation;
-                                characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, HeroType.Wizard, _currentNbOfPawnInScene);
-                                _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
+
+                                switch (spawnedCharacterPawnsCount)
+                                {
+                                    case 0:
+                                        heroType = HeroType.Ranger;
+                                        break;
+                                    case 1:
+                                        heroType = HeroType.Wizard;
+                                        break;
+                                    case 2:
+                                        heroType = HeroType.Knight;
+                                        break;
+                                    default:
+                                        throw new System.ArgumentOutOfRangeException("Wrong character pawn index.");
+                                }
+
+                                characterPawn.GetComponent<CharacterPawn>().Initialize(x, y, 4, 0, 4, heroType, _currentNbOfPawnInScene);
+                                _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<CharacterPawn>();
+                                Debug.LogWarning($"TileManager/SpawnPawns: Referenced pawn at index {spawnedCharacterPawnsCount}.");
                                 _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
+
+                                _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                spawnedCharacterPawnsCount++;
                             }
 
                             _pawnSpawn.UpdatePawnsPositionOnTile();
-                            
+
                             break;
                         case Tiles.enemySpawn1:
                             Tile _pawnSpawn2 = GetTile(x, y);
@@ -484,7 +505,7 @@ namespace Seance.BoardManagment
                             }
 
                             _pawnSpawn2.UpdatePawnsPositionOnTile();
-                           
+
                             break;
                         case Tiles.enemySpawn2:
                             Tile _pawnSpawn3 = GetTile(x, y);
@@ -500,18 +521,16 @@ namespace Seance.BoardManagment
                             }
 
                             _pawnSpawn3.UpdatePawnsPositionOnTile();
-                        
+
                             break;
                     }
                 }
             }
         }
 
-							break;
-					}
-				}
-			}
-		}
+        [ContextMenu("Save Tiles Rotation")]
+        public void SaveTileRotation()
+        {
 
             if (_roomShape._tileRotationSave.Length < 1)
             {
@@ -520,37 +539,32 @@ namespace Seance.BoardManagment
                 _roomShape._otherTileRotationSave = new Quaternion[_roomShape._xLength * _roomShape._yLength];
             }
 
-			if (_roomShape._tileRotationSave.Length < 1)
-			{
-				Debug.Log("initialise save list");
-				_roomShape._tileRotationSave = new Quaternion[_roomShape._xLength * _roomShape._yLength];
-				_roomShape._otherTileRotationSave = new Quaternion[_roomShape._xLength * _roomShape._yLength];
-			}
 
+            //ground tile (z = 0)
+            for (int i = 0; i < _tilesInScene.Length; i++)
+            {
+                if (_tilesInScene[i] != null)
+                {
+                    _tilesInScene[i].SaveRotation();
 
-			//ground tile (z = 0)
-			for (int i = 0; i < _tilesInScene.Length; i++)
-			{
-				if (_tilesInScene[i] != null)
-				{
-					_tilesInScene[i].SaveRotation();
+                    //apply save to room profile
+                    _roomShape._tileRotationSave[i] = _tilesInScene[i]._savedRot;
+                }
+            }
 
-					//apply save to room profile
-					_roomShape._tileRotationSave[i] = _tilesInScene[i]._savedRot;
-				}
-			}
+            //tile on top (z = 1)
+            for (int i = 0; i < _otherInstancesInScene.Count; i++)
+            {
+                if (_otherInstancesInScene[i] != null)
+                {
+                    _otherInstancesInScene[i].GetComponent<Tile>().SaveRotation();
 
-			//tile on top (z = 1)
-			for (int i = 0; i < _otherInstancesInScene.Count; i++)
-			{
-				if (_otherInstancesInScene[i] != null)
-				{
-					_otherInstancesInScene[i].GetComponent<Tile>().SaveRotation();
+                    //apply save to room profile
+                    _roomShape._otherTileRotationSave[i] = _otherInstancesInScene[i].GetComponent<Tile>()._savedRot;
+                }
+            }
 
-					//apply save to room profile
-					_roomShape._otherTileRotationSave[i] = _otherInstancesInScene[i].GetComponent<Tile>()._savedRot;
-				}
-			}
+        }
 
         [ContextMenu("Load Rotation Save")]
         public void LoadRotationSave()
@@ -578,19 +592,7 @@ namespace Seance.BoardManagment
             }
         }
 
-			//tile on top (z = 1)
-			for (int i = 0; i < _otherInstancesInScene.Count; i++)
-			{
-				if (_otherInstancesInScene[i] != null)
-				{
-					//apply save manualy
-					_otherInstancesInScene[i].GetComponent<Tile>()._savedRot = _roomShape._otherTileRotationSave[i];
-					_otherInstancesInScene[i].GetComponent<Tile>().ApplySavedRotation();
-				}
-			}
-		}
-
-		/*[ContextMenu("Apply Saved Rotation to Tiles")]
+        /*[ContextMenu("Apply Saved Rotation to Tiles")]
         public void ApplySavedRotationToTiles()
         {
             for (int i = 0; i < _tilesInScene.Length; i++)
@@ -612,7 +614,7 @@ namespace Seance.BoardManagment
 
             for (int i = 0; i < _pawnsInScene.Length; i++)
             {
-                if (_pawnsInScene[i] !=null)
+                if (_pawnsInScene[i] != null)
                 {
                     if (_pawnsInScene[i]._pawnType == PawnType.Enemy)
                     {
@@ -621,7 +623,7 @@ namespace Seance.BoardManagment
                 }
             }
 
-            if (counter ==0)
+            if (counter == 0)
             {
                 foreach (Transform item in _otherInstanceParent.transform)
                 {
@@ -630,13 +632,13 @@ namespace Seance.BoardManagment
 
                 foreach (var item in storedTile)
                 {
-                    if(item != null)
+                    if (item != null)
                     {
                         if (item.GetComponent<Door>() != null)
                         {
                             item.GetComponent<Door>().UpdateIcon();
                         }
-                    }  
+                    }
                 }
             }
         }
@@ -648,85 +650,85 @@ namespace Seance.BoardManagment
                 return null;
         }
 
-		public Pawn GetPawn(int pawnID)
-		{
-			for (int i = 0; i < _pawnsInScene.Length; i++)
-			{
-				if (_pawnsInScene[i]._pawnID == pawnID)
-				{
-					return _pawnsInScene[i];
-				}
-			}
-			return null; //when player doesnt exist
-		}
+        public Pawn GetPawn(int pawnID)
+        {
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
+                if (_pawnsInScene[i]._pawnID == pawnID)
+                {
+                    return _pawnsInScene[i];
+                }
+            }
+            return null; //when player doesnt exist
+        }
 
-		public Pawn GetClosestPawn(int xOrigin, int yOrigin, PawnType pt)
-		{
-			float smallestDistanceRecorded = float.PositiveInfinity;
-			Pawn closestPawn = null;
+        public Pawn GetClosestPawn(int xOrigin, int yOrigin, PawnType pt)
+        {
+            float smallestDistanceRecorded = float.PositiveInfinity;
+            Pawn closestPawn = null;
 
-			//looking between every pawn in scene
-			for (int i = 0; i < _pawnsInScene.Length; i++)
-			{
-				//if this pawn is of type we're looking for
-				if (_pawnsInScene[i]._pawnType == pt)
-				{
-					//
-					if (Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)
-					{
-						smallestDistanceRecorded = Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin));
-						closestPawn = _pawnsInScene[i];
-					}
-				}
-			}
+            //looking between every pawn in scene
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
+                //if this pawn is of type we're looking for
+                if (_pawnsInScene[i]._pawnType == pt)
+                {
+                    //
+                    if (Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin)) < smallestDistanceRecorded)
+                    {
+                        smallestDistanceRecorded = Vector2.Distance(new Vector2(_pawnsInScene[i]._x, _pawnsInScene[i]._y), new Vector2(xOrigin, yOrigin));
+                        closestPawn = _pawnsInScene[i];
+                    }
+                }
+            }
 
-			return closestPawn;
-		}
+            return closestPawn;
+        }
 
-		public Pawn GetPawnOn(int x, int y)
-		{
-			for (int i = 0; i < _pawnsInScene.Length; i++)
-			{
-				if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
-				{
-					return _pawnsInScene[i];
-				}
-			}
+        public Pawn GetPawnOn(int x, int y)
+        {
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
+                if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
+                {
+                    return _pawnsInScene[i];
+                }
+            }
 
-			//no pawn on position x,y on board
-			return null;
-		}
+            //no pawn on position x,y on board
+            return null;
+        }
 
-		public Pawn[] GetPawnsOn(int x, int y)
-		{
-			List<Pawn> _pawnList = new List<Pawn>();
+        public Pawn[] GetPawnsOn(int x, int y)
+        {
+            List<Pawn> _pawnList = new List<Pawn>();
 
-			for (int i = 0; i < _pawnsInScene.Length; i++)
-			{
-				if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
-				{
-					_pawnList.Add(_pawnsInScene[i]);
-				}
-			}
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
+                if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
+                {
+                    _pawnList.Add(_pawnsInScene[i]);
+                }
+            }
 
-			return _pawnList.ToArray();
-		}
+            return _pawnList.ToArray();
+        }
 
-		public enum Tiles
-		{
-			empty,
-			basicTile,
-			wall,
-			door,
-			characterSpawn,
-			enemySpawn1,
-			enemySpawn2,
-			oil,
-			chest,
-			column,
-			angle,//always add new tile type on last position
-			total //always put this var on last position
-		}
+        public enum Tiles
+        {
+            empty,
+            basicTile,
+            wall,
+            door,
+            characterSpawn,
+            enemySpawn1,
+            enemySpawn2,
+            oil,
+            chest,
+            column,
+            angle,//always add new tile type on last position
+            total //always put this var on last position
+        }
 
-	}
+    }
 }

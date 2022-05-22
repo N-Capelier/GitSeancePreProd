@@ -508,6 +508,7 @@ namespace Seance.BoardManagment
                     //apply save to room profile
                     _roomShape._tileRotationSave[i] = _tilesInScene[i]._savedRot;
                 }
+
             }
 
             //tile on top (z = 1)
@@ -519,8 +520,16 @@ namespace Seance.BoardManagment
 
                     //apply save to room profile
                     _roomShape._otherTileRotationSave[i] = _otherInstancesInScene[i].GetComponent<Tile>()._savedRot;
+
+
                 }
             }
+
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(_roomShape);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+#endif
 
         }
 

@@ -8,6 +8,8 @@ namespace Seance.BoardManagment
     /// This script was created by Julien haigron
     /// </summary>
 
+        [System.Serializable]
+
     [CreateAssetMenu(fileName = "New Room", menuName = "Tool/New Room")]
     public class RoomProfile : ScriptableObject
     {

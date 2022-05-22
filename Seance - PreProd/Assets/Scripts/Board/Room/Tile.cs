@@ -17,6 +17,13 @@ namespace Seance.BoardManagment
         public int _nbOfPawnOnStart = 0;
         public int _maxPawnOnTile = 4;
 
+        [Header("Pawn Positions")]
+        //pawn position transforms lists
+        public Transform _onePawn;
+        public Transform[] _twoPawns;
+        public Transform[] _threePawns;
+        public Transform[] _foorPawns;
+
         [SerializeField] private MeshRenderer tileRenderer;
         [SerializeField] private Material color1;
         [SerializeField] private Material color2;
@@ -55,6 +62,36 @@ namespace Seance.BoardManagment
             _thisTileType = tileType;
 
            
+        }
+
+        public void UpdatePawnsPositionOnTile()
+        {
+            //ignore z axis
+
+            switch (_pawnsOnTile.Count)
+            {
+                case 0:
+                    //no pawn on tile
+                    break;
+                case 1:
+                    _pawnsOnTile[0].transform.position = new Vector3(_onePawn.position.x, _pawnsOnTile[0].transform.position.y, _onePawn.position.z);
+                    break;
+                case 2:
+                    _pawnsOnTile[0].transform.position = new Vector3(_twoPawns[0].position.x, _pawnsOnTile[0].transform.position.y, _twoPawns[0].position.z);
+                    _pawnsOnTile[1].transform.position = new Vector3(_twoPawns[1].position.x, _pawnsOnTile[1].transform.position.y, _twoPawns[1].position.z);
+                    break;
+                case 3:
+                    _pawnsOnTile[0].transform.position = new Vector3(_threePawns[0].position.x, _pawnsOnTile[0].transform.position.y, _threePawns[0].position.z);
+                    _pawnsOnTile[1].transform.position = new Vector3(_threePawns[1].position.x, _pawnsOnTile[1].transform.position.y, _threePawns[1].position.z);
+                    _pawnsOnTile[2].transform.position = new Vector3(_threePawns[2].position.x, _pawnsOnTile[2].transform.position.y, _threePawns[2].position.z);
+                    break;
+                case 4:
+                    _pawnsOnTile[0].transform.position = new Vector3(_foorPawns[0].position.x, _pawnsOnTile[0].transform.position.y, _foorPawns[0].position.z);
+                    _pawnsOnTile[1].transform.position = new Vector3(_foorPawns[1].position.x, _pawnsOnTile[1].transform.position.y, _foorPawns[1].position.z);
+                    _pawnsOnTile[2].transform.position = new Vector3(_foorPawns[2].position.x, _pawnsOnTile[2].transform.position.y, _foorPawns[2].position.z);
+                    _pawnsOnTile[3].transform.position = new Vector3(_foorPawns[3].position.x, _pawnsOnTile[3].transform.position.y, _foorPawns[3].position.z);
+                    break;
+            }
         }
     }
 }

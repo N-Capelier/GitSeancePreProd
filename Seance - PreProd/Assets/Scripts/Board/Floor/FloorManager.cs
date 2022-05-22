@@ -47,8 +47,9 @@ namespace Seance.BoardManagment
         {
             //TODO : make a tool for this so its modulable in inspector
 
-            BinaryTreeOfRoom testFloor = new BinaryTreeOfRoom(_roomProfiles[0], 9);
+            _rooms = new BinaryTreeOfRoom(_roomProfiles[0], 9);
 
+           
             RoomProfile a = _roomProfiles[1]; 
             RoomProfile aBoss = _roomProfiles[2]; 
             RoomProfile b = _roomProfiles[3]; 
@@ -57,23 +58,23 @@ namespace Seance.BoardManagment
             RoomProfile boss = _roomProfiles[6];
 
             //1st column
-            testFloor.Add(a, testFloor._floor[0]);
-            testFloor.Add(b, testFloor._floor[0]);
-            Node[] firstFloor = { testFloor._floor[1], testFloor._floor[2] };
+            _rooms.Add(a, _rooms._floor[0]);
+            _rooms.Add(b, _rooms._floor[0]);
+            Node[] firstFloor = { _rooms._floor[1], _rooms._floor[2] };
 
             //2nc column
-            testFloor.Add(c, testFloor._floor[1]);
-            testFloor.Add(c, firstFloor);
-            testFloor.Add(c, testFloor._floor[2]);
-            Node[] secoundFloor = { testFloor._floor[3], testFloor._floor[4], testFloor._floor[5] };
+            _rooms.Add(c, _rooms._floor[1]);
+            _rooms.Add(c, firstFloor);
+            _rooms.Add(c, _rooms._floor[2]);
+            Node[] secoundFloor = { _rooms._floor[3], _rooms._floor[4], _rooms._floor[5] };
 
             //3rd floor
-            testFloor.Add(aBoss, secoundFloor);
-            testFloor.Add(bBoss, secoundFloor);
-            Node[] thirdFloor = { testFloor._floor[6], testFloor._floor[7] };
+            _rooms.Add(aBoss, secoundFloor);
+            _rooms.Add(bBoss, secoundFloor);
+            Node[] thirdFloor = { _rooms._floor[6], _rooms._floor[7] };
 
             //boss
-            testFloor.Add(boss, thirdFloor);
+            _rooms.Add(boss, thirdFloor);
         }
 
         

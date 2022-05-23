@@ -31,6 +31,7 @@ namespace Seance.BoardManagment
         //instances in scene
         public Tile[] _tilesInScene;
         public Pawn[] _pawnsInScene;
+        public List<CharacterPawn> _characterPawnsInScene;
         public List<GameObject> _otherInstancesInScene;
         //compteur
         public int _currentNbOfPawnInScene;
@@ -447,9 +448,14 @@ namespace Seance.BoardManagment
 
             //get nb of pawn in already in _pawnInScene
             int nbOfPawn = 0;
+            int nbOfPawnCurr = 0;
             for (int i = 0; i < _pawnsInScene.Length; i++)
             {
-                if (_pawnsInScene[i] != null && _pawnsInScene[i]._pawnType == PawnType.Character) nbOfPawn++;
+                if (_pawnsInScene[i] != null && _pawnsInScene[i]._pawnType == PawnType.Character)
+                {
+                    _characterPawnsInScene.Add(_pawnsInScene[i] as CharacterPawn);
+                    nbOfPawn++;
+                }
             }
 
             //determine grid and tiles margin ratio
@@ -520,7 +526,7 @@ namespace Seance.BoardManagment
                                 //read when fnct called from OpenDoor (to resume)
                                 for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
                                 {
-                                    GameObject characterPawn = _pawnsInScene[_currentNbOfPawnInScene++].gameObject;
+                                    GameObject characterPawn = _characterPawnsInScene[nbOfPawnCurr++].gameObject;
                                     characterPawn.transform.position = thisBlockPos;
                                     characterPawn.GetComponent<CharacterPawn>().ResetPosition(x, y);
                                     _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());

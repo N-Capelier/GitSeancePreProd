@@ -12,4 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad70174b079c2f4ebc7931d3dd1af6f, type: 3}
   m_Name: DefaultPrefabObjects
   m_EditorClassIdentifier: 
-  _prefabs: []
+  _prefabs:
+  - {fileID: 611616139817875448, guid: bf5f023b4017a5e41a9815ec5745df3d, type: 3}
+  - {fileID: 5419034073268085644, guid: e6ae32e65f4b83e4b9054a82fe5aaa6e, type: 3}
+  - {fileID: -7097629831912590180, guid: 602410340e68e2e4083b2991c9869b77, type: 3}
+  - {fileID: 196514667673760959, guid: 589bf17b0c6e2f241b37d5c4d684d312, type: 3}
+  - {fileID: 805949555825229353, guid: 995aab240f6c77f4993d8e6eaec6dcbb, type: 3}
+  - {fileID: 201277550, guid: d904f93bc171bb144ba33c5155282f6f, type: 3}
+  - {fileID: 9117857247562382210, guid: b2991431a5f893e49937d01b6da44ff8, type: 3}
+  - {fileID: 50124679549503033, guid: 6a0bf24852ae4c0408319d5f5ff690c9, type: 3}
+  - {fileID: 1300942931971877886, guid: 92a4bb38ec323bd469116d3fe9abfcbc, type: 3}
+  - {fileID: 5811671428697973085, guid: 376d584baae056f46a4eefbd5f378ebf, type: 3}
+  - {fileID: 5419034073268085644, guid: 8b70568e0eda9e94fbe0d8d8fd5c9a7d, type: 3}
+  - {fileID: 27039729695437543, guid: f820efff6a2871447b961fc755212ba3, type: 3}
+  - {fileID: 5419034073268085644, guid: 800a88f5ee31e3b4b9fb4750f7dc0adb, type: 3}

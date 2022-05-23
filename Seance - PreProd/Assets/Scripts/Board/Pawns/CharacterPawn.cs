@@ -33,6 +33,12 @@ namespace Seance.BoardManagment
             _pawnType = PawnType.Character;
         }
 
+        public void ResetPosition(int x, int y)
+        {
+            _x = x;
+            _y = y;
+        }
+
 
 		[SerializeField] int _corruption = 0;
 		public int Corruption { get => _corruption;}

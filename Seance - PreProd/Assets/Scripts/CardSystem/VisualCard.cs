@@ -18,10 +18,10 @@ namespace Seance.CardSystem
         [HideInInspector] public int _cardIndex;
         [HideInInspector] public Card _card;
 
-        public void Init(Card card, int boardIndex)
+        public void Init(Card card, int cardIndex)
 		{
             _card = card;
-            _cardIndex = boardIndex;
+            _cardIndex = cardIndex;
             DisplayCardInformation();
             _gManager = GameManager.Instance;
 		}

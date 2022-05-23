@@ -1,3 +1,4 @@
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Seance.BoardManagment
     /// <summary>
     /// This script was created by Julien haigron
     /// </summary>
-    public class Pawn : MonoBehaviour
+    public class Pawn : NetworkBehaviour
     {
         //Pascal Case PawnType enum + move it to pawn class
         public PawnType _pawnType = PawnType.Character;
@@ -35,7 +36,6 @@ namespace Seance.BoardManagment
 
         public int _intiativeBase;
 
-        //hard set pawn position to x,y pos on board
         public void ChangePositionTo(int x, int y)
         {
             if (TileManager.Instance.GetTile(x, y) != null)
@@ -62,13 +62,16 @@ namespace Seance.BoardManagment
 
         public void DealDamage(Pawn p, int damages)
         {
-            p.TakeDamage(damages);
+            TileManager.Instance.ServerRpcPawnTakeDamage(p._pawnID, damages);
         }
 
         public virtual void TakeDamage(int damages)
         {
             _currentHealth -= damages;
-            if (_currentHealth <= 0) Die();
+            if (_currentHealth <= 0)
+			{
+                TileManager.Instance.ServerRpcPawnDeath(_pawnID);
+			}
         }
 
         public void Heal(int amount)

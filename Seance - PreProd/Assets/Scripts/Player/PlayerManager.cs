@@ -74,7 +74,6 @@ namespace Seance.Player
 		IEnumerator SetPawnCoroutine(int pawnIndex)
 		{
 			yield return new WaitForSeconds(.1f);
-			Debug.LogError(TileManager.Instance._pawnsInScene[pawnIndex]._pawnType);
 			_gManager._lobby._ownedPlayer._pawn = TileManager.Instance._pawnsInScene[pawnIndex] as CharacterPawn;
 			_gManager._lobby._ownedPlayer._pawn.SetOwnedMaterial();
 		}

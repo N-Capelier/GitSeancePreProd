@@ -580,6 +580,14 @@ namespace Seance.BoardManagment
                     }
                 }
             }
+
+			for (int i = 0; i < _pawnsInScene.Length; i++)
+			{
+                if (_pawnsInScene[i] == null)
+                    continue;
+                _pawnsInScene[i]._pawnID = i;
+			}
+
         }
 
         [ContextMenu("Save Tiles Rotation")]
@@ -916,7 +924,7 @@ namespace Seance.BoardManagment
                     continue;
                 if (pawn._pawnID == id)
                 {
-                    CharacterPawn character = (CharacterPawn)pawn;
+                    CharacterPawn character = pawn as CharacterPawn;
                     character.Purify(amount);
                 }
             }
@@ -937,7 +945,7 @@ namespace Seance.BoardManagment
                     continue;
                 if (pawn._pawnID == id)
                 {
-                    CharacterPawn character = (CharacterPawn)pawn;
+                    CharacterPawn character = pawn as CharacterPawn;
                     character.Corrupt(amount);
                 }
             }

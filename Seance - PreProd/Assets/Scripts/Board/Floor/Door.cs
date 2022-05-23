@@ -16,6 +16,7 @@ namespace Seance.BoardManagment
             //UpdateIcon();
         }
 
+
         //load next room
         [ContextMenu("Open Door")]
         public void OpenDoor()

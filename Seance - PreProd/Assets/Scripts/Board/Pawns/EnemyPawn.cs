@@ -16,6 +16,9 @@ namespace Seance.BoardManagment
 
         [SerializeField] int _damages;
         [SerializeField] EnemyStatDisplay statDisplay;
+
+        [SerializeField] private ParticleSystem hitMarker;
+
         //TODO : function that itinitalise every var for TileManager.SpawnPawns
         //do the same for Character & Tile
         public void Initialize(int x, int y, int hp, int armor, int initDice, EnemyType enemyType, int pawnID)
@@ -99,15 +102,25 @@ namespace Seance.BoardManagment
                     break;
             }
         }
+
+        
+        [ContextMenu("DamageFeedback()")]
+        public void DamageFeedback()
+        {
+            hitMarker.Play();
+        }
+
         public override void TakeDamage(int damages)
         {
             base.TakeDamage(damages);
             statDisplay.ActualizeDisplayHealth(_currentHealth);
+            hitMarker.Play();
         }
         public override void DecreaseArmor(int amount)
         {
             base.DecreaseArmor(amount);
             statDisplay.ActualizeDisplayArmor(_armor);
+            hitMarker.Play();
         }
 
         [ContextMenu("Die()")]

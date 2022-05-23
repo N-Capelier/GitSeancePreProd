@@ -10,7 +10,6 @@ namespace Seance.BoardManagment
 
         private void OnMouseDown()
         {
-            Debug.Log("called open door");
             doorScript.OpenDoor();
         }
 

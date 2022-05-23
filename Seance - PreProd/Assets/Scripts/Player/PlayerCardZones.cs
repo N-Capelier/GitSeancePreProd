@@ -82,6 +82,11 @@ namespace Seance.Player
 
 			_hand[_selectedCardIndex].UseCard(caster, targetTile, targetPawns, _hand[_selectedCardIndex]._corruption);
 
+			if(_hand[_selectedCardIndex]._hasMovement)
+			{
+				TileManager.Instance.ServerRpcChangePositionTo(_gManager._lobby._ownedPlayer._pawn._pawnID, targetTile._x, targetTile._y);
+			}
+
 			DiscardCard(_selectedCardIndex);
 			RefreshCardIndexes();
 			_selectedCardIndex = -1;

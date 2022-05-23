@@ -18,8 +18,7 @@ namespace Seance.CardSystem
 		{
 			foreach (Pawn pawn in targetPawns)
 			{
-				pawn.DecreaseArmor(armorDebuff);
-
+				TileManager.Instance.ServerRpcPawnDecreaseArmor(pawn._pawnID, armorDebuff);
 			}
 		}
 	}

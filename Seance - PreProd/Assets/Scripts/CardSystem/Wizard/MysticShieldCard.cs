@@ -18,7 +18,7 @@ namespace Seance.CardSystem
 		{
 			foreach (Pawn pawn in targetPawns)
 			{
-				pawn.GainArmor(armorGain);
+				TileManager.Instance.ServerRpcPawnGainArmor(pawn._pawnID, armorGain);
 			}
 		}
 	}

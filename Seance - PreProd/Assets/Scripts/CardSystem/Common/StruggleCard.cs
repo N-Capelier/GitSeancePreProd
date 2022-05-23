@@ -19,10 +19,10 @@ namespace Seance.CardSystem
 
 		protected override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
 		{
-			caster.TakeDamage(damageTaken);
+			TileManager.Instance.ServerRpcPawnTakeDamage(caster._pawnID, damageTaken);
 			foreach (Pawn pawn in targetPawns)
 			{
-				pawn.TakeDamage(damageDealt);
+				TileManager.Instance.ServerRpcPawnTakeDamage(pawn._pawnID, damageDealt);
 			}
 		}
 	}

@@ -6,18 +6,18 @@ using Seance.BoardManagment;
 namespace Seance.CardSystem
 {
 
-		/// <summary>
-		/// LouisL
-		/// </summary>
-		[CreateAssetMenu(menuName = "ScriptableObjects/CardSystem/ProtectCard", fileName = "New ProtectCard", order = 50)]
-		public class ProtectCard : Card
+	/// <summary>
+	/// LouisL
+	/// </summary>
+	[CreateAssetMenu(menuName = "ScriptableObjects/CardSystem/ProtectCard", fileName = "New ProtectCard", order = 50)]
+	public class ProtectCard : Card
+	{
+		[SerializeField]
+		int armorGain;
+		protected override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
 		{
-			[SerializeField]
-			int armorGain;
-			protected override void Use(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns)
-			{
-			caster.GainArmor(armorGain);
-			}
+			TileManager.Instance.ServerRpcPawnGainArmor(caster._pawnID, armorGain);
 		}
-	
+	}
+
 }

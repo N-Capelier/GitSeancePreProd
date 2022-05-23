@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Seance.CardSystem;
 using Seance.Management;
+using FishNet.Object;
 
 namespace Seance.BoardManagment
 {
@@ -11,7 +12,7 @@ namespace Seance.BoardManagment
     /// This script was created by Julien haigron
     /// </summary>
 
-    public class TileManager : MonoBehaviour
+    public class TileManager : NetworkBehaviour
     {
         //origin spawn position
         public Vector3 _originPos = Vector3.zero;
@@ -43,9 +44,9 @@ namespace Seance.BoardManagment
 
         GameManager _gManager;
 
-        [HideInInspector] public Deck _rangerDeck;
-        [HideInInspector] public Deck _wizardDeck;
-        [HideInInspector] public Deck _knightDeck;
+        public Deck _rangerDeck;
+        public Deck _wizardDeck;
+        public Deck _knightDeck;
 
         void Awake()
         {
@@ -763,6 +764,152 @@ namespace Seance.BoardManagment
             }
 
             return _pawnList.ToArray();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcChangePositionTo(int id, int x, int y)
+        {
+            ObserverRpcChangePawnPositionTo(id, x, y);
+        }
+
+        [ObserversRpc]
+        void ObserverRpcChangePawnPositionTo(int id, int x, int y)
+		{
+            foreach(Pawn pawn in _pawnsInScene)
+			{
+                if(pawn._pawnID == id)
+				{
+                    pawn.ChangePositionTo(x, y);
+				}
+			}
+		}
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnTakeDamage(int id, int damages)
+		{
+            ObserverRpcPawnTakeDamage(id, damages);
+		}
+
+        [ObserversRpc]
+        void ObserverRpcPawnTakeDamage(int id, int damages)
+		{
+            foreach (Pawn pawn in _pawnsInScene)
+            {
+                if (pawn._pawnID == id)
+                {
+                    pawn.TakeDamage(damages);
+                }
+            }
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnDeath(int id)
+		{
+            ObserverRpcPawnDeath(id);
+		}
+
+        [ObserversRpc]
+        void ObserverRpcPawnDeath(int id)
+		{
+            foreach(Pawn pawn in _pawnsInScene)
+			{
+                if(pawn._pawnID == id)
+				{
+                    pawn.Die();
+				}
+			}
+		}
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnHeal(int id, int amount)
+		{
+            ObserverRpcPawnHeal(id, amount);
+        }
+
+        [ObserversRpc]
+        void ObserverRpcPawnHeal(int id, int amount)
+		{
+            foreach (Pawn pawn in _pawnsInScene)
+            {
+                if (pawn._pawnID == id)
+                {
+                    pawn.Heal(amount);
+                }
+            }
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnGainArmor(int id, int amount)
+        {
+            ObserverRpcPawnGainArmor(id, amount);
+        }
+
+        [ObserversRpc]
+        void ObserverRpcPawnGainArmor(int id, int amount)
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
+                if (pawn._pawnID == id)
+                {
+                    pawn.GainArmor(amount);
+                }
+            }
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnDecreaseArmor(int id, int amount)
+        {
+            ObserverRpcPawnDecreaseArmor(id, amount);
+        }
+
+        [ObserversRpc]
+        void ObserverRpcPawnDecreaseArmor(int id, int amount)
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
+                if (pawn._pawnID == id)
+                {
+                    pawn.DecreaseArmor(amount);
+                }
+            }
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnPurify(int id, int amount)
+        {
+            ObserverRpcPawnPurify(id, amount);
+        }
+
+        [ObserversRpc]
+        void ObserverRpcPawnPurify(int id, int amount)
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
+                if (pawn._pawnID == id)
+                {
+                    CharacterPawn character = (CharacterPawn)pawn;
+                    character.Purify(amount);
+                }
+            }
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        public void ServerRpcPawnCorrupt(int id, int amount)
+        {
+            ObserverRpcPawnCorrupt(id, amount);
+        }
+
+        [ObserversRpc]
+        void ObserverRpcPawnCorrupt(int id, int amount)
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
+                if (pawn._pawnID == id)
+                {
+                    CharacterPawn character = (CharacterPawn)pawn;
+                    character.Corrupt(amount);
+                }
+            }
         }
 
         public enum Tiles

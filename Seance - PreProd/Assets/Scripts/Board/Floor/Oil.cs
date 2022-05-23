@@ -10,7 +10,7 @@ namespace Seance.BoardManagment
 
         public void DealDamage(Pawn p, int damages = 1)
         {
-            p.TakeDamage(damages);
+            TileManager.Instance.ServerRpcPawnTakeDamage(p._pawnID, damages);
         }
     }
 }

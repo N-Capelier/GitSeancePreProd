@@ -19,10 +19,9 @@ namespace Seance.CardSystem
 		{
 			foreach (Pawn pawn in targetPawns)
 			{
-
 				if (pawn._pawnType == PawnType.Character)
 					return;
-				pawn.TakeDamage(damage);
+				TileManager.Instance.ServerRpcPawnTakeDamage(pawn._pawnID, damage);
 			}
 		}
 	}

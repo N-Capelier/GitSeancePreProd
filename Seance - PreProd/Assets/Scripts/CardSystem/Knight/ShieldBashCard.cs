@@ -17,8 +17,7 @@ namespace Seance.CardSystem
 		{
 			foreach (Pawn pawn in targetPawns)
 			{
-				pawn.TakeDamage(caster.CurrentArmor);
-
+				TileManager.Instance.ServerRpcPawnTakeDamage(pawn._pawnID, caster.CurrentArmor);
 			}
 		}
 	}

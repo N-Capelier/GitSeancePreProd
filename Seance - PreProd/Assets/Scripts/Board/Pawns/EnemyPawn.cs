@@ -116,6 +116,7 @@ namespace Seance.BoardManagment
             statDisplay.ActualizeDisplayHealth(_currentHealth);
             hitMarker.Play();
         }
+
         public override void DecreaseArmor(int amount)
         {
             base.DecreaseArmor(amount);

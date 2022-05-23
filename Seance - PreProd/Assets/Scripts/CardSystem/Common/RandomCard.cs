@@ -21,8 +21,7 @@ namespace Seance.CardSystem
 		{
 			foreach (Pawn pawn in targetPawns)
 			{
-
-				pawn.TakeDamage(Random.Range(minDamage,maxDamage));
+				TileManager.Instance.ServerRpcPawnTakeDamage(pawn._pawnID, Random.Range(minDamage, maxDamage));
 			}
 		}
 	}

@@ -20,7 +20,7 @@ namespace Seance.CardSystem
 
         public void UseCard(CharacterPawn caster, Tile targetTile, Pawn[] targetPawns, int corruptionAmount)
 		{
-            caster.Corrupt(corruptionAmount);
+            TileManager.Instance.ServerRpcPawnCorrupt(caster._pawnID, corruptionAmount);
             Use(caster, targetTile, targetPawns);
 		}
 

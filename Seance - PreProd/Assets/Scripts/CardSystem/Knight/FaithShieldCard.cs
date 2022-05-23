@@ -20,11 +20,12 @@ namespace Seance.CardSystem
 		{
 			foreach (Pawn pawn in targetPawns)
 			{
-				pawn.GainArmor(armorGain);
+				TileManager.Instance.ServerRpcPawnGainArmor(caster._pawnID, armorGain);
+
 				if (pawn._pawnType == PawnType.Character)
                 {
 					CharacterPawn character = pawn as CharacterPawn;
-					character.Purify(purifyAmmount);
+					TileManager.Instance.ServerRpcPawnPurify(character._pawnID, purifyAmmount);
                 }
 			}
 		}

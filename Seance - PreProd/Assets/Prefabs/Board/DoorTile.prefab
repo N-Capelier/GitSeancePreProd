@@ -174,13 +174,13 @@ GameObject:
   - component: {fileID: 2837459469063969193}
   - component: {fileID: 4160681247275385602}
   - component: {fileID: 3303794303467029565}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Icon Displayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1544959923720078557
 Transform:
   m_ObjectHideFlags: 0
@@ -271,6 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bd533ca56e06049b3adbe4d74d706c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
   doorScript: {fileID: 6137673063863377062}
 --- !u!1 &6154887793308164271
 GameObject:

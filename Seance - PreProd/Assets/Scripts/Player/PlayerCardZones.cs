@@ -97,7 +97,6 @@ namespace Seance.Player
 			}
 
 			DiscardCard(_selectedCardIndex);
-			RefreshCardIndexes();
 			_selectedCardIndex = -1;
 		}
 
@@ -108,15 +107,15 @@ namespace Seance.Player
 
 			Destroy(_visualHand[_selectedCardIndex].gameObject);
 			_visualHand.RemoveAt(cardIndex);
+
+			RefreshCardIndexes();
 		}
 
 		public void RefreshCardIndexes()
 		{
-			VisualCard[] cards = _cardsParent.GetComponentsInChildren<VisualCard>();
-
-			for (int i = 0; i < cards.Length; i++)
+			for (int i = 0; i < _visualHand.Count; i++)
 			{
-				cards[i]._cardIndex = i;
+				_visualHand[i]._cardIndex = i;
 			}
 		}
 

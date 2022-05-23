@@ -53,7 +53,7 @@ namespace Seance.CameraManagement
         private void OnUpArrow()
         {
             _currentCamIndex += 1;
-            _currentCamIndex = Mathf.Clamp(_currentCamIndex, 0, _camCount - 1);
+            _currentCamIndex = Mathf.Clamp(_currentCamIndex, 0, 2);
 
             SwitchCam();
         }
@@ -61,7 +61,7 @@ namespace Seance.CameraManagement
         private void OnDownArrow()
         {
             _currentCamIndex -= 1;
-            _currentCamIndex = Mathf.Clamp(_currentCamIndex, 0, _camCount - 1);
+            _currentCamIndex = Mathf.Clamp(_currentCamIndex, 0, 2);
 
             SwitchCam();
         }

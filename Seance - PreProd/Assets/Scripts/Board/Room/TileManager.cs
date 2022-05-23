@@ -5,6 +5,7 @@ using UnityEngine;
 using Seance.CardSystem;
 using Seance.Management;
 using FishNet.Object;
+using System.Linq;
 
 namespace Seance.BoardManagment
 {
@@ -499,13 +500,15 @@ namespace Seance.BoardManagment
                                     _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
                                     _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
 
+                                    int newPawnIndex = _currentNbOfPawnInScene - 1;
+
                                     //for editor testing purposes
                                     if (_gManager != null)
                                     {
                                         //network
                                         if(_gManager._lobby.IsServer)
 										{
-                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
 											_gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
 										}
 										spawnedCharacterPawnsCount++;
@@ -522,13 +525,15 @@ namespace Seance.BoardManagment
                                     characterPawn.GetComponent<CharacterPawn>().ResetPosition(x, y);
                                     _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
 
+                                    int newPawnIndex = _currentNbOfPawnInScene - 1;
+
                                     //for editor testing purposes
                                     if (_gManager != null)
                                     {
                                         //network
                                         if (_gManager._lobby.IsServer)
                                         {
-                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
                                             _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
                                         }
 										spawnedCharacterPawnsCount++;
@@ -762,6 +767,9 @@ namespace Seance.BoardManagment
 
             for (int i = 0; i < _pawnsInScene.Length; i++)
             {
+                if (_pawnsInScene[i] == null)
+                    continue;
+
                 if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
                 {
                     _pawnList.Add(_pawnsInScene[i]);
@@ -784,7 +792,9 @@ namespace Seance.BoardManagment
 		{
             foreach(Pawn pawn in _pawnsInScene)
 			{
-                if(pawn._pawnID == id)
+                if (pawn == null)
+                    continue;
+                if (pawn._pawnID == id)
 				{
                     pawn.ChangePositionTo(x, y);
 				}
@@ -802,6 +812,8 @@ namespace Seance.BoardManagment
 		{
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.TakeDamage(damages);
@@ -820,7 +832,9 @@ namespace Seance.BoardManagment
 		{
             foreach(Pawn pawn in _pawnsInScene)
 			{
-                if(pawn._pawnID == id)
+                if (pawn == null)
+                    continue;
+                if (pawn._pawnID == id)
 				{
                     pawn.Die();
 				}
@@ -838,6 +852,8 @@ namespace Seance.BoardManagment
 		{
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.Heal(amount);
@@ -856,6 +872,8 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.GainArmor(amount);
@@ -874,6 +892,8 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.DecreaseArmor(amount);
@@ -892,6 +912,8 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     CharacterPawn character = (CharacterPawn)pawn;
@@ -911,6 +933,8 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     CharacterPawn character = (CharacterPawn)pawn;

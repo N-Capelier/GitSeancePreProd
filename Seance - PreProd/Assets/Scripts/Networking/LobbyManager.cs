@@ -30,7 +30,6 @@ namespace Seance.Networking
 			if (!IsServer)
 				return;
 
-
 			if (!_initedServerConnection)
 			{
 				_initedServerConnection = true;
@@ -66,7 +65,9 @@ namespace Seance.Networking
 		[ObserversRpc]
 		void ObserversRpcStartGame()
 		{
-			TileManager.Instance.SpawnPawns();
+			GameManager.Instance.ipInputMode._ipInput.gameObject.SetActive(false);
+			GameManager.Instance.ipInputMode.enabled = false;
+			TileManager.Instance.GenerateRoomEditor();
 		}
 	}
 }

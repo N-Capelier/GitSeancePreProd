@@ -57,18 +57,26 @@ namespace Seance.Player
 		}
 
 		[ServerRpc(RequireOwnership = false)]
-		public void ServerRpcSetPawn(int pawnIndex)
+		public void ServerRpcSetPawn(int target, int pawnIndex)
 		{
-			TargetRpcSetPawn(_gManager._lobby._networkConnections[pawnIndex], pawnIndex);
+			TargetRpcSetPawn(_gManager._lobby._networkConnections[target], pawnIndex);
 		}
 
 		[TargetRpc]
 		void TargetRpcSetPawn(NetworkConnection conn, int pawnIndex)
 		{
-			if (_gManager._lobby._ownedConnection != conn)
-				return;
+			//if (_gManager._lobby._ownedConnection != conn)
+			//	return;
 
-			_pawn = TileManager.Instance._pawnsInScene[pawnIndex] as CharacterPawn;
+			StartCoroutine(SetPawnCoroutine(pawnIndex));
+		}
+
+		IEnumerator SetPawnCoroutine(int pawnIndex)
+		{
+			yield return new WaitForSeconds(.1f);
+			Debug.LogError(TileManager.Instance._pawnsInScene[pawnIndex]._pawnType);
+			_gManager._lobby._ownedPlayer._pawn = TileManager.Instance._pawnsInScene[pawnIndex] as CharacterPawn;
+			_gManager._lobby._ownedPlayer._pawn.SetOwnedMaterial();
 		}
 
 		[ServerRpc(RequireOwnership = false)]

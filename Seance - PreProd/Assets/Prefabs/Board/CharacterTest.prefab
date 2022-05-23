@@ -140,15 +140,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9f7a3de8cd5d974eb1660b6915c9875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 0}
-  _networkObjectCache: {fileID: 0}
   _pawnType: 0
   _baseHealth: 0
   _pawnID: 0
   _x: 0
   _y: 0
   _intiativeBase: 0
+  _ownedMaterial: {fileID: 2100000, guid: 846bb60130a7ee34c9743836602900cf, type: 2}
+  _meshRenderer: {fileID: 5899755927934523343}
   _heroType: 0
   _corruption: 0
 --- !u!1 &8628041756572455874

@@ -5,6 +5,7 @@ using UnityEngine;
 using Seance.CardSystem;
 using Seance.Management;
 using FishNet.Object;
+using System.Linq;
 
 namespace Seance.BoardManagment
 {
@@ -30,6 +31,7 @@ namespace Seance.BoardManagment
         //instances in scene
         public Tile[] _tilesInScene;
         public Pawn[] _pawnsInScene;
+        public List<CharacterPawn> _characterPawnsInScene;
         public List<GameObject> _otherInstancesInScene;
         //compteur
         public int _currentNbOfPawnInScene;
@@ -438,17 +440,22 @@ namespace Seance.BoardManagment
                 }
                 _pawnsInScene = new Pawn[50];
             }
-            else if (_pawnsInScene.Length > 0 && isInPlayMode)
+            else if (_pawnsInScene.Length == 0 && isInPlayMode)
             {
-                //dont depop character prefab when in play mode
+                _pawnsInScene = new Pawn[50];
             }
             _currentNbOfPawnInScene = 0;
 
             //get nb of pawn in already in _pawnInScene
             int nbOfPawn = 0;
+            int nbOfPawnCurr = 0;
             for (int i = 0; i < _pawnsInScene.Length; i++)
             {
-                if (_pawnsInScene[i] != null && _pawnsInScene[i]._pawnType == PawnType.Character) nbOfPawn++;
+                if (_pawnsInScene[i] != null && _pawnsInScene[i]._pawnType == PawnType.Character)
+                {
+                    _characterPawnsInScene.Add(_pawnsInScene[i] as CharacterPawn);
+                    nbOfPawn++;
+                }
             }
 
             //determine grid and tiles margin ratio
@@ -499,13 +506,18 @@ namespace Seance.BoardManagment
                                     _pawnsInScene[_currentNbOfPawnInScene++] = characterPawn.GetComponent<Pawn>();
                                     _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
 
+                                    int newPawnIndex = _currentNbOfPawnInScene - 1;
+
                                     //for editor testing purposes
                                     if (_gManager != null)
                                     {
                                         //network
-                                        _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
-                                        _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-                                        spawnedCharacterPawnsCount++;
+                                        if(_gManager._lobby.IsServer)
+										{
+                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
+											_gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+										}
+										spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -514,18 +526,23 @@ namespace Seance.BoardManagment
                                 //read when fnct called from OpenDoor (to resume)
                                 for (int i = 0; i < _roomShape._tilesWeight[y * _roomShape._yLength + x]; i++)
                                 {
-                                    GameObject characterPawn = _pawnsInScene[_currentNbOfPawnInScene++].gameObject;
+                                    GameObject characterPawn = _characterPawnsInScene[nbOfPawnCurr++].gameObject;
                                     characterPawn.transform.position = thisBlockPos;
                                     characterPawn.GetComponent<CharacterPawn>().ResetPosition(x, y);
                                     _pawnSpawn._pawnsOnTile.Add(characterPawn.GetComponent<Pawn>());
+
+                                    int newPawnIndex = _currentNbOfPawnInScene - 1;
 
                                     //for editor testing purposes
                                     if (_gManager != null)
                                     {
                                         //network
-                                        _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
-                                        _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-                                        spawnedCharacterPawnsCount++;
+                                        if (_gManager._lobby.IsServer)
+                                        {
+                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
+                                            _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                        }
+										spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -569,6 +586,14 @@ namespace Seance.BoardManagment
                     }
                 }
             }
+
+			for (int i = 0; i < _pawnsInScene.Length; i++)
+			{
+                if (_pawnsInScene[i] == null)
+                    continue;
+                _pawnsInScene[i]._pawnID = i;
+			}
+
         }
 
         [ContextMenu("Save Tiles Rotation")]
@@ -661,7 +686,6 @@ namespace Seance.BoardManagment
 
         public void NextRoomFeedback()
         {
-            Debug.Log("called");
             int counter = 0;
 
             for (int i = 0; i < _pawnsInScene.Length; i++)
@@ -757,6 +781,9 @@ namespace Seance.BoardManagment
 
             for (int i = 0; i < _pawnsInScene.Length; i++)
             {
+                if (_pawnsInScene[i] == null)
+                    continue;
+
                 if (_pawnsInScene[i]._x == x && _pawnsInScene[i]._y == y)
                 {
                     _pawnList.Add(_pawnsInScene[i]);
@@ -779,7 +806,9 @@ namespace Seance.BoardManagment
 		{
             foreach(Pawn pawn in _pawnsInScene)
 			{
-                if(pawn._pawnID == id)
+                if (pawn == null)
+                    continue;
+                if (pawn._pawnID == id)
 				{
                     pawn.ChangePositionTo(x, y);
 				}
@@ -797,6 +826,8 @@ namespace Seance.BoardManagment
 		{
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.TakeDamage(damages);
@@ -815,7 +846,9 @@ namespace Seance.BoardManagment
 		{
             foreach(Pawn pawn in _pawnsInScene)
 			{
-                if(pawn._pawnID == id)
+                if (pawn == null)
+                    continue;
+                if (pawn._pawnID == id)
 				{
                     pawn.Die();
 				}
@@ -833,6 +866,8 @@ namespace Seance.BoardManagment
 		{
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.Heal(amount);
@@ -851,6 +886,8 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.GainArmor(amount);
@@ -869,6 +906,8 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
                     pawn.DecreaseArmor(amount);
@@ -887,9 +926,11 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
-                    CharacterPawn character = (CharacterPawn)pawn;
+                    CharacterPawn character = pawn as CharacterPawn;
                     character.Purify(amount);
                 }
             }
@@ -906,9 +947,11 @@ namespace Seance.BoardManagment
         {
             foreach (Pawn pawn in _pawnsInScene)
             {
+                if (pawn == null)
+                    continue;
                 if (pawn._pawnID == id)
                 {
-                    CharacterPawn character = (CharacterPawn)pawn;
+                    CharacterPawn character = pawn as CharacterPawn;
                     character.Corrupt(amount);
                 }
             }

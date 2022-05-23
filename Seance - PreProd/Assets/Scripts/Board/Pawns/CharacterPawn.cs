@@ -5,70 +5,80 @@ using UnityEngine;
 
 namespace Seance.BoardManagment
 {
-    /// <summary>
-    /// This script was created by Julien haigron
-    /// </summary>
-    
-    public class CharacterPawn : Pawn
-    {
-        /// <TODO>
-        /// - character class (wizard,...)*
-        /// - ref to Dice prefab (for Xantin)
-        /// - 
-        /// </TODO>
+	/// <summary>
+	/// This script was created by Julien haigron
+	/// </summary>
 
-        [Header("Params")]
-        [SerializeField] HeroType _heroType;
-        //public HeroType HeroType { get => _heroType; }
+	public class CharacterPawn : Pawn
+	{
+		/// <TODO>
+		/// - character class (wizard,...)*
+		/// - ref to Dice prefab (for Xantin)
+		/// - 
+		/// </TODO>
 
-        public void Initialize(int x, int y, int hp, int armor, int initDice, HeroType heroType, int pawnID)
-        {
-            _x = x;
-            _y = y;
-            _baseHealth = hp;
-            _currentHealth = _baseHealth;
-            _armor = armor;
-            _intiativeBase = initDice;
-            _heroType = heroType;
-            _pawnType = PawnType.Character;
-        }
+		[Header("References")]
+		public Material _ownedMaterial;
+		[SerializeField] MeshRenderer _meshRenderer;
 
-        public void ResetPosition(int x, int y)
-        {
-            _x = x;
-            _y = y;
-        }
+		[Header("Params")]
+		[SerializeField] HeroType _heroType;
+		//public HeroType HeroType { get => _heroType; }
+
+		public void Initialize(int x, int y, int hp, int armor, int initDice, HeroType heroType, int pawnID)
+		{
+			_x = x;
+			_y = y;
+			_baseHealth = hp;
+			_currentHealth = _baseHealth;
+			_armor = armor;
+			_intiativeBase = initDice;
+			_heroType = heroType;
+			_pawnType = PawnType.Character;
+		}
+
+		public void ResetPosition(int x, int y)
+		{
+			_x = x;
+			_y = y;
+		}
 
 
 		[SerializeField] int _corruption = 0;
-		public int Corruption { get => _corruption;}
+		public int Corruption { get => _corruption; }
 
 
-        public int Corrupt(int amount)
+		public int Corrupt(int amount)
 		{
-            if (_corruption + amount > 200)
-                _corruption = 200;
-            else
-                _corruption += amount;
+			if (_corruption + amount > 200)
+				_corruption = 200;
+			else
+				_corruption += amount;
 
-            return _corruption;
+			return _corruption;
 		}
 
-        public int Purify(int amount)
+		public int Purify(int amount)
 		{
-            if (_corruption - amount < 0)
-                _corruption = 0;
-            else
-                _corruption -= amount;
+			if (_corruption - amount < 0)
+				_corruption = 0;
+			else
+				_corruption -= amount;
 
-            return _corruption;
+			return _corruption;
 		}
-    }
 
-    public enum HeroType
+		public void SetOwnedMaterial()
+		{
+			_meshRenderer.material = _ownedMaterial;
+		}
+	}
+
+
+	public enum HeroType
 	{
-        Wizard,
-        Knight,
-        Ranger
-    }
+		Wizard,
+		Knight,
+		Ranger
+	}
 }

@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 3947040132606521290}
   - component: {fileID: 6170585041670202421}
   - component: {fileID: 8182744253737441598}
+  - component: {fileID: 1097206631892498672}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -107,6 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7f208602d63c641ad4d1c5a287bdea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 1097206631892498672}
+  _networkObjectCache: {fileID: 1097206631892498672}
   _originPos: {x: 0, y: 0, z: 0}
   _tilesParent: {fileID: 1269377802199491320}
   _otherInstanceParent: {fileID: 4799173518528502508}
@@ -205,27 +209,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _pawnsInScene:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _pawnsInScene: []
   _otherInstancesInScene:
   - {fileID: 0}
   - {fileID: 0}
@@ -267,6 +251,9 @@ MonoBehaviour:
   - {fileID: 0}
   _currentNbOfPawnInScene: 3
   isLastRoom: 0
+  _rangerDeck: {fileID: 0}
+  _wizardDeck: {fileID: 0}
+  _knightDeck: {fileID: 0}
 --- !u!114 &8182744253737441598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +275,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 42967f179557cf448886f039ebdb5540, type: 2}
   - {fileID: 11400000, guid: f2b460b70ab48ef4692ce0241e5e2c08, type: 2}
   _playersPositionInFloor: 0
+--- !u!114 &1097206631892498672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401277311362245884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkObserver: {fileID: 0}
+  _prefabId: -1
+  _scenePathHash: 0
+  _sceneId: 0
+  _sceneNetworkObjects: []
+  _networkBehaviours:
+  - {fileID: 6170585041670202421}
+  SceneTransformProperties:
+    Position: {x: -0.06837207, y: 1.8429375, z: 0.85948753}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    LocalScale: {x: 1, y: 1, z: 1}
+  _isNetworked: 1
+  _hasParentNetworkObjectAtEdit: 0
 --- !u!1 &4799173518528502508
 GameObject:
   m_ObjectHideFlags: 0

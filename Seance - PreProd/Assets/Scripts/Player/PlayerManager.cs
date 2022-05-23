@@ -6,6 +6,7 @@ using UnityEngine;
 using Seance.BoardManagment.Dice;
 using UnityEngine.Rendering;
 using FishNet.Connection;
+using System.Collections;
 
 namespace Seance.Player
 {
@@ -42,29 +43,39 @@ namespace Seance.Player
 			base.OnStartClient();
 
 			if (!IsOwner)
+			{
+				Destroy(_cardZones.GetComponent<PlayerTileInteraction>()); ;
 				return;
+			}
 
 			GameManager.Instance._lobby._ownedPlayer = this;
 
-			_camera?.transform.parent.gameObject.SetActive(true);
+			_camera.transform.parent.gameObject.SetActive(true);
 			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
-			_playerUI?.gameObject.SetActive(true);
+			_playerUI.gameObject.SetActive(true);
 			Dice20.Instance.Init(_cheatPostProcessVolume);
 		}
 
 		[ServerRpc(RequireOwnership = false)]
-		public void ServerRpcSetPawn(int pawnIndex)
+		public void ServerRpcSetPawn(int target, int pawnIndex)
 		{
-			TargetRpcSetPawn(_gManager._lobby._networkConnections[pawnIndex], pawnIndex);
+			TargetRpcSetPawn(_gManager._lobby._networkConnections[target], pawnIndex);
 		}
 
 		[TargetRpc]
 		void TargetRpcSetPawn(NetworkConnection conn, int pawnIndex)
 		{
-			if (_gManager._lobby._ownedConnection != conn)
-				return;
+			//if (_gManager._lobby._ownedConnection != conn)
+			//	return;
 
-			_pawn = TileManager.Instance._pawnsInScene[pawnIndex] as CharacterPawn;
+			StartCoroutine(SetPawnCoroutine(pawnIndex));
+		}
+
+		IEnumerator SetPawnCoroutine(int pawnIndex)
+		{
+			yield return new WaitForSeconds(.1f);
+			_gManager._lobby._ownedPlayer._pawn = TileManager.Instance._pawnsInScene[pawnIndex] as CharacterPawn;
+			_gManager._lobby._ownedPlayer._pawn.SetOwnedMaterial();
 		}
 
 		[ServerRpc(RequireOwnership = false)]
@@ -76,7 +87,7 @@ namespace Seance.Player
 		[TargetRpc]
 		void TargetRpcInitZones(NetworkConnection conn, int deckIndex)
 		{
-			_cardZones.InitZones(deckIndex);
+			_gManager._lobby._ownedPlayer._cardZones.InitZones(deckIndex);
 		}
 
 		#endregion
@@ -91,6 +102,13 @@ namespace Seance.Player
 			_gManager._debugPlayerTurn.text = "Your turn";
 
 			_playerUI.EnableTurnUI();
+
+			StartCoroutine(StartTurnCoroutine());
+		}
+
+		IEnumerator StartTurnCoroutine()
+		{
+			yield return new WaitForSeconds(3f);
 
 			_cardZones.DrawCard();
 

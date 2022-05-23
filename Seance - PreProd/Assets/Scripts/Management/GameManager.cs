@@ -21,6 +21,7 @@ namespace Seance.Management
 
 		[Header("Debug")]
 		public TextMeshProUGUI _debugPlayerTurn;
+		public DefaultCameraUIMode ipInputMode;
 
 		private void Awake()
 		{

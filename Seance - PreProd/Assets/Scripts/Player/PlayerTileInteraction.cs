@@ -7,8 +7,8 @@ using Seance.Management;
 
 namespace Seance.Player
 {
-    public class PlayerTileInteraction : MonoBehaviour
-    {
+	public class PlayerTileInteraction : MonoBehaviour
+	{
 		[SerializeField] LayerMask _interactableLayerMask;
 
 		private void Update()
@@ -21,12 +21,20 @@ namespace Seance.Player
 		{
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(ray, out hit, Mathf.Infinity, _interactableLayerMask))
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity, _interactableLayerMask))
 			{
-				if(hit.transform.parent.GetComponent<Tile>() != null && GameManager.Instance._lobby._ownedPlayer._cardZones._selectedCardIndex != -1)
+				if (hit.transform.parent.GetComponent<Tile>() != null)
 				{
-					Tile targetTile = hit.transform.parent.GetComponent<Tile>();
-					GameManager.Instance._lobby._ownedPlayer._cardZones.UseCard(GameManager.Instance._lobby._ownedPlayer._pawn, targetTile, TileManager.Instance.GetPawnsOn(targetTile._x, targetTile._y));
+					if (GameManager.Instance._lobby._ownedPlayer._cardZones._selectedCardIndex != -1)
+					{
+						Tile targetTile = hit.transform.parent.GetComponent<Tile>();
+						Pawn[] targetPawns = TileManager.Instance.GetPawnsOn(targetTile._x, targetTile._y);
+						if (targetPawns.Length == 0)
+						{
+							return;
+						}
+						GameManager.Instance._lobby._ownedPlayer._cardZones.UseCard(GameManager.Instance._lobby._ownedPlayer._pawn, targetTile, targetPawns);
+					}
 				}
 			}
 		}

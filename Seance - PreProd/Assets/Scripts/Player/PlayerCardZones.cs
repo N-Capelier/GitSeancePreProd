@@ -26,6 +26,9 @@ namespace Seance.Player
 
 		[HideInInspector] public int _selectedCardIndex = -1;
 
+		[HideInInspector] public bool _inited = false;
+		[HideInInspector] public bool _startedIniting = false;
+
 		private void Start()
 		{
 			_gManager = GameManager.Instance;
@@ -33,13 +36,19 @@ namespace Seance.Player
 
 		public void InitZones(int deckIndex)
 		{
+			if (_startedIniting)
+				return;
+
+			_startedIniting = true;
+
 			_deck = deckIndex switch
 			{
-				1 => TileManager.Instance._rangerDeck.cards,
-				2 => TileManager.Instance._wizardDeck.cards,
-				3 => TileManager.Instance._knightDeck.cards,
+				0 => TileManager.Instance._rangerDeck.cards,
+				1 => TileManager.Instance._wizardDeck.cards,
+				2 => TileManager.Instance._knightDeck.cards,
 				_ => throw new System.ArgumentException(),
 			};
+
 
 			for (int i = 0; i < _deck.Count; i++)
 			{
@@ -117,8 +126,6 @@ namespace Seance.Player
 
 			yield return new WaitUntil(() => _gManager != null);
 
-			_gManager._lobby._ownedPlayer.AddInteraction();
-
 			yield return new WaitForSeconds(.2f);
 
 			for (int i = 0; i < 5; i++)
@@ -127,7 +134,7 @@ namespace Seance.Player
 				yield return wait;
 			}
 
-			_gManager._lobby._ownedPlayer.RemoveInteraction();
+			_inited = true;
 		}
 	}
 }

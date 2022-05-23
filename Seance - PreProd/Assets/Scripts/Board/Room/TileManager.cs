@@ -766,7 +766,9 @@ namespace Seance.BoardManagment
             return _pawnList.ToArray();
         }
 
-        [ServerRpc(RequireOwnership = false)]
+		#region Network Methods
+
+		[ServerRpc(RequireOwnership = false)]
         public void ServerRpcChangePositionTo(int id, int x, int y)
         {
             ObserverRpcChangePawnPositionTo(id, x, y);
@@ -911,6 +913,8 @@ namespace Seance.BoardManagment
                 }
             }
         }
+
+        #endregion
 
         public enum Tiles
         {

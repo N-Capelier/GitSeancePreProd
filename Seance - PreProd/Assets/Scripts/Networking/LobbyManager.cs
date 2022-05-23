@@ -19,6 +19,9 @@ namespace Seance.Networking
 		[SyncObject] public readonly SyncList<NetworkConnection> _networkConnections = new SyncList<NetworkConnection>();
 		[HideInInspector] public PlayerManager _ownedPlayer;
 		[HideInInspector] public NetworkConnection _ownedConnection;
+		[HideInInspector] public NetworkConnection _serverConnection;
+
+		bool _initedServerConnection = false;
 
 		public override void OnSpawnServer(NetworkConnection connection)
 		{
@@ -26,21 +29,44 @@ namespace Seance.Networking
 
 			if (!IsServer)
 				return;
-			
-			_connectedPlayerCount++;
+
+
+			if (!_initedServerConnection)
+			{
+				_initedServerConnection = true;
+				_ownedConnection = connection;
+				_serverConnection = connection;
+			}
+
 			_networkConnections.Add(connection);
-			_ownedConnection = connection;
+
+			_connectedPlayerCount++;
 
 			if (_connectedPlayerCount != 3)
 				return;
 
-			StartGame();
+			StartCoroutine(StartGame());
 		}
 
-		void StartGame()
+		IEnumerator StartGame()
+		{
+			yield return new WaitForSeconds(2f);
+
+			ServerRpcStartGame();
+			yield return new WaitForSeconds(.5f);
+			GameManager.Instance._turnManager.ServerRpcPlayNextTurn();
+		}
+
+		[ServerRpc(RequireOwnership = false)]
+		void ServerRpcStartGame()
+		{
+			ObserversRpcStartGame();
+		}
+
+		[ObserversRpc]
+		void ObserversRpcStartGame()
 		{
 			TileManager.Instance.SpawnPawns();
-			GameManager.Instance._turnManager.ServerRpcPlayNextTurn();
 		}
 	}
 }

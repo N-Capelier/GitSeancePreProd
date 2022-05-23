@@ -438,9 +438,9 @@ namespace Seance.BoardManagment
                 }
                 _pawnsInScene = new Pawn[50];
             }
-            else if (_pawnsInScene.Length > 0 && isInPlayMode)
+            else if (_pawnsInScene.Length == 0 && isInPlayMode)
             {
-                //dont depop character prefab when in play mode
+                _pawnsInScene = new Pawn[50];
             }
             _currentNbOfPawnInScene = 0;
 
@@ -503,9 +503,12 @@ namespace Seance.BoardManagment
                                     if (_gManager != null)
                                     {
                                         //network
-                                        _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
-                                        _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-                                        spawnedCharacterPawnsCount++;
+                                        if(_gManager._lobby.IsServer)
+										{
+                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+											_gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+										}
+										spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -523,9 +526,12 @@ namespace Seance.BoardManagment
                                     if (_gManager != null)
                                     {
                                         //network
-                                        _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
-                                        _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-                                        spawnedCharacterPawnsCount++;
+                                        if (_gManager._lobby.IsServer)
+                                        {
+                                            _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount);
+                                            _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                        }
+										spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -661,7 +667,6 @@ namespace Seance.BoardManagment
 
         public void NextRoomFeedback()
         {
-            Debug.Log("called");
             int counter = 0;
 
             for (int i = 0; i < _pawnsInScene.Length; i++)

@@ -15,7 +15,7 @@ namespace Seance.BoardManagment
     /// <summary>
     /// This script was created by Julien haigron
     /// </summary>
-    public class Pawn : NetworkBehaviour
+    public class Pawn : MonoBehaviour
     {
         //Pascal Case PawnType enum + move it to pawn class
         public PawnType _pawnType = PawnType.Character;

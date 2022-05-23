@@ -159,6 +159,8 @@ MonoBehaviour:
   _hand: []
   _discard: []
   _selectedCardIndex: -1
+  _inited: 0
+  _startedIniting: 0
 --- !u!114 &2439809510484711645
 MonoBehaviour:
   m_ObjectHideFlags: 0

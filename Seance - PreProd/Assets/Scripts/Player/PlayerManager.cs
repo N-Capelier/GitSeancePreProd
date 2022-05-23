@@ -6,6 +6,7 @@ using UnityEngine;
 using Seance.BoardManagment.Dice;
 using UnityEngine.Rendering;
 using FishNet.Connection;
+using System.Collections;
 
 namespace Seance.Player
 {
@@ -42,13 +43,16 @@ namespace Seance.Player
 			base.OnStartClient();
 
 			if (!IsOwner)
+			{
+				Destroy(_cardZones.GetComponent<PlayerTileInteraction>()); ;
 				return;
+			}
 
 			GameManager.Instance._lobby._ownedPlayer = this;
 
-			_camera?.transform.parent.gameObject.SetActive(true);
+			_camera.transform.parent.gameObject.SetActive(true);
 			GameManager.Instance._defaultCamera.gameObject.SetActive(false);
-			_playerUI?.gameObject.SetActive(true);
+			_playerUI.gameObject.SetActive(true);
 			Dice20.Instance.Init(_cheatPostProcessVolume);
 		}
 
@@ -76,7 +80,7 @@ namespace Seance.Player
 		[TargetRpc]
 		void TargetRpcInitZones(NetworkConnection conn, int deckIndex)
 		{
-			_cardZones.InitZones(deckIndex);
+			_gManager._lobby._ownedPlayer._cardZones.InitZones(deckIndex);
 		}
 
 		#endregion
@@ -91,6 +95,13 @@ namespace Seance.Player
 			_gManager._debugPlayerTurn.text = "Your turn";
 
 			_playerUI.EnableTurnUI();
+
+			StartCoroutine(StartTurnCoroutine());
+		}
+
+		IEnumerator StartTurnCoroutine()
+		{
+			yield return new WaitForSeconds(3f);
 
 			_cardZones.DrawCard();
 

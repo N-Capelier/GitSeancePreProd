@@ -30,5 +30,8 @@ namespace Seance.BoardManagment
         //save
         public Quaternion[] _tileRotationSave;
         public Quaternion[] _otherTileRotationSave;
+
+        public int[] _newTileRotation;
+        public int[] _newOtherTileRotation;
     }
 }

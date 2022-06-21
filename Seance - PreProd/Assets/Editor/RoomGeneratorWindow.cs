@@ -15,13 +15,15 @@ namespace Seance.BoardManagment
         RoomProfile _currentRoom;
 
 
-        SerializedProperty _roomID, _xLength, _yLength, _tiles, _tilesWeight, _currentTileSelected, _tilesColor, _tileRotationSave, _otherTileRotationSave;
+        SerializedProperty _roomID, _xLength, _yLength, _tiles, _tilesWeight, _currentTileSelected, _tilesColor, _tileRotationSave, _otherTileRotationSave, _newTileRotation, _newOtherTileRotation;
 
         //editor window var
         private bool isMouseLeftDown;
         private bool isMouseLeftDownProcessed;
         private bool isMouseRightDown;
         private bool isMouseRightDownProcessed;
+        private bool isEButtontDown;
+        private bool isEButtontDownProcessed;
 
 
         public void InitializeWindow(RoomProfile correspondingLevel)
@@ -35,13 +37,17 @@ namespace Seance.BoardManagment
             _tilesWeight = _serializedObject.FindProperty("_tilesWeight");
             _currentTileSelected = _serializedObject.FindProperty("_currentTileSelected");
             _tilesColor = _serializedObject.FindProperty("_tilesColor");
+
             _tileRotationSave = _serializedObject.FindProperty("_tileRotationSave");
             _otherTileRotationSave = _serializedObject.FindProperty("_otherTileRotationSave");
+            _newTileRotation = _serializedObject.FindProperty("_newTileRotation");
+            _newOtherTileRotation = _serializedObject.FindProperty("_newOtherTileRotation");
 
             isMouseLeftDown = false;
             isMouseRightDown = false;
             isMouseLeftDownProcessed = false;
             isMouseRightDownProcessed = false;
+
         }
 
 
@@ -64,6 +70,24 @@ namespace Seance.BoardManagment
             {
                 _otherTileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;
             }*/
+
+            if (_tileRotationSave.arraySize < 1)
+            {
+                Debug.Log("initialise save list");
+                _tileRotationSave.arraySize = _xLength.intValue * _yLength.intValue;
+                _otherTileRotationSave.arraySize = _xLength.intValue * _yLength.intValue;
+            }
+            if (_newTileRotation.arraySize < 1)
+            {
+                Debug.Log("initialise new save list");
+                _newTileRotation.arraySize = _xLength.intValue * _yLength.intValue;
+                _newOtherTileRotation.arraySize = _xLength.intValue * _yLength.intValue;
+                /*for (int i = 0; i < _newTileRotation.arraySize; i++)
+                {
+                    _newTileRotation.GetArrayElementAtIndex(i).intValue = 0;
+                    _newOtherTileRotation.GetArrayElementAtIndex(i).intValue = 0;
+                }*/
+            }
 
             //
             EditorGUILayout.Space(5);
@@ -193,6 +217,38 @@ namespace Seance.BoardManagment
                         isMouseRightDownProcessed = true;
                     }
 
+                    bool isRotatingtTile = isEButtontDown && !isEButtontDownProcessed && cell.Contains(Event.current.mousePosition);
+                    if (isRotatingtTile)
+                    {
+                        /*_tilesWeight.GetArrayElementAtIndex(index).intValue++;
+                        if (_tilesWeight.GetArrayElementAtIndex(index).intValue > 4)
+                            _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;*/
+
+                        //values in order: NESO = 0123
+                        
+                        if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.basicTile)
+                        {
+                            //for ground: _tileRotationSave
+                            _newTileRotation.GetArrayElementAtIndex(index).intValue++;
+                            if (_newTileRotation.GetArrayElementAtIndex(index).intValue > 3)
+                                _newTileRotation.GetArrayElementAtIndex(index).intValue = 0;
+
+                        }
+                        else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.empty)
+                        {
+                            //nothing to handle
+                        }
+                        else
+                        {
+                            //for wall: _otherTileRotationSave
+                            _newOtherTileRotation.GetArrayElementAtIndex(index).intValue++;
+                            if (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue > 3)
+                                _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 0;
+
+                        }
+                        isEButtontDownProcessed = true;
+                    }
+
 
                     int enumIndexInPalette = _tiles.GetArrayElementAtIndex(index).enumValueIndex;
                     Color col = _tilesColor.GetArrayElementAtIndex(enumIndexInPalette).colorValue;
@@ -223,6 +279,47 @@ namespace Seance.BoardManagment
                             Rect r1 = new Rect(curX + (cellWidth / 8), curY + (cellWidth / 8), cellWidth / 4, cellHeight / 4);
                             EditorGUI.DrawRect(r1, Color.black);
                         }
+                    }
+
+                    //draw rotation display
+
+                    if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.basicTile)
+                    {
+
+                        if (_newTileRotation.GetArrayElementAtIndex(index).intValue == 0)
+                        {
+                            Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellWidth / 10), cellWidth * 0.2f, cellHeight * 0.2f);
+                            EditorGUI.DrawRect(rotRec, Color.red);
+                        }
+
+                    }
+                    else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.empty)
+                    {
+                        //nothing to display
+                    }
+                    else
+                    {
+
+                        switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                        {
+                            case 0:
+                                Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellWidth / 10), cellWidth * 0.2f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec, Color.red);
+                                break;
+                            case 1:
+                                Rect rotRec2 = new Rect(curX + (cellWidth * 0.7f), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec2, Color.red);
+                                break;
+                            case 2:
+                                Rect rotRec3 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.7f), cellWidth * 0.2f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec3, Color.red);
+                                break;
+                            case 3:
+                                Rect rotRec4 = new Rect(curX + (cellWidth / 10), curY + (cellWidth * 0.4f), cellWidth * 0.2f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec4, Color.red);
+                                break;
+                        }
+
                     }
 
                     curX += cellWidth + widthSpace;
@@ -257,6 +354,16 @@ namespace Seance.BoardManagment
                 isMouseRightDown = false;
                 isMouseRightDownProcessed = false;
             }
+
+            if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.E && !isEButtontDownProcessed)
+                isEButtontDown = true;
+            if (Event.current.type == EventType.KeyUp && Event.current.keyCode == KeyCode.E)
+            {
+                isEButtontDown = false;
+                isEButtontDownProcessed = false;
+            }
+            
+            
         }
 
     }

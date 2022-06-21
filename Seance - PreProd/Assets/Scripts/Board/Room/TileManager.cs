@@ -440,8 +440,9 @@ namespace Seance.BoardManagment
                 }
                 _pawnsInScene = new Pawn[50];
             }
-            else if (_pawnsInScene.Length == 0 && isInPlayMode)
+            else if (_pawnsInScene.Length == 0)
             {
+                Debug.Log("enter here");
                 _pawnsInScene = new Pawn[50];
             }
             _currentNbOfPawnInScene = 0;

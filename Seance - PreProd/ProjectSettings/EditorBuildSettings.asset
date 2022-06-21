@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dev/Nico.unity
     guid: 57014ee7539e79642887c16f6fd3da95
+  - enabled: 1
+    path: Assets/Scenes/Dev/Julien.unity
+    guid: 3f859cc4bccb00740b1c7e5c5c2ac6fb
   m_configObjects: {}

@@ -87,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4401277311362245884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06837207, y: 1.8429375, z: 0.85948753}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2361356239006588476}
@@ -115,7 +115,7 @@ MonoBehaviour:
   _tilesParent: {fileID: 1269377802199491320}
   _otherInstanceParent: {fileID: 4799173518528502508}
   _pawnsParent: {fileID: 2920516231426513330}
-  _roomShape: {fileID: 11400000, guid: 15d88898f540cf24386ab6e445e7206b, type: 2}
+  _roomShape: {fileID: 11400000, guid: c40fd20d96077b845943a2f45146c6ff, type: 2}
   _tilePrefabs:
   - {fileID: 6154887793308164271, guid: 8caf4cefdd0d99c4c9415a66c42ded4e, type: 3}
   - {fileID: 6154887793308164271, guid: e11aae3c96f20794d9d3a84686f15bcb, type: 3}
@@ -210,6 +210,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _pawnsInScene: []
+  _characterPawnsInScene: []
   _otherInstancesInScene:
   - {fileID: 0}
   - {fileID: 0}

@@ -30,15 +30,42 @@ namespace Seance.BoardManagment
 
         //for angle
         public Quaternion _savedRot;
+        public int _newSavedRot;
 
         public void ApplySavedRotation()
         {
-            transform.rotation = _savedRot;
+            //transform.rotation = _savedRot;
+            switch (_newSavedRot)
+            {
+                case 0:
+                    Quaternion q = new Quaternion();
+                    q.eulerAngles = new Vector3 (0, 0, 0);
+                    transform.rotation = q;
+                    break;
+                case 1:
+                    Quaternion q2 = new Quaternion();
+                    q2.eulerAngles = new Vector3(0, 90, 0);
+                    transform.rotation = q2;
+                    break;
+                case 2:
+                    Quaternion q3 = new Quaternion();
+                    q3.eulerAngles = new Vector3(0, 180, 0);
+                    transform.rotation = q3;
+                    break;
+                case 3:
+                    Quaternion q4 = new Quaternion();
+                    q4.eulerAngles = new Vector3(0, 270, 0);
+                    transform.rotation = q4;
+                    break;
+            }
         }
 
         public void SaveRotation()
         {
-            _savedRot = transform.rotation;
+            ///DEPRETIATED
+            //_savedRot = transform.rotation;
+            // 0 = north, 1 = east, 2 = south, 3 = east
+            //_savedRot = transform.rotation;
         }
         
         public void Initialize(int x, int y, TileManager.Tiles tileType)

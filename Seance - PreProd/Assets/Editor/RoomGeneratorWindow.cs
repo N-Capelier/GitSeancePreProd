@@ -225,7 +225,7 @@ namespace Seance.BoardManagment
                             _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;*/
 
                         //values in order: NESO = 0123
-                        
+
                         if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.basicTile)
                         {
                             //for ground: _tileRotationSave
@@ -288,10 +288,62 @@ namespace Seance.BoardManagment
 
                         if (_newTileRotation.GetArrayElementAtIndex(index).intValue == 0)
                         {
-                            Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellWidth / 10), cellWidth * 0.2f, cellHeight * 0.2f);
+                            Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight / 10), cellWidth * 0.2f, cellHeight * 0.2f);
                             EditorGUI.DrawRect(rotRec, Color.red);
                         }
 
+                    }
+                    else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.wall)
+                    {
+                        switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                        {
+                            case 0:
+                                Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0), cellWidth * 0.2f, cellHeight * 1f);
+                                EditorGUI.DrawRect(rotRec, Color.gray);
+                                break;
+                            case 1:
+                                Rect rotRec2 = new Rect(curX + (cellWidth * 0), curY + (cellHeight * 0.4f), cellWidth * 1f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec2, Color.gray);
+                                break;
+                            case 2:
+                                Rect rotRec3 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0), cellWidth * 0.2f, cellHeight * 1f);
+                                EditorGUI.DrawRect(rotRec3, Color.gray);
+                                break;
+                            case 3:
+                                Rect rotRec4 = new Rect(curX + (cellWidth * 0), curY + (cellHeight * 0.4f), cellWidth * 1f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec4, Color.gray);
+                                break;
+                        }
+                    }
+                    else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.angle)
+                    {
+                        switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                        {
+                            case 0:
+                                Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.6f);
+                                EditorGUI.DrawRect(rotRec, Color.gray);
+                                Rect rotRecBis = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRecBis, Color.gray);
+                                break;
+                            case 1:
+                                Rect rotRec2 = new Rect(curX + (cellWidth * 0), curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec2, Color.gray);
+                                Rect rotRec2Bis = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.6f);
+                                EditorGUI.DrawRect(rotRec2Bis, Color.gray);
+                                break;
+                            case 2:
+                                Rect rotRec3 = new Rect(curX + (cellWidth * 0), curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec3, Color.gray);
+                                Rect rotRec3Bis = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0), cellWidth * 0.2f, cellHeight * 0.6f);
+                                EditorGUI.DrawRect(rotRec3Bis, Color.gray);
+                                break;
+                            case 3:
+                                Rect rotRec4 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                EditorGUI.DrawRect(rotRec4, Color.gray);
+                                Rect rotRec4Bis = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0), cellWidth * 0.2f, cellHeight * 0.6f);
+                                EditorGUI.DrawRect(rotRec4Bis, Color.gray);
+                                break;
+                        }
                     }
                     else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.empty)
                     {
@@ -303,7 +355,7 @@ namespace Seance.BoardManagment
                         switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
                         {
                             case 0:
-                                Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellWidth / 10), cellWidth * 0.2f, cellHeight * 0.2f);
+                                Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight / 10), cellWidth * 0.2f, cellHeight * 0.2f);
                                 EditorGUI.DrawRect(rotRec, Color.red);
                                 break;
                             case 1:
@@ -315,7 +367,7 @@ namespace Seance.BoardManagment
                                 EditorGUI.DrawRect(rotRec3, Color.red);
                                 break;
                             case 3:
-                                Rect rotRec4 = new Rect(curX + (cellWidth / 10), curY + (cellWidth * 0.4f), cellWidth * 0.2f, cellHeight * 0.2f);
+                                Rect rotRec4 = new Rect(curX + (cellWidth / 10), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.2f);
                                 EditorGUI.DrawRect(rotRec4, Color.red);
                                 break;
                         }
@@ -362,8 +414,8 @@ namespace Seance.BoardManagment
                 isEButtontDown = false;
                 isEButtontDownProcessed = false;
             }
-            
-            
+
+
         }
 
     }

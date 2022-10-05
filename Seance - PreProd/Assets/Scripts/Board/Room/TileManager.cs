@@ -346,7 +346,6 @@ namespace Seance.BoardManagment
                         case Tiles.door:
                             //block under door
                             GameObject doorBlock = Instantiate(_tilePrefabs[0], thisBlockPos, Quaternion.identity, _tilesParent.transform);
-                            doorBlock.transform.rotation = _tilePrefabs[0].transform.rotation;
                             doorBlock.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
                             doorBlock.transform.rotation = _tilePrefabs[0].transform.rotation;
                             _tilesInScene[y * _roomShape._yLength + x] = doorBlock.GetComponent<Tile>();
@@ -513,12 +512,12 @@ namespace Seance.BoardManagment
                                     if (_gManager != null)
                                     {
                                         //network
-                                        if(_gManager._lobby.IsServer)
-										{
+                                        if (_gManager._lobby.IsServer)
+                                        {
                                             _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
-											_gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-										}
-										spawnedCharacterPawnsCount++;
+                                            _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                        }
+                                        spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -543,7 +542,7 @@ namespace Seance.BoardManagment
                                             _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
                                             _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
                                         }
-										spawnedCharacterPawnsCount++;
+                                        spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -588,15 +587,16 @@ namespace Seance.BoardManagment
                 }
             }
 
-			for (int i = 0; i < _pawnsInScene.Length; i++)
-			{
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
                 if (_pawnsInScene[i] == null)
                     continue;
                 _pawnsInScene[i]._pawnID = i;
-			}
+            }
 
         }
 
+        /*
         [ContextMenu("Save Tiles Rotation")]
         public void SaveTileRotation()
         {
@@ -642,31 +642,31 @@ namespace Seance.BoardManagment
             AssetDatabase.Refresh();
 #endif
 
-        }
+        }*/
 
         [ContextMenu("Load Rotation Save")]
         public void LoadRotationSave()
         {
-            //ground tile (z = 0)
-            for (int i = 0; i < _roomShape._tileRotationSave.Length; i++)
+
+            for (int x = 0; x < _roomShape._yLength; x++)
             {
-                if (_tilesInScene[i] != null && _roomShape._tileRotationSave[i] != null)
+                for (int y = 0; y < _roomShape._xLength; y++)
                 {
-                    //load tile from save
-                    _tilesInScene[i]._savedRot = _roomShape._tileRotationSave[i];
-                    _tilesInScene[i].ApplySavedRotation();
+                    if (_tilesInScene[y * _roomShape._yLength + x] != null && (y * _roomShape._yLength + x >= _roomShape._yLength * _roomShape._xLength))
+                    {
+                        //Debug.Log(y * _roomShape._yLength + x + " : " + _roomShape._newTileRotation[y * _roomShape._yLength + x]);
+                        _tilesInScene[y * _roomShape._yLength + x]._newSavedRot = _roomShape._newTileRotation[y * _roomShape._yLength + x];
+                        _tilesInScene[y * _roomShape._yLength + x].ApplySavedRotation();
+                    }
                 }
             }
 
-            //tile on top (z = 1)
             for (int i = 0; i < _otherInstancesInScene.Count; i++)
             {
-                if (_otherInstancesInScene[i] != null && _roomShape._otherTileRotationSave.Length > i)
-                {
-                    //apply save manualy
-                    _otherInstancesInScene[i].GetComponent<Tile>()._savedRot = _roomShape._otherTileRotationSave[i];
-                    _otherInstancesInScene[i].GetComponent<Tile>().ApplySavedRotation();
-                }
+                Tile thisTile = _otherInstancesInScene[i].GetComponent<Tile>();
+                thisTile._newSavedRot = _roomShape._newOtherTileRotation[thisTile._y * _roomShape._yLength + thisTile._x];
+                thisTile.ApplySavedRotation();
+                //Debug.Log(i + " : " + thisTile._newSavedRot);
             }
         }
 
@@ -794,9 +794,9 @@ namespace Seance.BoardManagment
             return _pawnList.ToArray();
         }
 
-		#region Network Methods
+        #region Network Methods
 
-		[ServerRpc(RequireOwnership = false)]
+        [ServerRpc(RequireOwnership = false)]
         public void ServerRpcChangePositionTo(int id, int x, int y)
         {
             ObserverRpcChangePawnPositionTo(id, x, y);
@@ -804,27 +804,27 @@ namespace Seance.BoardManagment
 
         [ObserversRpc]
         void ObserverRpcChangePawnPositionTo(int id, int x, int y)
-		{
-            foreach(Pawn pawn in _pawnsInScene)
-			{
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
                 if (pawn == null)
                     continue;
                 if (pawn._pawnID == id)
-				{
+                {
                     pawn.ChangePositionTo(x, y);
-				}
-			}
-		}
+                }
+            }
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void ServerRpcPawnTakeDamage(int id, int damages)
-		{
+        {
             ObserverRpcPawnTakeDamage(id, damages);
-		}
+        }
 
         [ObserversRpc]
         void ObserverRpcPawnTakeDamage(int id, int damages)
-		{
+        {
             foreach (Pawn pawn in _pawnsInScene)
             {
                 if (pawn == null)
@@ -838,33 +838,33 @@ namespace Seance.BoardManagment
 
         [ServerRpc(RequireOwnership = false)]
         public void ServerRpcPawnDeath(int id)
-		{
+        {
             ObserverRpcPawnDeath(id);
-		}
+        }
 
         [ObserversRpc]
         void ObserverRpcPawnDeath(int id)
-		{
-            foreach(Pawn pawn in _pawnsInScene)
-			{
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
                 if (pawn == null)
                     continue;
                 if (pawn._pawnID == id)
-				{
+                {
                     pawn.Die();
-				}
-			}
-		}
+                }
+            }
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void ServerRpcPawnHeal(int id, int amount)
-		{
+        {
             ObserverRpcPawnHeal(id, amount);
         }
 
         [ObserversRpc]
         void ObserverRpcPawnHeal(int id, int amount)
-		{
+        {
             foreach (Pawn pawn in _pawnsInScene)
             {
                 if (pawn == null)

@@ -49,34 +49,42 @@ namespace Seance.BoardManagment
 
             _rooms = new BinaryTreeOfRoom(_roomProfiles[0], 9);
 
-           
-            RoomProfile a = _roomProfiles[1]; 
-            RoomProfile aBoss = _roomProfiles[2]; 
-            RoomProfile b = _roomProfiles[3]; 
-            RoomProfile bBoss = _roomProfiles[4]; 
-            RoomProfile c = _roomProfiles[5]; 
+
+            RoomProfile a = _roomProfiles[1];
+            RoomProfile aBoss = _roomProfiles[2];
+            RoomProfile b = _roomProfiles[3];
+            RoomProfile bBoss = _roomProfiles[4];
+            RoomProfile c = _roomProfiles[5];
             RoomProfile boss = _roomProfiles[6];
 
             //1st column
-            _rooms.Add(a, _rooms._floor[0]);
-            _rooms.Add(b, _rooms._floor[0]);
-            Node[] firstFloor = { _rooms._floor[1], _rooms._floor[2] };
+            _rooms.Add(a, _rooms._rooms[0]);
+            _rooms.Add(b, _rooms._rooms[0]);
+            Room[] firstFloor = { _rooms._rooms[1], _rooms._rooms[2] };
 
             //2nc column
-            _rooms.Add(c, _rooms._floor[1]);
+            _rooms.Add(c, _rooms._rooms[1]);
             _rooms.Add(c, firstFloor);
-            _rooms.Add(c, _rooms._floor[2]);
-            Node[] secoundFloor = { _rooms._floor[3], _rooms._floor[4], _rooms._floor[5] };
+            _rooms.Add(c, _rooms._rooms[2]);
+            Room[] secoundFloor = { _rooms._rooms[3], _rooms._rooms[4], _rooms._rooms[5] };
 
             //3rd floor
             _rooms.Add(aBoss, secoundFloor);
             _rooms.Add(bBoss, secoundFloor);
-            Node[] thirdFloor = { _rooms._floor[6], _rooms._floor[7] };
+            Room[] thirdFloor = { _rooms._rooms[6], _rooms._rooms[7] };
 
             //boss
             _rooms.Add(boss, thirdFloor);
         }
 
-        
+        public enum RoomType
+        {
+            start,
+            normal,
+            boss,
+            total
+        }
+
+
     }
 }

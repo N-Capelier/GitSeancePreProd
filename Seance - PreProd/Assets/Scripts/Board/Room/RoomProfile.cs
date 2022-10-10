@@ -8,7 +8,7 @@ namespace Seance.BoardManagment
     /// This script was created by Julien haigron
     /// </summary>
 
-        [System.Serializable]
+    [System.Serializable]
 
     [CreateAssetMenu(fileName = "New Room", menuName = "Tool/New Room")]
     public class RoomProfile : ScriptableObject
@@ -18,14 +18,10 @@ namespace Seance.BoardManagment
         public int _yLength;
         public TileManager.Tiles[] _tiles;
         public int[] _tilesWeight;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         public TileManager.Tiles _currentTileSelected;
         public Color[] _tilesColor;
 #endif
-
-        /// <summary>
-        /// TODO for next year : create other scriptableObject for "RoomSave"
-        /// </summary>
 
         //save
         public Quaternion[] _tileRotationSave;

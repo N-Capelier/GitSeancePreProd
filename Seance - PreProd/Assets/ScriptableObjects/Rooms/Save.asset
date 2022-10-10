@@ -21,3 +21,5 @@ MonoBehaviour:
   _tilesColor: []
   _tileRotationSave: []
   _otherTileRotationSave: []
+  _newTileRotation: 
+  _newOtherTileRotation: 

@@ -32,7 +32,7 @@ namespace Seance.BoardManagment
         public Tile[] _tilesInScene;
         public Pawn[] _pawnsInScene;
         public List<CharacterPawn> _characterPawnsInScene;
-        public List<GameObject> _otherInstancesInScene;
+        public GameObject[] _otherInstancesInScene;
         //compteur
         public int _currentNbOfPawnInScene;
 
@@ -78,7 +78,7 @@ namespace Seance.BoardManagment
             _roomShape = rp;
             GenerateRoom();
             SpawnPawns();
-            LoadRotationSave();
+            LoadNewRotationSave();
         }
 
         //For Room Decoration Editing purposes
@@ -99,13 +99,14 @@ namespace Seance.BoardManagment
                 _tilesInScene = new Tile[0];
             }
 
-            if (_otherInstancesInScene.Count > 0)
+            if (_otherInstancesInScene.Length > 0)
             {
-                for (int i = 0; i < _otherInstancesInScene.Count; i++)
+                for (int i = 0; i < _otherInstancesInScene.Length; i++)
                 {
-                    DestroyImmediate(_otherInstancesInScene[i]);
+                    if (_otherInstancesInScene[i] != null)
+                        DestroyImmediate(_otherInstancesInScene[i]);
                 }
-                _otherInstancesInScene.Clear();
+                _otherInstancesInScene = new GameObject[0];
             }
 
 
@@ -115,8 +116,8 @@ namespace Seance.BoardManagment
 
             if (FloorManager.Instance != null)
             {
-                if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
-                else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
+                if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
+                else if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
             }
 
 
@@ -124,6 +125,7 @@ namespace Seance.BoardManagment
             isLastRoom = false;
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
+            _otherInstancesInScene = new GameObject[_roomShape._xLength * _roomShape._yLength];
 
             //determine grid and tiles margin ratio
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
@@ -152,7 +154,7 @@ namespace Seance.BoardManagment
                             GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             wall.transform.rotation = _tilePrefabs[1].transform.rotation;
                             wall.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _otherInstancesInScene.Add(wall);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = wall;
                             break;
                         case Tiles.column:
                             //column ground
@@ -164,7 +166,7 @@ namespace Seance.BoardManagment
                             GameObject column = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             column.transform.rotation = _tilePrefabs[3].transform.rotation;
                             column.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _otherInstancesInScene.Add(column);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = column;
                             break;
                         case Tiles.angle:
                             //column ground
@@ -176,7 +178,7 @@ namespace Seance.BoardManagment
                             GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             angle.transform.rotation = _tilePrefabs[4].transform.rotation;
                             angle.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _otherInstancesInScene.Add(angle);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = angle;
                             break;
                         case Tiles.door:
                             //block under door
@@ -187,7 +189,7 @@ namespace Seance.BoardManagment
 
                             GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             door.transform.rotation = _tilePrefabs[2].transform.rotation;
-                            _otherInstancesInScene.Add(door);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = door;
 
                             //apply reference of next room to appropriate door
                             if (nbOfDoorTotal == 2)
@@ -195,25 +197,25 @@ namespace Seance.BoardManagment
                                 if (nbOfDoorActu == 0)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode;
                                 }
                                 if (nbOfDoorActu == 1)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode;
                                 }
                             }
                             else if (nbOfDoorTotal == 1)
                             {
-                                if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
+                                if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode;
                                 }
-                                else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
+                                else if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode;
                                 }
                             }
                             else
@@ -256,7 +258,7 @@ namespace Seance.BoardManagment
             }
             SpawnPawns();
             NextRoomFeedback();
-            LoadRotationSave();
+            LoadNewRotationSave();
         }
 
         public void GenerateRoom()
@@ -271,13 +273,14 @@ namespace Seance.BoardManagment
                 }
                 _tilesInScene = new Tile[0];
             }
-            if (_otherInstancesInScene.Count > 0)
+            if (_otherInstancesInScene.Length > 0)
             {
-                for (int i = 0; i < _otherInstancesInScene.Count; i++)
+                for (int i = 0; i < _otherInstancesInScene.Length; i++)
                 {
-                    DestroyImmediate(_otherInstancesInScene[i]);
+                    if (_otherInstancesInScene[i] != null)
+                        DestroyImmediate(_otherInstancesInScene[i]);
                 }
-                _otherInstancesInScene.Clear();
+                _otherInstancesInScene = new GameObject[0];
             }
 
             //init var
@@ -286,11 +289,12 @@ namespace Seance.BoardManagment
             //get nb of door in room
             int nbOfDoorTotal = 0;
             int nbOfDoorActu = 0;
-            if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
-            else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
+            if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode != null) nbOfDoorTotal++;
+            else if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode != null) nbOfDoorTotal++;
 
             //init array size
             _tilesInScene = new Tile[_roomShape._xLength * _roomShape._yLength];
+            _otherInstancesInScene = new GameObject[_roomShape._xLength * _roomShape._yLength];
 
             //determine grid and tiles margin ratio
             float tileSize = _tilePrefabs[0].transform.lossyScale.x;
@@ -317,7 +321,7 @@ namespace Seance.BoardManagment
                             GameObject wall = Instantiate(_tilePrefabs[1], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             wall.transform.rotation = _tilePrefabs[1].transform.rotation;
                             wall.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _otherInstancesInScene.Add(wall);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = wall;
                             break;
                         case Tiles.column:
                             //column ground
@@ -329,7 +333,7 @@ namespace Seance.BoardManagment
                             GameObject column = Instantiate(_tilePrefabs[3], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             column.transform.rotation = _tilePrefabs[3].transform.rotation;
                             column.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _otherInstancesInScene.Add(column);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = column;
                             break;
                         case Tiles.angle:
                             //column ground
@@ -341,7 +345,7 @@ namespace Seance.BoardManagment
                             GameObject angle = Instantiate(_tilePrefabs[4], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             angle.transform.rotation = _tilePrefabs[3].transform.rotation;
                             angle.GetComponent<Tile>().Initialize(x, y, _roomShape._tiles[y * _roomShape._yLength + x]);
-                            _otherInstancesInScene.Add(angle);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = angle;
                             break;
                         case Tiles.door:
                             //block under door
@@ -353,7 +357,7 @@ namespace Seance.BoardManagment
 
                             GameObject door = Instantiate(_tilePrefabs[2], thisBlockPos + new Vector3(0, tileSize, 0), Quaternion.identity, _otherInstanceParent.transform);
                             door.transform.rotation = _tilePrefabs[2].transform.rotation;
-                            _otherInstancesInScene.Add(door);
+                            _otherInstancesInScene[y * _roomShape._yLength + x] = door;
 
                             //apply reference of next room to appropriate door
                             if (nbOfDoorTotal == 2)
@@ -361,25 +365,25 @@ namespace Seance.BoardManagment
                                 if (nbOfDoorActu == 0)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode;
                                 }
                                 if (nbOfDoorActu == 1)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode;
                                 }
                             }
                             else if (nbOfDoorTotal == 1)
                             {
-                                if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
+                                if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode != null)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._leftNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._leftNode;
                                 }
-                                else if (FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode != null)
+                                else if (FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode != null)
                                 {
                                     nbOfDoorActu++;
-                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._floor[FloorManager.Instance._playersPositionInFloor]._rightNode;
+                                    door.GetComponent<Door>()._linkedRoom = FloorManager.Instance._rooms._rooms[FloorManager.Instance._playersPositionInFloor]._rightNode;
                                 }
                             }
                             else
@@ -513,12 +517,12 @@ namespace Seance.BoardManagment
                                     if (_gManager != null)
                                     {
                                         //network
-                                        if(_gManager._lobby.IsServer)
-										{
+                                        if (_gManager._lobby.IsServer)
+                                        {
                                             _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
-											_gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
-										}
-										spawnedCharacterPawnsCount++;
+                                            _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
+                                        }
+                                        spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -543,7 +547,7 @@ namespace Seance.BoardManagment
                                             _gManager._lobby._ownedPlayer.ServerRpcSetPawn(spawnedCharacterPawnsCount, newPawnIndex);
                                             _gManager._lobby._ownedPlayer.ServerRpcInitZones(spawnedCharacterPawnsCount);
                                         }
-										spawnedCharacterPawnsCount++;
+                                        spawnedCharacterPawnsCount++;
                                     }
                                 }
                             }
@@ -588,17 +592,17 @@ namespace Seance.BoardManagment
                 }
             }
 
-			for (int i = 0; i < _pawnsInScene.Length; i++)
-			{
+            for (int i = 0; i < _pawnsInScene.Length; i++)
+            {
                 if (_pawnsInScene[i] == null)
                     continue;
                 _pawnsInScene[i]._pawnID = i;
-			}
+            }
 
         }
 
-        [ContextMenu("Save Tiles Rotation")]
-        public void SaveTileRotation()
+        /*[ContextMenu("Save Tiles Rotation")]
+        public void OldSaveTileRotation()
         {
 
             if (_roomShape._tileRotationSave.Length < 1)
@@ -623,7 +627,7 @@ namespace Seance.BoardManagment
             }
 
             //tile on top (z = 1)
-            for (int i = 0; i < _otherInstancesInScene.Count; i++)
+            for (int i = 0; i < _otherInstancesInScene.Length; i++)
             {
                 if (_otherInstancesInScene[i] != null)
                 {
@@ -631,8 +635,6 @@ namespace Seance.BoardManagment
 
                     //apply save to room profile
                     _roomShape._otherTileRotationSave[i] = _otherInstancesInScene[i].GetComponent<Tile>()._savedRot;
-
-
                 }
             }
 
@@ -642,10 +644,10 @@ namespace Seance.BoardManagment
             AssetDatabase.Refresh();
 #endif
 
-        }
+        }*/
 
-        [ContextMenu("Load Rotation Save")]
-        public void LoadRotationSave()
+        /*[ContextMenu("Load Rotation Save")]
+        public void OldLoadRotationSave()
         {
             //ground tile (z = 0)
             for (int i = 0; i < _roomShape._tileRotationSave.Length; i++)
@@ -659,13 +661,60 @@ namespace Seance.BoardManagment
             }
 
             //tile on top (z = 1)
-            for (int i = 0; i < _otherInstancesInScene.Count; i++)
+            for (int i = 0; i < _otherInstancesInScene.Length; i++)
             {
                 if (_otherInstancesInScene[i] != null && _roomShape._otherTileRotationSave.Length > i)
                 {
                     //apply save manualy
                     _otherInstancesInScene[i].GetComponent<Tile>()._savedRot = _roomShape._otherTileRotationSave[i];
                     _otherInstancesInScene[i].GetComponent<Tile>().ApplySavedRotation();
+                }
+            }
+        }*/
+
+        public void LoadNewRotationSave()
+        {
+            for (int i = 0; i < _roomShape._newTileRotation.Length; i++)
+            {
+                if (_tilesInScene[i] != null)
+                {
+                    switch (_roomShape._newTileRotation[i])
+                    {
+                        case 0:
+                            _tilesInScene[i].gameObject.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+                            break;
+                        case 1:
+                            _tilesInScene[i].gameObject.transform.rotation = Quaternion.LookRotation(Vector3.right);
+                            break;
+                        case 2:
+                            _tilesInScene[i].gameObject.transform.rotation = Quaternion.LookRotation(Vector3.back);
+                            break;
+                        case 3:
+                            _tilesInScene[i].gameObject.transform.rotation = Quaternion.LookRotation(Vector3.left);
+                            break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < _roomShape._newOtherTileRotation.Length; i++)
+            {
+                if (_roomShape._newOtherTileRotation[i] != 4 && _otherInstancesInScene[i] != null)
+                {
+                    switch (_roomShape._newOtherTileRotation[i])
+                    {
+                        case 0:
+                            _otherInstancesInScene[i].transform.rotation = Quaternion.LookRotation(Vector3.forward);
+                            break;
+                        case 1:
+                            _otherInstancesInScene[i].transform.rotation = Quaternion.LookRotation(Vector3.right);
+                            break;
+                        case 2:
+                            _otherInstancesInScene[i].transform.rotation = Quaternion.LookRotation(Vector3.back);
+                            break;
+                        case 3:
+                            _otherInstancesInScene[i].transform.rotation = Quaternion.LookRotation(Vector3.left);
+                            break;
+                    }
                 }
             }
         }
@@ -794,9 +843,9 @@ namespace Seance.BoardManagment
             return _pawnList.ToArray();
         }
 
-		#region Network Methods
+        #region Network Methods
 
-		[ServerRpc(RequireOwnership = false)]
+        [ServerRpc(RequireOwnership = false)]
         public void ServerRpcChangePositionTo(int id, int x, int y)
         {
             ObserverRpcChangePawnPositionTo(id, x, y);
@@ -804,27 +853,27 @@ namespace Seance.BoardManagment
 
         [ObserversRpc]
         void ObserverRpcChangePawnPositionTo(int id, int x, int y)
-		{
-            foreach(Pawn pawn in _pawnsInScene)
-			{
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
                 if (pawn == null)
                     continue;
                 if (pawn._pawnID == id)
-				{
+                {
                     pawn.ChangePositionTo(x, y);
-				}
-			}
-		}
+                }
+            }
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void ServerRpcPawnTakeDamage(int id, int damages)
-		{
+        {
             ObserverRpcPawnTakeDamage(id, damages);
-		}
+        }
 
         [ObserversRpc]
         void ObserverRpcPawnTakeDamage(int id, int damages)
-		{
+        {
             foreach (Pawn pawn in _pawnsInScene)
             {
                 if (pawn == null)
@@ -838,33 +887,33 @@ namespace Seance.BoardManagment
 
         [ServerRpc(RequireOwnership = false)]
         public void ServerRpcPawnDeath(int id)
-		{
+        {
             ObserverRpcPawnDeath(id);
-		}
+        }
 
         [ObserversRpc]
         void ObserverRpcPawnDeath(int id)
-		{
-            foreach(Pawn pawn in _pawnsInScene)
-			{
+        {
+            foreach (Pawn pawn in _pawnsInScene)
+            {
                 if (pawn == null)
                     continue;
                 if (pawn._pawnID == id)
-				{
+                {
                     pawn.Die();
-				}
-			}
-		}
+                }
+            }
+        }
 
         [ServerRpc(RequireOwnership = false)]
         public void ServerRpcPawnHeal(int id, int amount)
-		{
+        {
             ObserverRpcPawnHeal(id, amount);
         }
 
         [ObserversRpc]
         void ObserverRpcPawnHeal(int id, int amount)
-		{
+        {
             foreach (Pawn pawn in _pawnsInScene)
             {
                 if (pawn == null)

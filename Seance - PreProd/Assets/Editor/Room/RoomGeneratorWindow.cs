@@ -25,6 +25,8 @@ namespace Seance.BoardManagment
         private bool isEButtontDown;
         private bool isEButtontDownProcessed;
 
+        private bool isRotationLayerActive;
+
 
         public void InitializeWindow(RoomProfile correspondingLevel)
         {
@@ -47,6 +49,8 @@ namespace Seance.BoardManagment
             isMouseRightDown = false;
             isMouseLeftDownProcessed = false;
             isMouseRightDownProcessed = false;
+
+            isRotationLayerActive = true;
 
         }
 
@@ -82,11 +86,11 @@ namespace Seance.BoardManagment
                 Debug.Log("initialise new save list");
                 _newTileRotation.arraySize = _xLength.intValue * _yLength.intValue;
                 _newOtherTileRotation.arraySize = _xLength.intValue * _yLength.intValue;
-                /*for (int i = 0; i < _newTileRotation.arraySize; i++)
+                for (int i = 0; i < _newTileRotation.arraySize; i++)
                 {
-                    _newTileRotation.GetArrayElementAtIndex(i).intValue = 0;
-                    _newOtherTileRotation.GetArrayElementAtIndex(i).intValue = 0;
-                }*/
+                    _newTileRotation.GetArrayElementAtIndex(i).intValue = 4;
+                    _newOtherTileRotation.GetArrayElementAtIndex(i).intValue = 4;
+                }
             }
 
             //
@@ -149,13 +153,20 @@ namespace Seance.BoardManagment
                     }
 
                     //for rotation save
-                    /*_tileRotationSave.ClearArray();
-                    _tileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;
-                    _otherTileRotationSave.ClearArray();
-                    _otherTileRotationSave.arraySize = _currentRoom._xLength * _currentRoom._yLength;*/
+                    _newTileRotation.arraySize = _xLength.intValue * _yLength.intValue;
+                    _newOtherTileRotation.arraySize = _xLength.intValue * _yLength.intValue;
+                    for (int i = 0; i < _newTileRotation.arraySize; i++)
+                    {
+                        _newTileRotation.GetArrayElementAtIndex(i).intValue = 0;
+                        _newOtherTileRotation.GetArrayElementAtIndex(i).intValue = 4;
+                    }
 
                 }
             }
+
+            EditorGUILayout.Space(5);
+
+            isRotationLayerActive = EditorGUILayout.Toggle("Show rotation layer", isRotationLayerActive);
 
             _serializedObject.ApplyModifiedProperties();
 
@@ -205,6 +216,24 @@ namespace Seance.BoardManagment
                     {
                         _tiles.GetArrayElementAtIndex(index).enumValueIndex = _currentTileSelected.enumValueIndex;
                         _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;
+
+                        //rotation
+                        if (_currentTileSelected.enumValueIndex == (int)TileManager.Tiles.basicTile)
+                        {
+                            _newTileRotation.GetArrayElementAtIndex(index).intValue = 0;
+                            _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 4;
+                        }
+                        else if (_currentTileSelected.enumValueIndex == (int)TileManager.Tiles.empty)
+                        {
+                            _newTileRotation.GetArrayElementAtIndex(index).intValue = 4;
+                            _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 4;
+                        }
+                        else
+                        {
+                            _newTileRotation.GetArrayElementAtIndex(index).intValue = 0;
+                            _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 0;
+                        }
+
                         isMouseLeftDownProcessed = true;
                     }
                     bool isChangingEntityCount = isMouseRightDown && !isMouseRightDownProcessed && cell.Contains(Event.current.mousePosition);
@@ -217,15 +246,15 @@ namespace Seance.BoardManagment
                         isMouseRightDownProcessed = true;
                     }
 
-                    bool isRotatingtTile = isEButtontDown && !isEButtontDownProcessed && cell.Contains(Event.current.mousePosition);
+                    bool isRotatingtTile = isRotationLayerActive && isEButtontDown && !isEButtontDownProcessed && cell.Contains(Event.current.mousePosition);
                     if (isRotatingtTile)
                     {
                         /*_tilesWeight.GetArrayElementAtIndex(index).intValue++;
                         if (_tilesWeight.GetArrayElementAtIndex(index).intValue > 4)
                             _tilesWeight.GetArrayElementAtIndex(index).intValue = 0;*/
 
-                        //values in order: NESO = 0123
-                        
+                        //values in order: NESO = 0123 ; 4 = null
+
                         if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.basicTile)
                         {
                             //for ground: _tileRotationSave
@@ -233,14 +262,20 @@ namespace Seance.BoardManagment
                             if (_newTileRotation.GetArrayElementAtIndex(index).intValue > 3)
                                 _newTileRotation.GetArrayElementAtIndex(index).intValue = 0;
 
+                            _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 4;
+
                         }
                         else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.empty)
                         {
                             //nothing to handle
+                            _newTileRotation.GetArrayElementAtIndex(index).intValue = 4;
+                            _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 4;
                         }
                         else
                         {
                             //for wall: _otherTileRotationSave
+                            _newTileRotation.GetArrayElementAtIndex(index).intValue = 4;
+
                             _newOtherTileRotation.GetArrayElementAtIndex(index).intValue++;
                             if (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue > 3)
                                 _newOtherTileRotation.GetArrayElementAtIndex(index).intValue = 0;
@@ -282,44 +317,116 @@ namespace Seance.BoardManagment
                     }
 
                     //draw rotation display
-
-                    if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.basicTile)
+                    if (isRotationLayerActive)
                     {
 
-                        if (_newTileRotation.GetArrayElementAtIndex(index).intValue == 0)
+                        if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.basicTile)
                         {
-                            Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellWidth / 10), cellWidth * 0.2f, cellHeight * 0.2f);
-                            EditorGUI.DrawRect(rotRec, Color.red);
+
+                            switch (_newTileRotation.GetArrayElementAtIndex(index).intValue)
+                            {
+                                case 0:
+                                    Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY, cellWidth * 0.2f, cellHeight * 0.1f);
+                                    EditorGUI.DrawRect(rotRec, Color.white);
+                                    break;
+                                case 1:
+                                    Rect rotRec2 = new Rect(curX + (cellWidth * 0.9f), curY + (cellHeight * 0.4f), cellWidth * 0.1f, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec2, Color.white);
+                                    break;
+                                case 2:
+                                    Rect rotRec3 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.9f), cellWidth * 0.2f, cellHeight * 0.1f);
+                                    EditorGUI.DrawRect(rotRec3, Color.white);
+                                    break;
+                                case 3:
+                                    Rect rotRec4 = new Rect(curX, curY + (cellHeight * 0.4f), cellWidth * 0.1f, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec4, Color.white);
+                                    break;
+                            }
+
                         }
-
-                    }
-                    else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.empty)
-                    {
-                        //nothing to display
-                    }
-                    else
-                    {
-
-                        switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                        else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.empty)
                         {
-                            case 0:
-                                Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY + (cellWidth / 10), cellWidth * 0.2f, cellHeight * 0.2f);
-                                EditorGUI.DrawRect(rotRec, Color.red);
-                                break;
-                            case 1:
-                                Rect rotRec2 = new Rect(curX + (cellWidth * 0.7f), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.2f);
-                                EditorGUI.DrawRect(rotRec2, Color.red);
-                                break;
-                            case 2:
-                                Rect rotRec3 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.7f), cellWidth * 0.2f, cellHeight * 0.2f);
-                                EditorGUI.DrawRect(rotRec3, Color.red);
-                                break;
-                            case 3:
-                                Rect rotRec4 = new Rect(curX + (cellWidth / 10), curY + (cellWidth * 0.4f), cellWidth * 0.2f, cellHeight * 0.2f);
-                                EditorGUI.DrawRect(rotRec4, Color.red);
-                                break;
+                            //nothing to display
                         }
+                        else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.wall ||
+                                _tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.door)
+                        {
+                            switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                            {
+                                case 0:
+                                    Rect rotRec = new Rect(curX, curY + (cellHeight * 0.4f), cellWidth, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec, Color.gray);
+                                    break;
+                                case 1:
+                                    Rect rotRec2 = new Rect(curX + (cellWidth * 0.4f), curY, cellWidth * 0.2f, cellHeight);
+                                    EditorGUI.DrawRect(rotRec2, Color.gray);
 
+                                    break;
+                                case 2:
+                                    Rect rotRec3 = new Rect(curX, curY + (cellHeight * 0.4f), cellWidth, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec3, Color.gray);
+                                    break;
+                                case 3:
+                                    Rect rotRec4 = new Rect(curX + (cellWidth * 0.4f), curY, cellWidth * 0.2f, cellHeight);
+                                    EditorGUI.DrawRect(rotRec4, Color.gray);
+                                    break;
+                            }
+                        }
+                        else if (_tiles.GetArrayElementAtIndex(index).enumValueIndex == (int)TileManager.Tiles.angle)
+                        {
+                            switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                            {
+                                case 0:
+                                    Rect rotRec11 = new Rect(curX, curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                    Rect rotRec12 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.6f);
+                                    EditorGUI.DrawRect(rotRec11, Color.gray);
+                                    EditorGUI.DrawRect(rotRec12, Color.gray);
+                                    break;
+                                case 1:
+                                    Rect rotRec21 = new Rect(curX, curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                    Rect rotRec22 = new Rect(curX + (cellWidth * 0.4f), curY, cellWidth * 0.2f, cellHeight * 0.6f);
+                                    EditorGUI.DrawRect(rotRec21, Color.gray);
+                                    EditorGUI.DrawRect(rotRec22, Color.gray);
+                                    break;
+                                case 2:
+                                    Rect rotRec31 = new Rect(curX + (cellWidth * 0.4f), curY, cellWidth * 0.2f, cellHeight * 0.6f);
+                                    Rect rotRec32 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec31, Color.gray);
+                                    EditorGUI.DrawRect(rotRec32, Color.gray);
+                                    break;
+                                case 3:
+                                    Rect rotRec41 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.2f, cellHeight * 0.6f);
+                                    Rect rotRec42 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.4f), cellWidth * 0.6f, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec41, Color.gray);
+                                    EditorGUI.DrawRect(rotRec42, Color.gray);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+
+                            switch (_newOtherTileRotation.GetArrayElementAtIndex(index).intValue)
+                            {
+                                case 0:
+                                    Rect rotRec = new Rect(curX + (cellWidth * 0.4f), curY, cellWidth * 0.2f, cellHeight * 0.1f);
+                                    EditorGUI.DrawRect(rotRec, Color.white);
+                                    break;
+                                case 1:
+                                    Rect rotRec2 = new Rect(curX + (cellWidth * 0.9f), curY + (cellHeight * 0.4f), cellWidth * 0.1f, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec2, Color.white);
+
+                                    break;
+                                case 2:
+                                    Rect rotRec3 = new Rect(curX + (cellWidth * 0.4f), curY + (cellHeight * 0.9f), cellWidth * 0.2f, cellHeight * 0.1f);
+                                    EditorGUI.DrawRect(rotRec3, Color.white);
+                                    break;
+                                case 3:
+                                    Rect rotRec4 = new Rect(curX, curY + (cellHeight * 0.4f), cellWidth * 0.1f, cellHeight * 0.2f);
+                                    EditorGUI.DrawRect(rotRec4, Color.white);
+                                    break;
+                            }
+
+                        }
                     }
 
                     curX += cellWidth + widthSpace;
@@ -362,8 +469,8 @@ namespace Seance.BoardManagment
                 isEButtontDown = false;
                 isEButtontDownProcessed = false;
             }
-            
-            
+
+
         }
 
     }

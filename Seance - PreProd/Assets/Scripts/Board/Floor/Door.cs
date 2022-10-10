@@ -6,7 +6,7 @@ namespace Seance.BoardManagment
 {
     public class Door : MonoBehaviour
     {
-        public Node _linkedRoom;
+        public Room _linkedRoom;
 
         public GameObject iconDisplay;
         public Sprite[] nextRoomIcone;

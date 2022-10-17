@@ -92,7 +92,8 @@ namespace Seance.BoardManagment
                     case EventType.MouseDrag:
                         if (room._Box.Contains(e.mousePosition))
                         {
-                            room._Box.position += e.delta;
+                            room._Box.position += e.delta; //for cell id
+                            room._Box2.position += e.delta; //for cell attributes
                             isInARoom = true;
                         }
                         break;
@@ -170,7 +171,7 @@ namespace Seance.BoardManagment
 
         void OnAddStartingRoom(Vector2 mousePosition)
         {
-            RoomDisplay newRoom = new RoomDisplay(mousePosition, 200, 30, "< Starting room > ");
+            RoomDisplay newRoom = new RoomDisplay(mousePosition, 200, 45, "< Starting room > ");
 
             _currentFloor._roomDisplays.Add(newRoom);
             /*_roomDisplays.arraySize++;
@@ -179,7 +180,7 @@ namespace Seance.BoardManagment
 
         void OnAddRoom(Vector2 mousePosition)
         {
-            RoomDisplay newRoom = new RoomDisplay(mousePosition, 200, 30, "Item " + _currentFloor._roomDisplays.Count);
+            RoomDisplay newRoom = new RoomDisplay(mousePosition, 200, 45, "Item " + _currentFloor._roomDisplays.Count);
 
             _currentFloor._roomDisplays.Add(newRoom);
         }

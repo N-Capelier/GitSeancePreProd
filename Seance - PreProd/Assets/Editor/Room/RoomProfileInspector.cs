@@ -20,11 +20,12 @@ namespace Seance.BoardManagment
         /// </summary>
 
 
-        SerializedProperty _roomID, _xLength, _yLength, _tilesColor, _tileRotationSave, _otherTileRotationSave, _newTileRotation, _newOtherTileRotation;
+        SerializedProperty _roomID, _name, _xLength, _yLength, _tilesColor, _tileRotationSave, _otherTileRotationSave, _newTileRotation, _newOtherTileRotation;
 
         private void OnEnable()
         {
             _roomID = serializedObject.FindProperty("_roomID");
+            _name = serializedObject.FindProperty("_name");
             _xLength = serializedObject.FindProperty("_xLength");
             _yLength = serializedObject.FindProperty("_yLength");
             _tilesColor = serializedObject.FindProperty("_tilesColor");
@@ -44,6 +45,7 @@ namespace Seance.BoardManagment
 
             if (GUILayout.Button("Open Window")) OpenWindow();
             EditorGUILayout.PropertyField(_roomID);
+            EditorGUILayout.PropertyField(_name);
             EditorGUILayout.PropertyField(_xLength);
             EditorGUILayout.PropertyField(_yLength);
             EditorGUILayout.PropertyField(_tilesColor);

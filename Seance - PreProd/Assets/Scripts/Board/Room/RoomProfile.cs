@@ -16,6 +16,7 @@ namespace Seance.BoardManagment
         public int _roomID;
         public int _xLength;
         public int _yLength;
+        public string _name;
         public TileManager.Tiles[] _tiles;
         public int[] _tilesWeight;
 #if UNITY_EDITOR
